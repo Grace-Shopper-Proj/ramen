@@ -36,3 +36,5 @@ Working outside of class hours:
 We may work in pairs outside of class hours, not alone
 We may work on Saturday, will try not to work on Sunday.
 Decide about lunch break with your pair. Try to at least take a 30 minute lunch break. If one person wants to take a break,take a break.
+
+test
