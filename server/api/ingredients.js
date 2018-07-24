@@ -1,0 +1,14 @@
+const router = require('express').Router()
+const {Ingredient} = require('../db/models')
+
+//Get all
+router.get('/', async (req, res, next) => {
+  try {
+    const ingredients = await Ingredient.findAll()
+    res.json(ingredients)
+  } catch (err) {
+    next(err)
+  }
+})
+
+module.exports = router

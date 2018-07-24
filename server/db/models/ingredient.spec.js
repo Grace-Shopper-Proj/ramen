@@ -1,16 +1,15 @@
 const {expect} = require('chai')
 const db = require('../index')
-const Product = db.model('product')
+const Ingredient = db.model('ingredient')
 
-describe('Product model', () => {
+describe('Ingredient model', () => {
   let ramen1
 
   before(() => {
-    ramen1 = Product.build({
+    ramen1 = Ingredient.build({
       title: 'beef ramen',
       description: 'has beef',
       inventory: 10,
-      tags: ['meat', 'main course'],
       price: 5,
       type: 'broth',
       imageUrl: 'sdfdfs.jpg'
@@ -28,10 +27,6 @@ describe('Product model', () => {
 
     it('contains inventory', () => {
       expect(ramen1.inventory).to.equal(10)
-    })
-
-    it('contains tags', () => {
-      expect(ramen1.tags).to.deep.equal(['meat', 'main course'])
     })
 
     it('contains price', () => {
