@@ -1,31 +1,54 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-
 const Product = db.define('product', {
-  title:{
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true
     }
   },
-  description:{
+  description: {
     type: Sequelize.TEXT
   },
-  inventory:{
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    validate: {
+      min: 0
+    }
+  },
+  inventory: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
-  category:{
+  tags: {
     type: Sequelize.ARRAY(Sequelize.STRING),
-    // isIn:[['vegetarian', 'meat']]
+    validate: {
+      isFoodPreference(array) {
+        array.forEach(foodPreference => {
+          if (
+            ['meat', 'nuts', 'dairy', 'gluten', 'fish', 'soy'].indexOf(
+              foodPreference
+            ) === -1
+          ) {
+            throw new Error('no food preference selected')
+          }
+        })
+      }
+    }
   },
-  imageUrl:{
+  type: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [['broth', 'noodles', 'toppings', 'protein']]
+    }
+  },
+  imageUrl: {
     type: Sequelize.TEXT,
-    defaultValue: 'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
+    defaultValue:
+      'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
   }
 })
-
 
 module.exports = Product

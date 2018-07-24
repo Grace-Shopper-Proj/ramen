@@ -10,7 +10,9 @@ describe('Product model', () => {
       title: 'beef ramen',
       description: 'has beef',
       inventory: 10,
-      category: ['meat', 'main course'],
+      tags: ['meat', 'main course'],
+      price: 5,
+      type: 'broth',
       imageUrl: 'sdfdfs.jpg'
     })
   })
@@ -28,8 +30,16 @@ describe('Product model', () => {
       expect(ramen1.inventory).to.equal(10)
     })
 
-    it('contains category', () => {
-      expect(ramen1.category).to.deep.equal(['meat', 'main course'])
+    it('contains tags', () => {
+      expect(ramen1.tags).to.deep.equal(['meat', 'main course'])
+    })
+
+    it('contains price', () => {
+      expect(ramen1.price).to.equal(5)
+    })
+
+    it('contains type', () => {
+      expect(ramen1.type).to.deep.equal('broth')
     })
 
     it('contains imageUrl', () => {
