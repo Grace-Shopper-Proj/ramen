@@ -5,28 +5,23 @@ const db = require('../index')
 const User = db.model('user')
 
 describe('User model', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
+  let user1
+  before(() => {
+    user1 = User.build({
+      email: 'cody@email.com',
+      password: 'jlkjlkjlkj',
+      userType: 'admin'
+    })
   })
-
-  describe('instanceMethods', () => {
-    describe('correctPassword', () => {
-      let cody
-
-      beforeEach(async () => {
-        cody = await User.create({
-          email: 'cody@puppybook.com',
-          password: 'bones'
-        })
-      })
-
-      it('returns true if the password is correct', () => {
-        expect(cody.correctPassword('bones')).to.be.equal(true)
-      })
-
-      it('returns false if the password is incorrect', () => {
-        expect(cody.correctPassword('bonez')).to.be.equal(false)
-      })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+  describe('fields in model', () => {
+    it('contains email', () => {
+      expect(user1.email).to.equal('cody@email.com')
+    })
+    it('contains password', () => {
+      expect(user1.password).to.equal('jlkjlkjlkj')
+    })
+    it('contains user type', () => {
+      expect(user1.userType).to.equal('admin')
+    })
+  })
+})

@@ -5,7 +5,7 @@ const Product = db.model('product')
 describe('Product model', () => {
   let ramen1
 
-  before (() => {
+  before(() => {
     ramen1 = Product.build({
       title: 'beef ramen',
       description: 'has beef',
@@ -17,24 +17,23 @@ describe('Product model', () => {
 
   describe('fields in model', () => {
     it('contains title', () => {
-      expect(ramen1.title).to.equal('beef ramen');
+      expect(ramen1.title).to.equal('beef ramen')
     })
 
     it('contains description', () => {
-      expect(ramen1.description).to.equal('has beef');
+      expect(ramen1.description).to.equal('has beef')
     })
 
     it('contains inventory', () => {
-      expect(ramen1.inventory).to.equal(10);
+      expect(ramen1.inventory).to.equal(10)
     })
 
     it('contains category', () => {
-      expect(ramen1.category).to.deep.equal(['meat', 'main course']);
+      expect(ramen1.category).to.deep.equal(['meat', 'main course'])
     })
 
     it('contains imageUrl', () => {
-      expect(ramen1.imageUrl).to.equal('sdfdfs.jpg');
+      expect(ramen1.imageUrl).to.equal('sdfdfs.jpg')
     })
-
   })
 })
