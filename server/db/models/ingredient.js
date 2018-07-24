@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Product = db.define('product', {
+const Ingredient = db.define('ingredient', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -28,9 +28,16 @@ const Product = db.define('product', {
       isFoodPreference(array) {
         array.forEach(foodPreference => {
           if (
-            ['meat', 'nuts', 'dairy', 'gluten', 'fish', 'soy'].indexOf(
-              foodPreference
-            ) === -1
+            [
+              'meat',
+              'nuts',
+              'dairy',
+              'gluten-free',
+              'fish',
+              'soy',
+              'vegetarian',
+              'spicy'
+            ].indexOf(foodPreference) === -1
           ) {
             throw new Error('no food preference selected')
           }
@@ -51,4 +58,4 @@ const Product = db.define('product', {
   }
 })
 
-module.exports = Product
+module.exports = Ingredient
