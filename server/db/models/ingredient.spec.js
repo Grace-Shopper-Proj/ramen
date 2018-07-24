@@ -10,7 +10,6 @@ describe('Ingredient model', () => {
       title: 'beef ramen',
       description: 'has beef',
       inventory: 10,
-      tags: ['meat', 'main course'],
       price: 5,
       type: 'broth',
       imageUrl: 'sdfdfs.jpg'
@@ -28,10 +27,6 @@ describe('Ingredient model', () => {
 
     it('contains inventory', () => {
       expect(ramen1.inventory).to.equal(10)
-    })
-
-    it('contains tags', () => {
-      expect(ramen1.tags).to.deep.equal(['meat', 'main course'])
     })
 
     it('contains price', () => {

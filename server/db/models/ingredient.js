@@ -22,29 +22,6 @@ const Ingredient = db.define('ingredient', {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
-  tags: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    validate: {
-      isFoodPreference(array) {
-        array.forEach(foodPreference => {
-          if (
-            [
-              'meat',
-              'nuts',
-              'dairy',
-              'gluten-free',
-              'fish',
-              'soy',
-              'vegetarian',
-              'spicy'
-            ].indexOf(foodPreference) === -1
-          ) {
-            throw new Error('no food preference selected')
-          }
-        })
-      }
-    }
-  },
   type: {
     type: Sequelize.STRING,
     validate: {
