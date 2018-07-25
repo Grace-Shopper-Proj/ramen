@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {DietaryRestrictionForm} from './DietaryRestrictionForm'
-import {SingleSelectionForm} from './SingleSelectionForm'
-import {MultiSelectionForm} from './MultiSelectionForm'
+import DietaryRestrictionForm from './DietaryRestrictionForm'
+import SingleSelectionForm from './SingleSelectionForm'
+import MultiSelectionForm from './MultiSelectionForm'
 
 class OrderPage extends Component {
   state = {
