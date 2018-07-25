@@ -15,12 +15,10 @@ export default function SingleSelectionForm(props) {
   if (selectedRestrictions.length > 0) {
     filteredIngredients = filteredIngredients.filter(ingredient => {
       for (let i = 0; i < selectedRestrictions.length; i++) {
-        if (
-          ingredient.category.find(
-            elem => elem.name !== selectedRestrictions[i].name
-          )
+        let match = ingredient.category.find(
+          elem => elem.name === selectedRestrictions[i].name
         )
-          break
+        if (!match) break
         if (i === selectedRestrictions.length - 1) {
           return true
         }
