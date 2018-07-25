@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+
+//Our components
 import DietaryRestrictionForm from './DietaryRestrictionForm'
 import SingleSelectionForm from './SingleSelectionForm'
 import MultiSelectionForm from './MultiSelectionForm'
+
+//Thunks
 import {getProducts} from '../store/product'
 import {getRestrictions} from '../store/restrictions'
 

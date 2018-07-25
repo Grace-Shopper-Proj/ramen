@@ -25,9 +25,9 @@ const allProducts = [] //an array of objects
 //Reducer
 export default function(state = allProducts, action) {
   switch (action.type) {
-    case GOT_PRODUCTS:
+    case GOT_PRODUCTS: {
       return action.products
-
+    }
     default:
       return state
   }

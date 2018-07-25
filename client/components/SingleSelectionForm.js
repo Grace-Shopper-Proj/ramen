@@ -9,15 +9,26 @@ export default function SingleSelectionForm(props) {
     )
     updateSelection(selectedIngredient)
   }
-  const filteredIngredients = allIngredients
-    .filter(ingredient => ingredient.type === type)
-    .filter(ingredient => {
-      for (let i = 0; i < ingredient.category.length; i++) {
-        if (selectedRestrictions.find(ingredient.category[i].name) > -1) {
+  let filteredIngredients = allIngredients.filter(
+    ingredient => ingredient.type === type
+  )
+  if (selectedRestrictions.length > 0) {
+    filteredIngredients = filteredIngredients.filter(ingredient => {
+      for (let i = 0; i < selectedRestrictions.length; i++) {
+        if (
+          ingredient.category.find(
+            elem => elem.name !== selectedRestrictions[i].name
+          )
+        )
+          break
+        if (i === selectedRestrictions.length - 1) {
           return true
         }
       }
+      return false
     })
+  }
+
   return (
     <div>
       {filteredIngredients.map(ingredient => (
@@ -26,7 +37,7 @@ export default function SingleSelectionForm(props) {
           name={ingredient.id}
           onClick={handleIngredientChange}
         >
-          <h3>{ingredient.name}</h3>
+          <h3>{ingredient.title}</h3>
         </div>
       ))}
     </div>
