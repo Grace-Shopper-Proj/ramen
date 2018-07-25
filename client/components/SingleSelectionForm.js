@@ -13,7 +13,11 @@ export default function SingleSelectionForm(props) {
     .filter(ingredient => ingredient.type === type)
     .filter(ingredient => {
       for (let i = 0; i < ingredient.category.length; i++) {
-        if (selectedRestrictions.find(ingredient.category[i].name) > -1) {
+        if (
+          selectedRestrictions.find(
+            elem => elem.name === ingredient.category[i].name
+          ) > -1
+        ) {
           return true
         }
       }
