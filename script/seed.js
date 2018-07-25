@@ -92,14 +92,14 @@ async function seed() {
 
   //assign association
   await Promise.all([
-    await ShioBroth.addCategories([
+    await ShioBroth.addCategory([
       nonSpicy,
       nonDairy,
       noFish,
       soyFree,
       glutenFree
     ]),
-    await ShoyuBroth.addCategories([
+    await ShoyuBroth.addCategory([
       vegetarian,
       glutenFree,
       soyFree,
@@ -107,8 +107,45 @@ async function seed() {
       nonDairy,
       noFish
     ]),
-    await ShioBroth.addCategories([])
+    await UdonNoodles.addCategory([
+      vegetarian,
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish
+    ]),
+    await CurlyNoodles.addCategory([
+      vegetarian,
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish
+    ]),
+    await noriTopping.addCategory([
+      vegetarian,
+      soyFree,
+      glutenFree,
+      nonSpicy,
+      nonDairy,
+      noFish
+    ]),
+    await EggTopping.addCategory([
+      soyFree,
+      glutenFree,
+      nonSpicy,
+      nonDairy,
+      noFish
+    ]),
+    await porkProtein.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree
+    ])
   ])
+
+  console.log(`assigned successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.

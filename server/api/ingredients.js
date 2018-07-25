@@ -8,7 +8,9 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: Category,
-          as: 'category'
+          as: 'category',
+          attributes: ['id', 'name'],
+          through: {attributes: []}
         }
       ]
     })
