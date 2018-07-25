@@ -5,14 +5,6 @@ import {getAllIngredients, getAllCategories} from '../store/index'
 import {SingleSelectionForm} from './SingleSelectionForm'
 
 class OrderPage extends Component {
-  // TODO: move everything to the redux store
-  state = {
-    restrictions: {},
-    selectedBroth: 0,
-    selectedNoodles: 0,
-    selectedProtein: 0,
-    selectedToppings: []
-  }
   componentDidMount() {
     this.props.getAllIngredients()
     this.props.getAllRestrictions()
