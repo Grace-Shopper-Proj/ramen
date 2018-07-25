@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function SingleSelectionForm(props) {
-  const {type, allIngredients, selectedRestriction, updateSelection} = props
+  const {type, allIngredients, selectedRestrictions, updateSelection} = props
   const handleIngredientChange = event => {
     // Identify the selected ingredient object
     const selectedIngredient = allIngredients.find(
@@ -13,7 +13,7 @@ export default function SingleSelectionForm(props) {
     .filter(ingredient => ingredient.type === type)
     .filter(ingredient => {
       for (let i = 0; i < ingredient.category.length; i++) {
-        if (selectedRestriction.find(ingredient.category[i].name) > -1) {
+        if (selectedRestrictions.find(ingredient.category[i].name) > -1) {
           return true
         }
       }
