@@ -26,7 +26,7 @@ export const selectProtein = proteinType => ({
 })
 export const selectToppings = toppings => ({type: SELECT_TOPPINGS, toppings})
 export const selectRestrictions = restrictions => ({
-  type: SELECT_TOPPINGS,
+  type: SELECT_RESTRICTIONS,
   restrictions
 })
 
@@ -55,7 +55,7 @@ export const getRestrictions = () => {
   }
 }
 
-// // INITIAL STATE
-// const initialProductState = {
-//   selectBroth
-// }
+// INITIAL STATE
+const initialProductState = {
+  selectedBroth: {}
+}
