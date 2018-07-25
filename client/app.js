@@ -1,13 +1,10 @@
 import React from 'react'
-
-import {Navbar} from './components'
-import Routes from './routes'
+import OrderPage from './components/OrderPage'
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
+      <OrderPage />
     </div>
   )
 }
