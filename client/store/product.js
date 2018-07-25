@@ -1,10 +1,8 @@
 import axios from 'axios'
-import {runInNewContext} from 'vm'
 
 // ACTION TYPES
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_RESTRICTIONS = 'GOT_RESTRICTIONS'
-const SELECT_SIZE = 'SELECT_SIZE'
 const SELECT_NOODLES = 'SELECT_NOODLES'
 const SELECT_BROTH = 'SELECT_BROTH'
 const SELECT_PROTEIN = 'SELECT_PROTEIN'
@@ -17,7 +15,6 @@ export const gotRestrictions = restrictions => ({
   type: GOT_RESTRICTIONS,
   restrictions
 })
-export const selectSize = size => ({type: SELECT_SIZE, size})
 export const selectNoodles = noodleType => ({type: SELECT_NOODLES, noodleType})
 export const selectBroth = brothType => ({type: SELECT_BROTH, brothType})
 export const selectProtein = proteinType => ({
@@ -57,5 +54,67 @@ export const getRestrictions = () => {
 
 // INITIAL STATE
 const initialProductState = {
-  selectedBroth: {}
+  selectedBroth: {}, //broth object
+  selectedNoodles: {}, //noodle object
+  selectedProtein: {},
+  selectedToppings: [], //an array of toppings objects
+  selectedRestrictions: [], //an array of objects
+  allProducts: [], //an array of objects
+  allRestrictions: [] //an array of objects
+}
+
+//Reducer
+export default function(productState = initialProductState, action) {
+  switch (action.type) {
+    case GOT_PRODUCTS: {
+      return {
+        ...productState,
+        allProducts: action.products
+      }
+    }
+
+    case GOT_RESTRICTIONS: {
+      return {
+        ...productState,
+        allRestrictions: action.restrictions
+      }
+    }
+
+    case SELECT_NOODLES: {
+      return {
+        ...productState,
+        selectedNoodles: action.noodleType
+      }
+    }
+    case SELECT_BROTH: {
+      return {
+        ...productState,
+        selectedBroth: action.brothType
+      }
+    }
+
+    case SELECT_PROTEIN: {
+      return {
+        ...productState,
+        selectedProtein: action.proteinType
+      }
+    }
+
+    case SELECT_TOPPINGS: {
+      return {
+        ...productState,
+        selectedToppings: action.selectedToppings
+      }
+    }
+
+    case SELECT_RESTRICTIONS: {
+      return {
+        ...productState,
+        selectedRestrictions: action.selectedRestrictions
+      }
+    }
+
+    default:
+      return productState
+  }
 }
