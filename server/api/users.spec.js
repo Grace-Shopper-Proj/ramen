@@ -16,17 +16,39 @@ describe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        email: codysEmail,
+        username: 'codythedog',
+        password: 'secret',
+        userType: 'customer'
       })
     })
 
-    it('GET /api/users', async () => {
+    it('GET /api/users/:username', async () => {
       const res = await request(app)
-        .get('/api/users')
+        .get('/api/users/codythedog')
         .expect(200)
 
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].email).to.be.equal(codysEmail)
+      expect(res.body.email).to.be.equal(codysEmail)
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+
+    it('POST /api/users/', async () => {
+      const res = await request(app)
+        .post('/api/users/')
+        .send({
+          email: 'tom@hello.com',
+          username: 'tom',
+          password: 'secret',
+          userType: 'customer'
+        })
+        .expect(201)
+
+      expect(res.body.email).to.be.equal('tom@hello.com')
+    })
+
+    it('DELETE /api/users/:username', async () => {
+      const res = await request(app)
+        .delete('/api/users/codythedog')
+        .expect(204)
+    })
+  })
+})
