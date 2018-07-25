@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+
+//Our components
 import DietaryRestrictionForm from './DietaryRestrictionForm'
 import SingleSelectionForm from './SingleSelectionForm'
 import MultiSelectionForm from './MultiSelectionForm'
+
+//Thunks
 import {getProducts} from '../store/product'
 import {getRestrictions} from '../store/restrictions'
 
@@ -39,6 +43,7 @@ class OrderPage extends Component {
   }
   render() {
     const {allIngredients, restrictions} = this.props
+    console.log('the props', this.props)
     return (
       <div>
         <h1>Order Ramen</h1>

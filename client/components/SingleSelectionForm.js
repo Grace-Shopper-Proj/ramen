@@ -16,7 +16,7 @@ export default function SingleSelectionForm(props) {
         if (
           selectedRestrictions.find(
             elem => elem.name === ingredient.category[i].name
-          ) > -1
+          )
         ) {
           return true
         }
