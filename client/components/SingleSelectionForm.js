@@ -9,7 +9,6 @@ export default function SingleSelectionForm(props) {
     )
     updateSelection(selectedIngredient)
   }
-  console.log('selectedRestrictions', selectedRestrictions)
   let filteredIngredients = allIngredients.filter(
     ingredient => ingredient.type === type
   )
@@ -30,7 +29,6 @@ export default function SingleSelectionForm(props) {
     })
   }
 
-  console.log('selected restrictions', selectedRestrictions)
   return (
     <div>
       {filteredIngredients.map(ingredient => (

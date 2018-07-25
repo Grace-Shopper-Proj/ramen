@@ -10,9 +10,12 @@ export default function DietaryRestrictionForm(props) {
     if (event.target.checked) {
       newRestrictions = [...selectedRestrictions, restrictionToChng]
     } else {
-      const restrictionToRmIdx = restrictions.indexOf(restrictionToChng)
-      newRestrictions = selectedRestrictions.slice(restrictionToRmIdx, 1)
+      newRestrictions = selectedRestrictions.filter(
+        item => item.name !== event.target.name
+      )
     }
+    console.log('old restrictions', selectedRestrictions)
+    console.log('new set of restrictions', newRestrictions)
     updateRestrictions(newRestrictions)
   }
   return (

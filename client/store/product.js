@@ -26,7 +26,6 @@ const allProducts = [] //an array of objects
 export default function(state = allProducts, action) {
   switch (action.type) {
     case GOT_PRODUCTS: {
-      console.log('products in reducer', action.products)
       return action.products
     }
     default:
