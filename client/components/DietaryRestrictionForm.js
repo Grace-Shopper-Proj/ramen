@@ -14,8 +14,6 @@ export default function DietaryRestrictionForm(props) {
         item => item.name !== event.target.name
       )
     }
-    console.log('old restrictions', selectedRestrictions)
-    console.log('new set of restrictions', newRestrictions)
     updateRestrictions(newRestrictions)
   }
   return (
