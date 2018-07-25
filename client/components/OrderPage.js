@@ -1,64 +1,77 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {getAllIngredients, getAllCategories} from '../store/index'
+import {DietaryRestrictionForm} from './DietaryRestrictionForm'
 import {SingleSelectionForm} from './SingleSelectionForm'
+import {MultiSelectionForm} from './MultiSelectionForm'
 
 class OrderPage extends Component {
-  componentDidMount() {
-    this.props.getAllIngredients()
-    this.props.getAllRestrictions()
+  state = {
+    selectedBroth: {},
+    selectedNoodles: {},
+    selectedProtein: {},
+    selectedToppings: [],
+    selectedRestrictions: []
   }
-  handleRestrictionChange = event => {
-    const newRestrictions = {
-      ...this.state.restrictions,
-      [event.target.name]: event.target.checked
+  handleClick = event => {
+    // Implement button behavior later when we implement cart
+    event.preventDefault()
+  }
+  updateSelection = ingredient => {
+    if (ingredient.type === 'broth') {
+      this.setState({selectedBroth: ingredient})
+    } else if (ingredient.type === 'noodles') {
+      this.setState({selectedNoodles: ingredient})
+    } else if (ingredient.type === 'protein') {
+      this.setState({selectedProtein: ingredient})
+    } else {
+      this.setState({selectedToppings: ingredient})
     }
-    this.setState({
-      restrictions: newRestrictions
-    })
   }
-  // selectBroth =
+  updateRestrictions = selectedRestrictions => {
+    this.setState({selectedRestrictions})
+  }
   render() {
-    const {restrictions} = this.props
+    const {allIngredients, restrictions} = this.props
     return (
       <div>
         <h1>Order Ramen</h1>
-        <form>
-          <p>Dietary Restrictions</p>
-          {/* Generate the checkboxes for dietary restrictions */}
-          {restrictions.map(restriction => {
-            return (
-              <div key={restriction.id}>
-                <label htmlFor={restriction.name}>{restriction.name}</label>
-                <input
-                  type="checkbox"
-                  name={restriction.name}
-                  checked={this.state.restrictions}
-                  onChange={this.handleRestrictionChange}
-                />
-              </div>
-            )
-          })}
-        </form>
+        <h2>Dietary Restriction</h2>
+        <DietaryRestrictionForm
+          restrictions={restrictions}
+          selectedRestrictions={this.state.selectedRestrictions}
+          updateRestrictions={this.updateRestrictions}
+        />
         <h2>Select broth</h2>
         <SingleSelectionForm
           type="broth"
-          allIngredients={this.props.allIngredients}
-          restrictions={this.state.restrictions}
+          allIngredients={allIngredients}
+          selectedRestrictions={this.state.selectedRestrictions}
+          updateSelection={this.updateSelection}
         />
         <h2>Select noodles</h2>
         <SingleSelectionForm
           type="noodles"
-          allIngredients={this.props.allIngredients}
-          restrictions={this.state.restrictions}
+          allIngredients={allIngredients}
+          selectedRestrictions={this.state.selectedRestrictions}
+          updateSelection={this.updateSelection}
         />
         <h2>Select protein</h2>
         <SingleSelectionForm
           type="protein"
-          allIngredients={this.props.allIngredients}
-          restrictions={this.state.restrictions}
+          allIngredients={allIngredients}
+          selectedRestrictions={this.state.selectedRestrictions}
+          updateSelection={this.updateSelection}
         />
+        <h2>Select toppings</h2>
+        <MultiSelectionForm
+          allIngredients={allIngredients}
+          selectedRestrictions={this.state.selectedRestrictions}
+          updateSelection={this.updateSelection}
+        />
+        <button type="submit" onClick={this.handleClick}>
+          Add To Cart
+        </button>
       </div>
     )
   }
@@ -66,12 +79,13 @@ class OrderPage extends Component {
 
 const mapState = state => ({
   allIngredients: state.allIngredients,
-  restrictions: state.categories
+  restrictions: state.restrictions
 })
 
 const mapDispatch = dispatch => ({
+  // import action creator for add to cart
   getAllIngredients: () => dispatch(getAllIngredients()),
-  getAllRestrictions: () => dispatch(getAllCategories())
+  getRestrictions: () => dispatch(getRestrictions())
 })
 
 export default withRouter(connect(mapState, mapDispatch)(OrderPage))
