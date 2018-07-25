@@ -4,6 +4,8 @@ import {withRouter} from 'react-router-dom'
 import DietaryRestrictionForm from './DietaryRestrictionForm'
 import SingleSelectionForm from './SingleSelectionForm'
 import MultiSelectionForm from './MultiSelectionForm'
+import {getProducts} from '../store/product'
+import {getRestrictions} from '../store/restrictions'
 
 class OrderPage extends Component {
   state = {
@@ -12,6 +14,10 @@ class OrderPage extends Component {
     selectedProtein: {},
     selectedToppings: [],
     selectedRestrictions: []
+  }
+  componentDidMount() {
+    this.props.getAllIngredients()
+    this.props.getRestrictions()
   }
   handleClick = event => {
     // Implement button behavior later when we implement cart
@@ -84,7 +90,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   // import action creator for add to cart
-  getAllIngredients: () => dispatch(getAllIngredients()),
+  getAllIngredients: () => dispatch(getProducts()),
   getRestrictions: () => dispatch(getRestrictions())
 })
 
