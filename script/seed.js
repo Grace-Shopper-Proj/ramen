@@ -2,52 +2,113 @@
 
 const db = require('../server/db')
 const {User, Ingredient, Category} = require('../server/db/models')
-const {broth, noodles, toppings, proteins} = require('../ingredients_data')
+//const {broth, noodles, toppings, proteins} = require('../ingredients_data')
 const category = require('../category_data')
-/**
- * Welcome to the seed file! This seed file uses a newer language feature called...
- *
- *                  -=-= ASYNC...AWAIT -=-=
- *
- * Async-await is a joy to use! Read more about it in the MDN docs:
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
- *
- * Now that you've got the main idea, check it out in practice below!
- */
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-  // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
-  // executed until that promise resolves!
-  const brothList = await Promise.all(
-    broth.map(ingredient => Ingredient.create(ingredient))
-  )
 
-  const noodlesList = await Promise.all(
-    noodles.map(ingredient => Ingredient.create(ingredient))
-  )
+  //creating ingreadients
+  const ShioBroth = await Ingredient.create({
+    title: 'Shio',
+    description:
+      'A clear and saltier soup base made with chicken, vegetables and salt. It is the oldest of the ramen broth. ',
+    price: '3.50',
+    inventory: 100,
+    type: 'broth',
+    imageUrl:
+      'https://i.pinimg.com/originals/d2/b2/09/d2b20921e8cf9b504e7d897ae6595aae.jpg'
+  })
 
-  const toppingsList = await Promise.all(
-    toppings.map(ingredient => Ingredient.create(ingredient))
-  )
+  const ShoyuBroth = await Ingredient.create({
+    title: 'Shoyu',
+    description:
+      'A tangy-flavored, clear, brown broth made with vegetable and soy souce',
+    price: '3.50',
+    inventory: 100,
+    type: 'broth',
+    imageUrl: 'https://truffle-assets.imgix.net/9a72cc13-ramentime6.png'
+  })
 
-  const proteinsList = await Promise.all(
-    proteins.map(ingredient => Ingredient.create(ingredient))
-  )
+  const UdonNoodles = await Ingredient.create({
+    title: 'Udon',
+    description: 'thick, chewy',
+    price: '3.50',
+    inventory: 100,
+    type: 'noodles',
+    imageUrl:
+      'http://kandscorporation.com/wp-content/uploads/2017/02/order-noodles-1848952632.png'
+  })
 
-  const categoryList = await Promise.all(
-    category.map(eachCategory => Category.create(eachCategory))
-  )
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${brothList.length} broths`)
-  console.log(`seeded ${toppingsList.length} toppingss`)
-  console.log(`seeded ${proteinsList.length} proteins`)
-  console.log(`seeded ${noodlesList.length} noodles`)
-  console.log(`seeded ${categoryList.length} categories`)
+  const CurlyNoodles = await Ingredient.create({
+    title: 'Curly noodle',
+    description: 'yellow, made with wheat and eggs.',
+    price: '3.50',
+    inventory: 100,
+    type: 'noodles',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-2.png'
+  })
+
+  const noriTopping = await Ingredient.create({
+    title: 'nori',
+    description: 'crunchy seaweed',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings',
+    imageUrl:
+      'https://www.superfoodevolution.com/images/nori-flakes-8oz-live-superfoods.png'
+  })
+
+  const EggTopping = await Ingredient.create({
+    title: 'soft-boiled egg',
+    description: 'egg that is soft-boiled and cutted a half',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EGG.png'
+  })
+
+  const porkProtein = await Ingredient.create({
+    title: 'pork',
+    description: 'pork belly',
+    price: '2.00',
+    inventory: 100,
+    type: 'protein',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-PORK.png'
+  })
+
+  //creating categories
+  const nonDairy = await Category.create({name: 'non-dairy'})
+  const noFish = await Category.create({name: 'no-fish'})
+  const nonSpicy = await Category.create({name: 'non-spicy'})
+  const soyFree = await Category.create({name: 'soy-free'})
+  const glutenFree = await Category.create({name: 'gluten-free'})
+  const vegetarian = await Category.create({name: 'vegetarian'})
   console.log(`seeded successfully`)
+
+  //assign association
+  await Promise.all([
+    await ShioBroth.addCategories([
+      nonSpicy,
+      nonDairy,
+      noFish,
+      soyFree,
+      glutenFree
+    ]),
+    await ShoyuBroth.addCategories([
+      vegetarian,
+      glutenFree,
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish
+    ]),
+    await ShioBroth.addCategories([])
+  ])
 }
 
 // We've separated the `seed` function from the `runSeed` function.
