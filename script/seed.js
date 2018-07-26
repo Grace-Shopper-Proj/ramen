@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Ingredient, Category} = require('../server/db/models')
+const {User, Ingredient, Category, Bowl} = require('../server/db/models')
 //const {broth, noodles, toppings, proteins} = require('../ingredients_data')
 const category = require('../category_data')
 
