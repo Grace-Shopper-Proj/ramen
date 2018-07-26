@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {Bowl} = require('./index')
+const Bowl = require('./bowl')
 
-const Order = db.define('orders', {
+const Order = db.define('order', {
   //true if order is still in progress (it is still a cart.) False if order is complete
   isCart: {
     type: Sequelize.BOOLEAN,
@@ -18,7 +18,12 @@ Order.prototype.getPrice = async function() {
     const bowls = await Bowl.findAll({
       where: {orderId: this.id}
     })
-    bowls.reduce((totalPrice, currentBowl) => totalPrice + currentBowl.price, 0)
+    const price = bowls.reduce(
+      (totalPrice, currentBowl) => totalPrice + Number(currentBowl.price),
+      0
+    )
+    console.log('We should get this: ', price)
+    return price
   } catch (error) {
     console.log(error)
   }

@@ -18,8 +18,7 @@ const Bowl = db.define('bowl', {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false
+    type: Sequelize.DECIMAL(10, 2)
   }
 })
 
