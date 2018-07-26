@@ -77,6 +77,7 @@ class OrderPage extends Component {
         <MultiSelectionForm
           allIngredients={allIngredients}
           selectedRestrictions={this.state.selectedRestrictions}
+          selectedToppings={this.state.selectedToppings}
           updateSelection={this.updateSelection}
         />
         <button type="submit" onClick={this.handleClick}>
