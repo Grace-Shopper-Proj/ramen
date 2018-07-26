@@ -1,9 +1,11 @@
 import React from 'react'
+import IngredientCard from './ingredientCard'
 
 export default function SingleSelectionForm(props) {
   const {type, allIngredients, selectedRestrictions, updateSelection} = props
   const handleIngredientChange = event => {
     // Identify the selected ingredient object
+    console.log('target.value is', event.target.value)
     const selectedIngredient = allIngredients.find(
       ingredient => ingredient.id === +event.target.name
     )
@@ -30,13 +32,7 @@ export default function SingleSelectionForm(props) {
   return (
     <div>
       {filteredIngredients.map(ingredient => (
-        <div
-          key={ingredient.id}
-          name={ingredient.id}
-          onClick={handleIngredientChange}
-        >
-          <h3>{ingredient.title}</h3>
-        </div>
+        <IngredientCard key={ingredient.id} ingredient={ingredient} />
       ))}
     </div>
   )
