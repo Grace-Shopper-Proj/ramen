@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 export default function singleIngredient(props) {
-  const {ingredient, closePopup} = props
+  const {ingredient, closePopup, selectIngredient} = props
   // const ingredient = {
   //   id: 1,
   //   title: 'Shio',
@@ -29,6 +29,7 @@ export default function singleIngredient(props) {
         <ul>
           {ingredient.category.map(cat => <li key={cat.id}>{cat.name}</li>)}
         </ul>
+        <button onClick={selectIngredient}>choose me</button>
       </div>
     </div>
   )
