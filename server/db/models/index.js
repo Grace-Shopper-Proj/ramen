@@ -19,7 +19,7 @@ Category.belongsToMany(Ingredient, {
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
 
-//add association between order and cart here
+//add association between order and user here
 
 module.exports = {
   User,

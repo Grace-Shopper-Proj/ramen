@@ -3,16 +3,6 @@ const {Bowl} = require('../db/models')
 
 module.exports = router
 
-//gets all bowls -- not sure if we need this route
-router.get('/', async (req, res, next) => {
-  try {
-    const allBowls = await Bowl.findAll()
-    res.json(allBowls)
-  } catch (error) {
-    next(error)
-  }
-})
-
 //create a new bowl
 router.post('/', async (req, res, next) => {
   try {
@@ -45,6 +35,11 @@ router.use('/:id', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+})
+
+//get a bowl
+router.get('/:id', async (req, res, next) => {
+  res.json(req.bowl)
 })
 
 //update a bowl
