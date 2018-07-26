@@ -114,13 +114,7 @@ async function seed() {
       nonDairy,
       noFish
     ]),
-    await CurlyNoodles.addCategory([
-      vegetarian,
-      soyFree,
-      nonSpicy,
-      nonDairy,
-      noFish
-    ]),
+    await CurlyNoodles.addCategory([soyFree, nonSpicy, nonDairy, noFish]),
     await noriTopping.addCategory([
       vegetarian,
       soyFree,

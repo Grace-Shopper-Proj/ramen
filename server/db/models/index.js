@@ -1,6 +1,7 @@
 const User = require('./user')
 const Ingredient = require('./ingredient')
 const Category = require('./category')
+const Bowl = require('./bowl')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -22,5 +23,6 @@ Category.belongsToMany(Ingredient, {
 module.exports = {
   User,
   Ingredient,
-  Category
+  Category,
+  Bowl
 }
