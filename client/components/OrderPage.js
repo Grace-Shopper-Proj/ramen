@@ -43,6 +43,8 @@ class OrderPage extends Component {
   }
   render() {
     const {allIngredients, restrictions} = this.props
+
+    console.log('CHOSEN INGREDIENT', this.state)
     return (
       <div>
         <h1>Order Ramen</h1>
