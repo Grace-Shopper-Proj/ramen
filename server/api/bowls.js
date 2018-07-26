@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const {Bowl} = require('../db/models')
 
+module.exports = router
+
 //gets all bowls -- not sure if we need this route
 router.get('/', async (req, res, next) => {
   try {
@@ -40,6 +42,27 @@ router.use('/:id', async (req, res, next) => {
     req.bowl = bowl
     next()
     //catch any other errors
+  } catch (error) {
+    next(error)
+  }
+})
+
+//update a bowl
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updatedBowl = await req.bowl.update(req.body)
+    res.json(updatedBowl)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//delete a bowl
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await req.bowl.destroy()
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }
