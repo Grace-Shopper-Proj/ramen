@@ -7,11 +7,19 @@ class IngredientCard extends Component {
       showPopup: false
     }
     this.togglePopup = this.togglePopup.bind(this)
+    this.selectIngredient = this.selectIngredient.bind(this)
   }
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
     })
+  }
+
+  selectIngredient(event) {
+    event.preventDefault()
+    const {ingredient, updateSelection} = this.props
+    console.log('We have this ingredient:', ingredient)
+    updateSelection(ingredient)
   }
 
   render() {
@@ -29,8 +37,10 @@ class IngredientCard extends Component {
           <SingleIngredient
             ingredient={ingredient}
             closePopup={this.togglePopup}
+            selectIngredient={this.selectIngredient}
           />
         ) : null}
+        <button onClick={this.selectIngredient}>choose this</button>
       </div>
     )
   }
