@@ -2,12 +2,7 @@ const User = require('./user')
 const Ingredient = require('./ingredient')
 const Category = require('./category')
 const Bowl = require('./bowl')
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+const Order = require('./order')
 
 Ingredient.belongsToMany(Category, {
   through: 'ingredient_category',
@@ -20,9 +15,16 @@ Category.belongsToMany(Ingredient, {
   foreignKey: 'categoryId'
 })
 
+//create association between bowls and orders. Each bowl belongs to only one order
+Bowl.belongsTo(Order)
+Order.hasMany(Bowl)
+
+//add association between order and cart here
+
 module.exports = {
   User,
   Ingredient,
   Category,
-  Bowl
+  Bowl,
+  Order
 }
