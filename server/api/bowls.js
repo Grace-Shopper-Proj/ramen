@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-//some middleware to find the campus and send it on to the next route or handle the error if there is one
+//some middleware to find the bowl and send it on to the next route or handle the error if there is one
 router.use('/:id', async (req, res, next) => {
   try {
     const bowl = await Bowl.find({
