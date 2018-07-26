@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+//comment
+
 const Ingredient = db.define('ingredient', {
   title: {
     type: Sequelize.STRING,
