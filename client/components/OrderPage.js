@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom'
 import DietaryRestrictionForm from './DietaryRestrictionForm'
 import SingleSelectionForm from './SingleSelectionForm'
 import MultiSelectionForm from './MultiSelectionForm'
-
+import CurrentBowl from './CurrentBowl'
 //Thunks
 import {getProducts} from '../store/product'
 import {getRestrictions} from '../store/restrictions'
@@ -48,6 +48,7 @@ class OrderPage extends Component {
     return (
       <div>
         <h1>Order Ramen</h1>
+        <CurrentBowl currentBowl={this.state} />
         <h2>Dietary Restriction</h2>
         <DietaryRestrictionForm
           restrictions={restrictions}
