@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const ingredient = require('./ingredient')
+const Ingredient = require('./ingredient')
 
 const Bowl = db.define('bowl', {
   price: {
@@ -8,20 +8,21 @@ const Bowl = db.define('bowl', {
   }
 })
 
-Bowl.beforeValidate(async bowlInstance => {
+Bowl.prototype.setPrice = async function() {
+  //find all ingredients with this bowl
   try {
-    const ingredients = await ingredient.findAll({
-      where: {bowlId: bowlInstance.id}
-    })
-    const price = ingredients.reduce(
+    const ingredientList = await this.getIngredient()
+    console.log('ingredient list', ingredientList)
+    const price = ingredientList.reduce(
       (totalPrice, currentIngredient) =>
         totalPrice + Number(currentIngredient.price),
       0
     )
-    bowlInstance.price = price
+    console.log('We should get this: ', price)
+    this.price = price
   } catch (error) {
     console.log(error)
   }
-})
+}
 
 module.exports = Bowl
