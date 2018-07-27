@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
 //Our components
 import DietaryRestrictionForm from './DietaryRestrictionForm'
@@ -19,14 +20,55 @@ class OrderPage extends Component {
     selectedToppings: [],
     selectedRestrictions: []
   }
+
   componentDidMount() {
     this.props.getAllIngredients()
     this.props.getRestrictions()
   }
-  handleClick = event => {
-    // Implement button behavior later when we implement cart
+
+  //submit bowl
+  submitBowl = async event => {
     event.preventDefault()
+    const {
+      selectedBroth,
+      selectedNoodles,
+      selectedProtein,
+      selectedToppings
+    } = this.state
+
+    let ingredientsPrice =
+      Number(selectedBroth.price) +
+      Number(selectedNoodles.price) +
+      Number(selectedProtein.price) +
+      Number(selectedToppings.price)
+    let bowlPrice = selectedToppings.reduce(
+      (totalPrice, eachTopping) => totalPrice + Number(eachTopping.price),
+      ingredientsPrice
+    )
+
+    const bowl = {
+      broth: selectedBroth.title,
+      noodles: selectedNoodles.title,
+      protein: selectedProtein.title,
+      toppings: selectedToppings.title,
+      price: bowlPrice
+    }
+
+    console.log('We try to post this:', bowl)
+    try {
+      const responseOfBowl = await axios.post('/api/bowls', bowl)
+      if (responseOfBowl) {
+        console.log('So we are adding this to the cart', responseOfBowl)
+        this.props.history.push('/cart')
+      }
+    } catch (err) {
+      console.log(
+        "Sorry... you can't buy this bowl of ramen... please try again!"
+      )
+    }
   }
+
+  //update broth, noodles, protein,toppings when add
   updateSelection = ingredient => {
     if (ingredient.type === 'broth') {
       this.setState({selectedBroth: ingredient})
@@ -38,15 +80,17 @@ class OrderPage extends Component {
       this.setState({selectedToppings: ingredient})
     }
   }
+
   updateRestrictions = selectedRestrictions => {
     this.setState({selectedRestrictions})
   }
   render() {
     const {allIngredients, restrictions} = this.props
+    const {selectedBroth, selectedNoodles, selectedProtein} = this.state
 
-    console.log('CHOSEN INGREDIENT', this.state)
+    console.log('this is the props', this.props)
     return (
-      <div>
+      <form>
         <h1>Order Ramen</h1>
         <CurrentBowl currentBowl={this.state} />
         <h2>Dietary Restriction</h2>
@@ -83,10 +127,16 @@ class OrderPage extends Component {
           selectedToppings={this.state.selectedToppings}
           updateSelection={this.updateSelection}
         />
-        <button type="submit" onClick={this.handleClick}>
+        <button
+          type="submit"
+          disabled={
+            !selectedBroth.id && !selectedNoodles.id && !selectedProtein.id
+          }
+          onClick={this.submitBowl}
+        >
           Add To Cart
         </button>
-      </div>
+      </form>
     )
   }
 }
