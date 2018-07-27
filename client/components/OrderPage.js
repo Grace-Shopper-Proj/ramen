@@ -46,19 +46,19 @@ class OrderPage extends Component {
       ingredientsPrice
     )
 
-    const bowl = {
-      broth: selectedBroth.title,
-      noodles: selectedNoodles.title,
-      protein: selectedProtein.title,
-      toppings: selectedToppings.title,
-      price: bowlPrice
-    }
+    const bowlIngredients = [
+      selectedBroth,
+      selectedNoodles,
+      selectedProtein,
+      ...selectedToppings
+    ]
 
-    console.log('We try to post this:', bowl)
+    const bowlIngredientIds = bowlIngredients.map(ingredient => ingredient.id)
+
     try {
-      const responseOfBowl = await axios.post('/api/bowls', bowl)
+      const responseOfBowl = await axios.post('/api/bowls', bowlIngredientIds)
       if (responseOfBowl) {
-        console.log('So we are adding this to the cart', responseOfBowl)
+        console.log('So we are adding this to the cart', responseOfBowl.data)
         this.props.history.push('/cart')
       }
     } catch (err) {
