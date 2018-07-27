@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
 //Our components
 import DietaryRestrictionForm from './DietaryRestrictionForm'
@@ -17,36 +18,67 @@ class OrderPage extends Component {
     selectedNoodles: {},
     selectedProtein: {},
     selectedToppings: [],
-    selectedRestrictions: []
+    selectedRestrictions: [],
+    price: 0
   }
+
   componentDidMount() {
     this.props.getAllIngredients()
     this.props.getRestrictions()
   }
-  handleClick = event => {
-    // Implement button behavior later when we implement cart
-    event.preventDefault()
-  }
+
+  // //submit bowl
+  // submitBowl = async event => {
+  //   event.preventDefault();
+  //   const {
+  //     selectedBroth,
+  //     selectedNoodles,
+  //     selectedProtein,
+  //     selectedToppings
+  //   } = this.state
+  //   try{
+  //   const responseOfBowl = await axios.post('/api/bowls', {
+  //     broth: selectedBroth,
+  //     noodles: selectedNoodles,
+  //     protein: selectedProtein,
+  //     toppings: selectedToppings,
+  //   });
+
+  //   }
+  //   catch (err) {
+  //     console.log("Sorry... you can't buy this bowl of ramen... please try again!")
+  //   }
+  // }
+
+  //update broth, noodles, protein,toppings when add
   updateSelection = ingredient => {
     if (ingredient.type === 'broth') {
-      this.setState({selectedBroth: ingredient})
+      this.setState({selectedBroth: ingredient, price: ingredient.price})
     } else if (ingredient.type === 'noodles') {
-      this.setState({selectedNoodles: ingredient})
+      this.setState({selectedNoodles: ingredient, price: ingredient.price})
     } else if (ingredient.type === 'protein') {
-      this.setState({selectedProtein: ingredient})
+      this.setState({selectedProtein: ingredient, price: ingredient.price})
     } else {
-      this.setState({selectedToppings: ingredient})
+      this.setState({
+        selectedToppings: ingredient,
+        price: ingredient.reduce(
+          (totalPrice, eachTop) => totalPrice + eachTop,
+          0
+        )
+      })
     }
   }
+
   updateRestrictions = selectedRestrictions => {
     this.setState({selectedRestrictions})
   }
   render() {
     const {allIngredients, restrictions} = this.props
+    const {selectedBroth, selectedNoodles, selectedProtein} = this.state
 
     console.log('CHOSEN INGREDIENT', this.state)
     return (
-      <div>
+      <form>
         <h1>Order Ramen</h1>
         <CurrentBowl currentBowl={this.state} />
         <h2>Dietary Restriction</h2>
@@ -83,10 +115,16 @@ class OrderPage extends Component {
           selectedToppings={this.state.selectedToppings}
           updateSelection={this.updateSelection}
         />
-        <button type="submit" onClick={this.handleClick}>
+        <button
+          type="submit"
+          disabled={
+            !selectedBroth.id && !selectedNoodles.id && !selectedProtein.id
+          }
+          onClick={this.handleClick}
+        >
           Add To Cart
         </button>
-      </div>
+      </form>
     )
   }
 }
