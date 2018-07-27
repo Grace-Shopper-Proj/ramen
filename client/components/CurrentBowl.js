@@ -6,25 +6,30 @@ export default function CurrentBowl(props) {
       <h1>Your Ramen Bowl</h1>
       <h4>Broth</h4>
       {currentBowl.selectedBroth.id
-        ? currentBowl.selectedBroth.title
+        ? `${currentBowl.selectedBroth.title}   \$ ${
+            currentBowl.selectedBroth.price
+          } `
         : 'Please select a broth'}
       <h4>Noodles</h4>
       {currentBowl.selectedNoodles.id
-        ? currentBowl.selectedNoodles.title
+        ? `${currentBowl.selectedNoodles.title}   \$ ${
+            currentBowl.selectedNoodles.price
+          } `
         : 'Please select a noodles'}
       <h4>Protein</h4>
       {currentBowl.selectedProtein.id
-        ? currentBowl.selectedProtein.title
+        ? `${currentBowl.selectedProtein.title}   \$ ${
+            currentBowl.selectedProtein.price
+          } `
         : 'Please select a protein'}
       <h4>Toppings</h4>
       <ul>
-        {currentBowl.selectedProtein.length
-          ? currentBowl.selectedToppings.map(topping => (
-              <li>{topping.title}</li>
-            ))
-          : 'Please select toppings if you want to'}
+        {currentBowl.selectedToppings.map(topping => (
+          <li key={topping.id}>
+            {topping.title} $ {topping.price}
+          </li>
+        ))}
       </ul>
-      <h4>{currentBowl.price}</h4>
     </div>
   )
 }

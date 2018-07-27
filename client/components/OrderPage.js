@@ -18,8 +18,7 @@ class OrderPage extends Component {
     selectedNoodles: {},
     selectedProtein: {},
     selectedToppings: [],
-    selectedRestrictions: [],
-    price: 0
+    selectedRestrictions: []
   }
 
   componentDidMount() {
@@ -27,45 +26,58 @@ class OrderPage extends Component {
     this.props.getRestrictions()
   }
 
-  // //submit bowl
-  // submitBowl = async event => {
-  //   event.preventDefault();
-  //   const {
-  //     selectedBroth,
-  //     selectedNoodles,
-  //     selectedProtein,
-  //     selectedToppings
-  //   } = this.state
-  //   try{
-  //   const responseOfBowl = await axios.post('/api/bowls', {
-  //     broth: selectedBroth,
-  //     noodles: selectedNoodles,
-  //     protein: selectedProtein,
-  //     toppings: selectedToppings,
-  //   });
+  //submit bowl
+  submitBowl = async event => {
+    event.preventDefault()
+    const {
+      selectedBroth,
+      selectedNoodles,
+      selectedProtein,
+      selectedToppings
+    } = this.state
 
-  //   }
-  //   catch (err) {
-  //     console.log("Sorry... you can't buy this bowl of ramen... please try again!")
-  //   }
-  // }
+    let ingredientsPrice =
+      Number(selectedBroth.price) +
+      Number(selectedNoodles.price) +
+      Number(selectedProtein.price) +
+      Number(selectedToppings.price)
+    let bowlPrice = selectedToppings.reduce(
+      (totalPrice, eachTopping) => totalPrice + Number(eachTopping.price),
+      ingredientsPrice
+    )
+
+    const bowl = {
+      broth: selectedBroth.title,
+      noodles: selectedNoodles.title,
+      protein: selectedProtein.title,
+      toppings: selectedToppings.title,
+      price: bowlPrice
+    }
+
+    console.log('We try to post this:', bowl)
+    try {
+      const responseOfBowl = await axios.post('/api/bowls', bowl)
+      if (responseOfBowl) {
+        console.log('So we are adding this to the cart', responseOfBowl)
+        this.props.history.push('/cart')
+      }
+    } catch (err) {
+      console.log(
+        "Sorry... you can't buy this bowl of ramen... please try again!"
+      )
+    }
+  }
 
   //update broth, noodles, protein,toppings when add
   updateSelection = ingredient => {
     if (ingredient.type === 'broth') {
-      this.setState({selectedBroth: ingredient, price: ingredient.price})
+      this.setState({selectedBroth: ingredient})
     } else if (ingredient.type === 'noodles') {
-      this.setState({selectedNoodles: ingredient, price: ingredient.price})
+      this.setState({selectedNoodles: ingredient})
     } else if (ingredient.type === 'protein') {
-      this.setState({selectedProtein: ingredient, price: ingredient.price})
+      this.setState({selectedProtein: ingredient})
     } else {
-      this.setState({
-        selectedToppings: ingredient,
-        price: ingredient.reduce(
-          (totalPrice, eachTop) => totalPrice + eachTop,
-          0
-        )
-      })
+      this.setState({selectedToppings: ingredient})
     }
   }
 
@@ -76,7 +88,7 @@ class OrderPage extends Component {
     const {allIngredients, restrictions} = this.props
     const {selectedBroth, selectedNoodles, selectedProtein} = this.state
 
-    console.log('CHOSEN INGREDIENT', this.state)
+    console.log('this is the props', this.props)
     return (
       <form>
         <h1>Order Ramen</h1>
@@ -120,7 +132,7 @@ class OrderPage extends Component {
           disabled={
             !selectedBroth.id && !selectedNoodles.id && !selectedProtein.id
           }
-          onClick={this.handleClick}
+          onClick={this.submitBowl}
         >
           Add To Cart
         </button>
