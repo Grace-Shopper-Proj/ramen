@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {me} from './store/user'
+import {me} from '../store/user'
 
 class AccountManagement extends Component {
   componentDidMount() {

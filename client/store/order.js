@@ -9,7 +9,7 @@ const getOrder = order => ({type: GET_ORDER, order})
 const removeOrder = () => ({type: REMOVE_ORDER})
 
 // THUNK CREATORS
-export const fetchOrder = () => async dispatch => {
+export const fetchOrder = userId => async dispatch => {
   try {
     const {data} = await axios.get('/') // fill in the path
     dispatch(getOrder(data))
@@ -18,9 +18,9 @@ export const fetchOrder = () => async dispatch => {
   }
 }
 
-export const deleteOrder = () => async dispatch => {
+export const deleteOrder = orderId => async dispatch => {
   try {
-    const {data} = await axios.delete('/') // fill in the path
+    const {data} = await axios.delete(`/api/orders/${orderId}`)
     dispatch(removeOrder())
   } catch (err) {
     console.log(err)
