@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 
 import OrderPage from './components/OrderPage'
-import AccountManagement from './components/AccountManagement'
+import AccountManagement from './AccountManagement'
 
 import {Navbar} from './components'
 import Routes from './routes'
