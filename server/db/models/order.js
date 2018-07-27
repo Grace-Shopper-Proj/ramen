@@ -9,12 +9,21 @@ const Order = db.define('order', {
     allowNull: false,
     defaultValue: false
   }
+  // promoCode: {
+  //   type: Sequelize.STRING,
+  //   allowNull: true
+  // }
 })
 
 //method to calculate price
 Order.prototype.getPrice = async function() {
   //find all bowls with this order
   try {
+    // let totalValue = 0
+    // let promo = 50
+    // let promoCode = "(brunoLovesRamen)"
+    //table get all current promocodes.
+
     const bowls = await Bowl.findAll({
       where: {orderId: this.id}
     })
@@ -22,6 +31,11 @@ Order.prototype.getPrice = async function() {
       (totalPrice, currentBowl) => totalPrice + Number(currentBowl.price),
       0
     )
+
+    // if(promoCode === ""){
+    //   totalValue = price - (price * (Number(Bowl.getElemebById(promoCode).value)/100))
+    // }
+
     console.log('We should get this: ', price)
     return price
   } catch (error) {

@@ -30,6 +30,10 @@ export default function CurrentBowl(props) {
           </li>
         ))}
       </ul>
+      <h4>Total Price: $</h4>
+      {(Number(currentBowl.selectedBroth.price) || 0) +
+        (Number(currentBowl.selectedNoodles.price) || 0) +
+        (Number(currentBowl.selectedProtein.price) || 0)}
     </div>
   )
 }

@@ -1,12 +1,15 @@
 const router = require('express').Router()
-const {Bowl} = require('../db/models')
+const {Bowl, Ingredient} = require('../db/models')
 
 module.exports = router
 
 //create a new bowl
 router.post('/', async (req, res, next) => {
   try {
-    const newBowl = await Bowl.create(req.body)
+    let newBowl = await Bowl.create()
+    await newBowl.addIngredients(req.body)
+    newBowl = await newBowl.setPrice()
+    console.log('new bowl price', newBowl.price)
     res.status(201).json(newBowl)
   } catch (err) {
     next(err)

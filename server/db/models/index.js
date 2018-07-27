@@ -15,6 +15,14 @@ Category.belongsToMany(Ingredient, {
   foreignKey: 'categoryId'
 })
 
+Bowl.belongsToMany(Ingredient, {
+  through: 'bowl_ingredients'
+})
+
+Ingredient.belongsToMany(Bowl, {
+  through: 'bowl_ingredients'
+})
+
 //create association between bowls and orders. Each bowl belongs to only one order
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
