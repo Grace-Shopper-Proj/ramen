@@ -8,11 +8,11 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
-  },
-  promoCode: {
-    type: Sequelize.STRING,
-    allowNull: true
   }
+  // promoCode: {
+  //   type: Sequelize.STRING,
+  //   allowNull: true
+  // }
 })
 
 //method to calculate price
