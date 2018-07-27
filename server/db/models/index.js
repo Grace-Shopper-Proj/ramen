@@ -16,15 +16,11 @@ Category.belongsToMany(Ingredient, {
 })
 
 Bowl.belongsToMany(Ingredient, {
-  through: 'bowl_ingredients',
-  as: 'ingredient',
-  foreignKey: 'bowlId'
+  through: 'bowl_ingredients'
 })
 
 Ingredient.belongsToMany(Bowl, {
-  through: 'bowl_ingredients',
-  as: 'bowl',
-  foreignKey: 'ingredientId'
+  through: 'bowl_ingredients'
 })
 
 //create association between bowls and orders. Each bowl belongs to only one order

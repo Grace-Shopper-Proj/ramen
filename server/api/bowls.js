@@ -6,12 +6,9 @@ module.exports = router
 //create a new bowl
 router.post('/', async (req, res, next) => {
   try {
-    const newBowl = await Bowl.create()
-    req.body.forEach(async ingredientId => {
-      const currentIngredient = await Ingredient.findById(ingredientId)
-      await newBowl.addIngredient(currentIngredient)
-    })
-    await newBowl.setPrice()
+    let newBowl = await Bowl.create()
+    await newBowl.addIngredients(req.body)
+    newBowl = await newBowl.setPrice()
     console.log('new bowl price', newBowl.price)
     res.status(201).json(newBowl)
   } catch (err) {
