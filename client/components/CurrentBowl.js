@@ -1,6 +1,15 @@
 import React from 'react'
 export default function CurrentBowl(props) {
   const currentBowl = props.currentBowl
+  let toppingsPrice = currentBowl.selectedToppings.reduce(
+    (totalPrice, currentTopping) => totalPrice + Number(currentTopping.price),
+    0
+  )
+  let currentPrice =
+    (Number(currentBowl.selectedBroth.price) || 0) +
+    (Number(currentBowl.selectedNoodles.price) || 0) +
+    (Number(currentBowl.selectedProtein.price) || 0) +
+    (toppingsPrice || 0)
   return (
     <div>
       <h1>Your Ramen Bowl</h1>
@@ -30,10 +39,8 @@ export default function CurrentBowl(props) {
           </li>
         ))}
       </ul>
-      <h4>Total Price: $</h4>
-      {(Number(currentBowl.selectedBroth.price) || 0) +
-        (Number(currentBowl.selectedNoodles.price) || 0) +
-        (Number(currentBowl.selectedProtein.price) || 0)}
+      <h4>Total Price: </h4>
+      ${currentPrice}
     </div>
   )
 }

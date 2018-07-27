@@ -39,7 +39,7 @@ export default function MultiSelectionForm(props) {
     updateSelection(newToppings)
   }
   return (
-    <form>
+    <div>
       {/* Generate the checkboxes for toppings */}
       {toppings.map(topping => {
         return (
@@ -53,6 +53,6 @@ export default function MultiSelectionForm(props) {
           </div>
         )
       })}
-    </form>
+    </div>
   )
 }
