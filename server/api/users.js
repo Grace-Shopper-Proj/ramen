@@ -1,23 +1,41 @@
+import {truncateSync} from 'fs'
+
 const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
-// router.get('/', async(req, res, next) => {
-//   User.findAll({
-//     attributes:["id", "email", "admin"]
-//   })
-// })
-// router.get('/:userId/allOrders', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: ['id', 'email', 'admin']
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/allOrders', async (req, res, next) => {
+  try {
+    const allOrders = await User.findAll({
+      include: [{all: true}]
+    })
+    res.json(allOrders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// router.get(':userId/currentOrder', async (req, res, next) => {
 //   try{
-//     const allOrders = await User.findAll({
-//       include:[{all: allOrders}]
-//     })
 
 //   }catch(err){
 //     next(err)
 //   }
 // })
-
 // router.get('guest with session')
 
 router.post('/', async (req, res, next) => {
