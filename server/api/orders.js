@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Bowl} = require('../db/models')
+const {Order, Bowl, User, Ingredient} = require('../db/models')
 
 module.exports = router
 
@@ -19,13 +19,79 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//create a new order
-router.post('/', async (req, res, next) => {
+// GET cart by userId
+router.get('/:userId/cart', async (req, res, next) => {
   try {
-    const newOrder = await Order.create(req.body)
-    res.status(201).json(newOrder)
-  } catch (err) {
-    next(err)
+    console.log('I am here!')
+    const cart = await Order.findOne({
+      where: {
+        isCart: true,
+        userId: req.params.userId
+      },
+      include: [
+        {
+          model: Bowl,
+          include: [Ingredient]
+        }
+      ]
+    })
+    if (cart) {
+      console.log(cart)
+      res.json(cart)
+    } else {
+      const newCart = await Order.create({isCart: true})
+      const user = await User.findOne({
+        where: {
+          id: req.params.userId
+        }
+      })
+      await user.setOrder(newCart)
+      console.log(newCart)
+      res.status(201).json(newCart)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Get cart by Session ID
+router.get('/guest/cart', async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        sessionId: req.session.id
+      },
+      include: [
+        {
+          model: Bowl
+        }
+      ]
+    })
+
+    res.json(cart)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// GET past orders by userId
+router.get('/:userId/past', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        isCart: false,
+        userId: req.params.userId
+      },
+      include: [
+        {
+          model: Bowl,
+          include: [Ingredient]
+        }
+      ]
+    })
+    res.json(orders)
+  } catch (error) {
+    next(error)
   }
 })
 

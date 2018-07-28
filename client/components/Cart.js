@@ -1,59 +1,22 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {axios} from 'axios'
+import axios from 'axios'
 
 import {fetchOrder, deleteOrder} from '../store/order'
-
-// dummy data
-const dummyUser = {
-  id: 1,
-  email: 'cody@email.com',
-  userType: 'customer'
-}
-const dummyCart = {
-  id: 1,
-  bowls: [
-    {
-      id: 1,
-      price: '10.00',
-      ingredients: [
-        {
-          id: 1,
-          title: 'shio',
-          type: 'broth'
-        },
-        {
-          id: 2,
-          title: 'udon',
-          type: 'noodles'
-        },
-        {
-          id: 3,
-          title: 'pork',
-          type: 'protein'
-        },
-        {
-          id: 4,
-          title: 'soft boil egg',
-          type: 'toppings'
-        },
-        {
-          id: 5,
-          title: 'nori',
-          type: 'toppings'
-        }
-      ]
-    }
-  ]
-}
+import {me} from '../store/user'
 
 class Cart extends Component {
   componentDidMount() {
-    // BLOCKER: express route to get an order for either guest or logged in user
-    // this.props.fetchOrder()
+    this.props.getUser()
   }
-  // This helper function parses a bowl object into a string that describes the bowl
+  componentDidUpdate() {
+    if (!this.props.cart.id) {
+      this.props.fetchOrder(this.props.user.id)
+    }
+  }
+
+  // parseItem is a helper function that parses a bowl object into a string that describes the bowl
   parseItem = bowl => {
     const {ingredients} = bowl
     const brothStr = ingredients.find(ingredient => ingredient.type === 'broth')
@@ -82,19 +45,19 @@ class Cart extends Component {
     const toppingStr = parseToppings(toppings)
     return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
   }
-  deleteBowl = event => {
+  deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
-    console.log('Will make DEL request to: ', `/api/bowls/${bowlId}`)
-    // await axios.delete(`/api/bowls/${bowlId}`)
-    // this.props.fetchOrder()
+    await axios.delete(`/api/bowls/${bowlId}`)
+    this.props.fetchOrder(this.props.user.id)
   }
   handleCheckout = event => {
     event.preventDefault()
-    console.log('Trying to checkout!')
     // Will move to Strip page; not implemented yet
+    console.log('Cannot check out just yet!')
   }
   render() {
     const {bowls} = this.props.cart
+    if (!bowls) return <p>loading...</p>
     return (
       <div>
         <h1>Your order</h1>
@@ -103,14 +66,14 @@ class Cart extends Component {
             <tr>
               <td>Item</td>
               <td>Price</td>
-              <td>Delete?</td>
+              <td>Click to remove item from order</td>
             </tr>
             {bowls.map(bowl => (
               <tr key={bowl.id}>
                 <td>{this.parseItem(bowl)}</td>
                 <td>${bowl.price}</td>
                 <td onClick={this.deleteBowl} name={bowl.id}>
-                  X
+                  remove
                 </td>
               </tr>
             ))}
@@ -126,16 +89,14 @@ class Cart extends Component {
 }
 
 const mapState = state => ({
-  // Using dummy data
-  user: dummyUser,
-  cart: dummyCart
-  // user: state.user,
-  // cart: state.cart
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
-  fetchOrder: () => dispatch(fetchOrder()),
-  deleteOrder: orderId => dispatch(deleteOrder(orderId))
+  fetchOrder: userId => dispatch(fetchOrder(userId)),
+  deleteOrder: orderId => dispatch(deleteOrder(orderId)),
+  getUser: () => dispatch(me())
 })
 
 export default withRouter(connect(mapState, mapDispatch)(Cart))
