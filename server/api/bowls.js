@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Bowl, Ingredient, Order} = require('../db/models')
+const {Bowl, Ingredient, Order, Session} = require('../db/models')
 
 module.exports = router
 
@@ -13,24 +13,31 @@ router.post('/', async (req, res, next) => {
     //call the set price bowl instance method on the new bowl
     newBowl = await newBowl.setPrice()
     //associate bowl with an order
-    let cart
+    let cartArray
     //check whether the user exists req.user
-    if (req.user.id) {
+    if (req.user) {
       //if the user does exist find or create an order
-
       let currentUserId = req.user.id
-      let cartArray = await Order.findOrCreate({
+      cartArray = await Order.findOrCreate({
         where: {
           userId: currentUserId,
           isCart: true
         }
       })
-      cart = cartArray[0]
+    } else {
+      //if the user does not exist find the session
+      let currentSessionId = req.sessionID
+      //find or create an order for the session
+      console.log('current session id', currentSessionId)
+      cartArray = await Order.findOrCreate({
+        where: {
+          sessionId: currentSessionId
+        }
+      })
     }
 
-    //if the user does not exist find the session
-    //find or create an order for the session
-
+    //find or create returns an array, the first element of which is the instance we need
+    let cart = cartArray[0]
     //add the bowl to this order
     newBowl.setOrder(cart)
     res.status(201).json(newBowl)
