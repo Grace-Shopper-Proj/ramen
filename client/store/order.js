@@ -9,9 +9,10 @@ const getOrder = order => ({type: GET_ORDER, order})
 const removeOrder = () => ({type: REMOVE_ORDER})
 
 // THUNK CREATORS
-export const fetchOrder = userId => async dispatch => {
+export const fetchOrder = () => async dispatch => {
   try {
-    const {data} = await axios.get('/') // fill in the path
+    // BLOCKER: express route to get an order for either guest or logged in user
+    const {data} = await axios.get('')
     dispatch(getOrder(data))
   } catch (err) {
     console.log(err)
