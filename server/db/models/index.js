@@ -32,6 +32,8 @@ Order.belongsTo(Session)
 Order.belongsTo(User)
 User.hasMany(Order)
 
+//changed something
+
 //sessions has one order
 //orders have one or no sessions
 
