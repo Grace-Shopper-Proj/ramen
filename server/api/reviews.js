@@ -1,11 +1,17 @@
 const router = require('express').Router()
-const Review = require('../db/models')
+const {Review} = require('../db/models')
 
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const reviewList = await Review.findAll()
+    const reviewList = await Review.findAll({
+      includes: [
+        {
+          model: user
+        }
+      ]
+    })
     if (!reviewList) {
       const error = new Error('There is no reviews')
       //send an error

@@ -42,12 +42,6 @@ User.hasMany(Order)
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
 
-//add association between order and user here
-
-//order has one review
-//the review has a foreign key for the associated order
-Order.hasOne(Review)
-
 //user has many reviews
 //review belongs to one user
 User.hasMany(Review)
@@ -59,5 +53,6 @@ module.exports = {
   Category,
   Bowl,
   Order,
-  Session
+  Session,
+  Review
 }
