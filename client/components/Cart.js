@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
+import {axios} from 'axios'
 
 import {fetchOrder, deleteOrder} from '../store/order'
 
@@ -52,6 +53,7 @@ class Cart extends Component {
     // BLOCKER: express route to get an order for either guest or logged in user
     // this.props.fetchOrder()
   }
+  // This helper function parses a bowl object into a string that describes the bowl
   parseItem = bowl => {
     const {ingredients} = bowl
     const brothStr = ingredients.find(ingredient => ingredient.type === 'broth')
@@ -80,6 +82,17 @@ class Cart extends Component {
     const toppingStr = parseToppings(toppings)
     return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
   }
+  deleteBowl = event => {
+    const bowlId = event.target.getAttribute('name')
+    console.log('Will make DEL request to: ', `/api/bowls/${bowlId}`)
+    // await axios.delete(`/api/bowls/${bowlId}`)
+    // this.props.fetchOrder()
+  }
+  handleCheckout = event => {
+    event.preventDefault()
+    console.log('Trying to checkout!')
+    // Will move to Strip page; not implemented yet
+  }
   render() {
     const {bowls} = this.props.cart
     return (
@@ -88,17 +101,25 @@ class Cart extends Component {
         <table>
           <tbody>
             <tr>
-              <td>item</td>
-              <td>price</td>
+              <td>Item</td>
+              <td>Price</td>
+              <td>Delete?</td>
             </tr>
             {bowls.map(bowl => (
               <tr key={bowl.id}>
                 <td>{this.parseItem(bowl)}</td>
                 <td>${bowl.price}</td>
+                <td onClick={this.deleteBowl} name={bowl.id}>
+                  X
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <button type="submit" onClick={this.handleCheckout}>
+          Check Out
+        </button>
+        <Link to="/home">Add another bowl</Link>
       </div>
     )
   }
