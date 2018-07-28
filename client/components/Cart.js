@@ -50,10 +50,10 @@ const dummyCart = {
 
 class Cart extends Component {
   componentDidMount() {
-    // BLOCKER: express route to get an order for either guest or logged in user
-    // this.props.fetchOrder()
+    this.props.fetchOrder(this.props.user.id)
   }
-  // This helper function parses a bowl object into a string that describes the bowl
+
+  // parseItem is a helper function that parses a bowl object into a string that describes the bowl
   parseItem = bowl => {
     const {ingredients} = bowl
     const brothStr = ingredients.find(ingredient => ingredient.type === 'broth')
@@ -82,16 +82,15 @@ class Cart extends Component {
     const toppingStr = parseToppings(toppings)
     return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
   }
-  deleteBowl = event => {
+  deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
-    console.log('Will make DEL request to: ', `/api/bowls/${bowlId}`)
-    // await axios.delete(`/api/bowls/${bowlId}`)
-    // this.props.fetchOrder()
+    await axios.delete(`/api/bowls/${bowlId}`)
+    this.props.fetchOrder()
   }
   handleCheckout = event => {
     event.preventDefault()
-    console.log('Trying to checkout!')
     // Will move to Strip page; not implemented yet
+    console.log('Trying to checkout!')
   }
   render() {
     const {bowls} = this.props.cart
@@ -126,15 +125,12 @@ class Cart extends Component {
 }
 
 const mapState = state => ({
-  // Using dummy data
-  user: dummyUser,
-  cart: dummyCart
-  // user: state.user,
-  // cart: state.cart
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
-  fetchOrder: () => dispatch(fetchOrder()),
+  fetchOrder: userId => dispatch(fetchOrder(userId)),
   deleteOrder: orderId => dispatch(deleteOrder(orderId))
 })
 

@@ -2,17 +2,35 @@ import axios from 'axios'
 
 // ACTION TYPES
 const GET_ORDER = 'GET_ORDER'
+const GET_PAST_ORDERS = 'GET_PAST_ORDERS'
 const REMOVE_ORDER = 'REMOVE_ORDER' // e.g. user decides to start over
 
 // ACTION CREATORS
 const getOrder = order => ({type: GET_ORDER, order})
+const getPastOrders = orders => ({type: GET_PAST_ORDERS, orders})
 const removeOrder = () => ({type: REMOVE_ORDER})
 
 // THUNK CREATORS
-export const fetchOrder = () => async dispatch => {
+export const fetchOrder = userId => async dispatch => {
   try {
-    const {data} = await axios.get('')
-    dispatch(getOrder(data))
+    let res
+    // using dummy paths
+    if (userId) {
+      res = await axios.get(`${userId}`)
+    } else {
+      res = await axios.get('')
+    }
+    dispatch(getOrder(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const fetchPassOrders = userId => async dispatch => {
+  try {
+    // using dummy path
+    const {data} = await axios.get(`${userId}`)
+    dispatch(getPastOrders(data))
   } catch (err) {
     console.log(err)
   }
