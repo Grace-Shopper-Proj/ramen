@@ -20,6 +20,9 @@ const User = db.define('user', {
 
 module.exports = User
 
+//instance method to getCureentOrder
+// User.prototype.getCurrentOrder
+
 // const crypto = require('crypto')
 
 //this is from the boilerplate
