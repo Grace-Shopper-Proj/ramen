@@ -3,6 +3,7 @@ const Ingredient = require('./ingredient')
 const Category = require('./category')
 const Bowl = require('./bowl')
 const Order = require('./order')
+const Review = require('./review')
 
 Ingredient.belongsToMany(Category, {
   through: 'ingredient_category',
@@ -35,6 +36,15 @@ Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
 
 //add association between order and user here
+
+//order has one review
+//the review has a foreign key for the associated order
+Order.hasOne(Review)
+
+//user has many reviews
+//review belongs to one user
+User.hasMany(Review)
+Review.belongsTo(User)
 
 module.exports = {
   User,
