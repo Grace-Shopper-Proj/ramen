@@ -1,56 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {axios} from 'axios'
+import axios from 'axios'
 
 import {fetchOrder, deleteOrder} from '../store/order'
-
-// dummy data
-const dummyUser = {
-  id: 1,
-  email: 'cody@email.com',
-  userType: 'customer'
-}
-const dummyCart = {
-  id: 1,
-  bowls: [
-    {
-      id: 1,
-      price: '10.00',
-      ingredients: [
-        {
-          id: 1,
-          title: 'shio',
-          type: 'broth'
-        },
-        {
-          id: 2,
-          title: 'udon',
-          type: 'noodles'
-        },
-        {
-          id: 3,
-          title: 'pork',
-          type: 'protein'
-        },
-        {
-          id: 4,
-          title: 'soft boil egg',
-          type: 'toppings'
-        },
-        {
-          id: 5,
-          title: 'nori',
-          type: 'toppings'
-        }
-      ]
-    }
-  ]
-}
+import {me} from '../store/user'
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.fetchOrder(this.props.user.id)
+    this.props.getUser()
+  }
+  componentDidUpdate() {
+    if (!this.props.cart.id) {
+      this.props.fetchOrder(this.props.user.id)
+    }
   }
 
   // parseItem is a helper function that parses a bowl object into a string that describes the bowl
@@ -85,15 +48,16 @@ class Cart extends Component {
   deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
     await axios.delete(`/api/bowls/${bowlId}`)
-    this.props.fetchOrder()
+    this.props.fetchOrder(this.props.user.id)
   }
   handleCheckout = event => {
     event.preventDefault()
     // Will move to Strip page; not implemented yet
-    console.log('Trying to checkout!')
+    console.log('Cannot check out just yet!')
   }
   render() {
     const {bowls} = this.props.cart
+    if (!bowls) return <p>loading...</p>
     return (
       <div>
         <h1>Your order</h1>
@@ -131,7 +95,8 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   fetchOrder: userId => dispatch(fetchOrder(userId)),
-  deleteOrder: orderId => dispatch(deleteOrder(orderId))
+  deleteOrder: orderId => dispatch(deleteOrder(orderId)),
+  getUser: () => dispatch(me())
 })
 
 export default withRouter(connect(mapState, mapDispatch)(Cart))

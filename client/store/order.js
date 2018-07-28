@@ -14,11 +14,10 @@ const removeOrder = () => ({type: REMOVE_ORDER})
 export const fetchOrder = userId => async dispatch => {
   try {
     let res
-    // using dummy paths
     if (userId) {
-      res = await axios.get(`${userId}`)
+      res = await axios.get(`/api/orders/${userId}/cart`)
     } else {
-      res = await axios.get('')
+      res = await axios.get('/api/orders/guest/cart')
     }
     dispatch(getOrder(res.data))
   } catch (err) {
@@ -28,8 +27,7 @@ export const fetchOrder = userId => async dispatch => {
 
 export const fetchPassOrders = userId => async dispatch => {
   try {
-    // using dummy path
-    const {data} = await axios.get(`${userId}`)
+    const {data} = await axios.get(`/orders/${userId}/past`)
     dispatch(getPastOrders(data))
   } catch (err) {
     console.log(err)
