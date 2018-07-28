@@ -3,6 +3,7 @@ const Ingredient = require('./ingredient')
 const Category = require('./category')
 const Bowl = require('./bowl')
 const Order = require('./order')
+const Session = require('./session')
 
 Ingredient.belongsToMany(Category, {
   through: 'ingredient_category',
@@ -23,6 +24,10 @@ Ingredient.belongsToMany(Bowl, {
   through: 'bowl_ingredients'
 })
 
+//association between bowl and sessions
+Session.hasMany(Bowl)
+Bowl.belongsTo(Session)
+
 //create association between bowls and orders. Each bowl belongs to only one order
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
@@ -34,5 +39,6 @@ module.exports = {
   Ingredient,
   Category,
   Bowl,
-  Order
+  Order,
+  Session
 }
