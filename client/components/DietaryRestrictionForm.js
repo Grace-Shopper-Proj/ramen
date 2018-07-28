@@ -17,7 +17,7 @@ export default function DietaryRestrictionForm(props) {
     updateRestrictions(newRestrictions)
   }
   return (
-    <form>
+    <div>
       {/* Generate the checkboxes for dietary restrictions */}
       {restrictions.map(restriction => {
         return (
@@ -31,6 +31,6 @@ export default function DietaryRestrictionForm(props) {
           </div>
         )
       })}
-    </form>
+    </div>
   )
 }
