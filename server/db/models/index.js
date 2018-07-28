@@ -41,8 +41,6 @@ User.hasMany(Order)
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
 
-//add association between order and user here
-
 module.exports = {
   User,
   Ingredient,
