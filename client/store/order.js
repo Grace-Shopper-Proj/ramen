@@ -12,7 +12,7 @@ const removeOrder = () => ({type: REMOVE_ORDER})
 export const fetchOrder = () => async dispatch => {
   try {
     // BLOCKER: express route to get an order for either guest or logged in user
-    const {data} = await axios.get('')
+    const {data} = await axios.get('/api/')
     dispatch(getOrder(data))
   } catch (err) {
     console.log(err)
