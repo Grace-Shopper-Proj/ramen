@@ -25,8 +25,8 @@ Ingredient.belongsToMany(Bowl, {
 })
 
 //association between bowl and sessions
-Session.hasMany(Bowl)
-Bowl.belongsTo(Session)
+Session.hasOne(Order)
+Order.belongsTo(Session)
 
 //create association between bowls and orders. Each bowl belongs to only one order
 Bowl.belongsTo(Order)
