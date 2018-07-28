@@ -9,14 +9,16 @@ const User = db.define('user', {
   },
   username: {
     type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
+    unique: true
   },
   password: {
     type: Sequelize.STRING
   },
   userType: {
     type: Sequelize.ENUM('customer', 'admin')
+  },
+  googleId: {
+    type: Sequelize.STRING
   }
 })
 
