@@ -15,7 +15,7 @@ router.post('/', async (req, res, next) => {
     //associate bowl with an order
     let cart
     //check whether the user exists req.user
-    if (req.user.id) {
+    if (req.user) {
       //if the user does exist find or create an order
 
       let currentUserId = req.user.id

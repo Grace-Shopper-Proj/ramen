@@ -103,14 +103,14 @@ class Cart extends Component {
             <tr>
               <td>Item</td>
               <td>Price</td>
-              <td>Delete?</td>
+              <td>Click to remove item from order</td>
             </tr>
             {bowls.map(bowl => (
               <tr key={bowl.id}>
                 <td>{this.parseItem(bowl)}</td>
                 <td>${bowl.price}</td>
                 <td onClick={this.deleteBowl} name={bowl.id}>
-                  X
+                  remove
                 </td>
               </tr>
             ))}
