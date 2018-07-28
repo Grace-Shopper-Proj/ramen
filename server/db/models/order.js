@@ -7,7 +7,10 @@ const Order = db.define('order', {
   isCart: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: false
+    defaultValue: true
+  },
+  sessionId: {
+    type: Sequelize.STRING
   }
   // promoCode: {
   //   type: Sequelize.STRING,
@@ -36,7 +39,6 @@ Order.prototype.getPrice = async function() {
     //   totalValue = price - (price * (Number(Bowl.getElemebById(promoCode).value)/100))
     // }
 
-    console.log('We should get this: ', price)
     return price
   } catch (error) {
     console.log(error)
