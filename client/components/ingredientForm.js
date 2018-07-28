@@ -2,15 +2,31 @@ import React, {Component} from 'react'
 class IngredientForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      title: '',
+      description: '',
+      price: 0,
+      inventory: 0,
+      imageUrl: ''
+    }
   }
 
+  componentDidMount() {
+    this.setState({
+      title: this.props.ingredient.title,
+      description: this.props.ingredient.description,
+      price: this.props.ingredient.price,
+      inventory: this.props.ingredient.inventory,
+      imageUrl: this.props.ingredient.imageUrl
+    })
+  }
+  handleChange = event => {
+    this.setState({[event.target.name]: event.target.value})
+  }
   render() {
-    const {ingredient} = this.props
     return (
       <form
-        id="ingredientForm"
-        // onSubmit={props.handleSubmit}
+      // onSubmit={props.handleSubmit}
       >
         <div className="form-group">
           <label htmlFor="title">Ingredient</label>
@@ -18,10 +34,9 @@ class IngredientForm extends Component {
             type="text"
             name="title"
             className="form-control"
-            id="title"
             placeholder="enter ingredient name"
-            // onChange={props.handleChange}
-            value={ingredient.title || ''}
+            onChange={this.handleChange}
+            value={this.state.title || ''}
             required
           />
         </div>
@@ -30,9 +45,8 @@ class IngredientForm extends Component {
           <textarea
             name="description"
             className="form-control"
-            id="description"
-            // onChange={props.handleChange}
-            value={ingredient.description || ''}
+            onChange={this.handleChange}
+            value={this.state.description || ''}
           />
         </div>
         <div className="form-group">
@@ -43,9 +57,8 @@ class IngredientForm extends Component {
             min="0"
             name="price"
             className="form-control"
-            id="price"
-            // onChange={props.handleChange}
-            value={ingredient.price || ''}
+            onChange={this.handleChange}
+            value={this.state.price || ''}
             required
           />
         </div>
@@ -55,9 +68,8 @@ class IngredientForm extends Component {
             type="number"
             name="inventory"
             className="form-control"
-            id="inventory"
-            // onChange={props.handleChange}
-            value={ingredient.inventory || ''}
+            onChange={this.handleChange}
+            value={this.state.inventory || ''}
             required
           />
           <div className="form-group">
@@ -76,16 +88,15 @@ class IngredientForm extends Component {
               type="text"
               name="image"
               className="form-control"
-              id="image"
               placeholder="enter image Url"
-              // onChange={props.handleChange}
-              value={ingredient.imageUrl || ''}
+              onChange={this.handleChange}
+              value={this.state.imageUrl || ''}
               required
             />
           </div>
         </div>
         <button type="submit" className="btn btn-primary">
-          {ingredient ? <span>Edit</span> : <span>Add</span>}
+          {this.state.ingredient ? <span>Edit</span> : <span>Add</span>}
         </button>
       </form>
     )
