@@ -19,29 +19,47 @@ class IngredientForm extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      title: this.props.ingredient.title,
-      description: this.props.ingredient.description,
-      price: this.props.ingredient.price,
-      inventory: this.props.ingredient.inventory,
-      imageUrl: this.props.ingredient.imageUrl,
-      type: this.props.ingredient.type,
-      id: this.props.ingredient.id
-    })
+    if (this.props.edit) {
+      this.setState({
+        title: this.props.ingredient.title,
+        description: this.props.ingredient.description,
+        price: this.props.ingredient.price,
+        inventory: this.props.ingredient.inventory,
+        imageUrl: this.props.ingredient.imageUrl,
+        type: this.props.ingredient.type,
+        id: this.props.ingredient.id
+      })
+    }
   }
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit = async event => {
+  handleEdit = async event => {
     event.preventDefault()
     await axios.put(`api/ingredients/${this.state.id}`, this.state)
     this.setState({edited: 'true'})
   }
 
+  handleAdd = async event => {
+    event.preventDefault()
+    console.log('new ingredient is', this.state)
+    await axios.post('api/ingredients', this.state)
+    this.setState({
+      title: '',
+      description: '',
+      price: 0,
+      inventory: 0,
+      imageUrl: '',
+      type: '',
+      id: '',
+      edited: false
+    })
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.props.edit ? this.handleEdit : this.handleAdd}>
         <div className="form-group">
           <label htmlFor="title">Ingredient</label>
           <input
@@ -88,7 +106,11 @@ class IngredientForm extends Component {
           />
           <div className="form-group">
             <label htmlFor="type">Type</label>
-            <select name="type" value={this.state.type}>
+            <select
+              name="type"
+              value={this.state.type}
+              onChange={this.handleChange}
+            >
               <option value="broth">broth</option>
               <option value="noodles">noodles</option>
               <option value="toppings">toppings</option>
@@ -97,20 +119,19 @@ class IngredientForm extends Component {
           </div>
           {/* need to add functionality for categories/tags - a multi select or something. or checkboxes */}
           <div className="form-group">
-            <label htmlFor="image">Image</label>
+            <label htmlFor="imageUrl">Image</label>
             <input
               type="text"
-              name="image"
+              name="imageUrl"
               className="form-control"
               placeholder="enter image Url"
               onChange={this.handleChange}
               value={this.state.imageUrl || ''}
-              required
             />
           </div>
         </div>
         <button type="submit" className="btn btn-primary">
-          {this.state.title ? <span>Update</span> : <span>Add</span>}
+          {this.props.edit ? <span>Update</span> : <span>Add</span>}
         </button>
         {this.state.edited ? <span>Updated!</span> : null}
       </form>
