@@ -51,7 +51,7 @@ class IngredientForm extends Component {
       price: 0,
       inventory: 0,
       imageUrl: '',
-      type: '',
+      type: 'broth',
       id: '',
       edited: false
     })
