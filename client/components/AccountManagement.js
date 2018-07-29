@@ -3,16 +3,18 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 //thunks
-import {getPastOrder, getUser} from '../store/order'
+import {getPastOrders, fetchPastOrders} from '../store/pastOrders'
 import {me} from '../store/user'
 
 class AccountManagement extends React.Component {
   constructor() {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {}
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     this.props.getUser()
+    this.props.getPastOrders()
   }
 
   handleClick = event => {
@@ -20,8 +22,8 @@ class AccountManagement extends React.Component {
     // A thunk creator for deleting user is needed to implement this method
   }
   render() {
-    console.log('what is this', this.props)
-    const {user, order} = this.props
+    console.log('what is this', this)
+    const {user, orders} = this.props
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
       <div>
@@ -29,14 +31,25 @@ class AccountManagement extends React.Component {
         <p>Logged in with: {user.email}</p>
         <p>User Type: {user.userType}</p>
         <h2>Order History:</h2>
-        <thead>
-          <tr>
-            <th>Order Number {order.id}</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+        <table>
+          <tbody>
+            <tr>
+              <th>Order Number</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+            {orders &&
+              orders.map(order => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.createdAt}</td>
+                  <td>{order.createdAt}</td>
+                  <td>{order.isCart}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
         <button type="submit" onClick={this.handleClick}>
           Logout
@@ -47,11 +60,13 @@ class AccountManagement extends React.Component {
 }
 
 const mapState = state => ({
-  user: state.user
+  user: state.user,
+  orders: state.pastOrders
 })
 
 const mapDispatch = dispatch => ({
-  getUser: () => dispatch(me())
+  getUser: () => dispatch(me()),
+  getPastOrders: () => dispatch(fetchPastOrders())
 })
 
 export default connect(mapState, mapDispatch)(AccountManagement)

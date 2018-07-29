@@ -80,7 +80,7 @@ router.get('/:userId/past', async (req, res, next) => {
     const orders = await Order.findAll({
       where: {
         isCart: false,
-        userId: req.params.userId
+        userId: +req.params.userId
       },
       include: [
         {
@@ -89,6 +89,7 @@ router.get('/:userId/past', async (req, res, next) => {
         }
       ]
     })
+    console.log('ORDERSSSSSS', orders)
     res.json(orders)
   } catch (error) {
     next(error)
