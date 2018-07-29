@@ -30,7 +30,15 @@ const Ingredient = db.define('ingredient', {
   },
   imageUrl: {
     type: Sequelize.TEXT,
+    validate: {notEmpty: true},
     defaultValue:
+      'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
+  }
+})
+//if imageUrl is an empty string add default image
+Ingredient.beforeValidate(ingredientInstance => {
+  if (!ingredientInstance.imageUrl) {
+    ingredientInstance.imageUrl =
       'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
   }
 })
