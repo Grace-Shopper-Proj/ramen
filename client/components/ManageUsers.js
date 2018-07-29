@@ -1,23 +1,45 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import axios from 'axios'
 
 import UserItem from './UserItem'
 
 // using dummy data
-const dummyUsers = {}
+const dummyUsers = [
+  {
+    id: 1,
+    email: 'cody@email.com'
+  },
+  {
+    id: 2,
+    email: 'exploding.kitten@email.com'
+  }
+]
 
-class ManageUser extends Component {
+export default class ManageUser extends Component {
+  state = {
+    allUsers: []
+  }
+  async componentDidMount() {
+    const {data} = await axios.get('/api/users')
+    this.setState({
+      allUsers: data
+    })
+  }
+  modifyUser = async (userId, actionType) => {
+    let newStatus = {}
+    if (actionType === 'upgrade') {
+      newStatus = {userType: 'admin'}
+    }
+    if (actionType === 'ban') {
+      newStatus = {isBan: true}
+    }
+    const {data} = await axios.put(`/api/user/${userId}`, newStatus)
+  }
   render() {
-    return <h1>This is where user management lives.</h1>
+    return (
+      <div>
+        <h1>Upgrade or band users</h1>
+      </div>
+    )
   }
 }
-
-const mapState = state => ({
-  allUsers: dummyUsers
-})
-
-const mapDispatch = dispatch => ({
-  modifyUser: user => dispatch(modifyUser(user))
-})
-
-export default connect(mapState, mapDispatch)(ManageUser)
