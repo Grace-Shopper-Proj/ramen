@@ -34,13 +34,13 @@ router.put('/:userId', async (req, res, next) => {
     }
     const user = await User.findOne({
       where: {
-        id: +req.params.userId,
-        attributes: ['id', 'email', 'userType', 'isBan']
-      }
+        id: +req.params.userId
+      },
+      attributes: ['id', 'email', 'userType', 'isBan']
     })
     if (user) {
-      const updatedUser = user.update(req.body)
-      res.json(updatedUser)
+      const updatedUser = await user.update(req.body)
+      res.status(201).json(updatedUser)
     } else {
       res.status(404).send('User not found')
     }
