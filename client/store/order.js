@@ -25,7 +25,7 @@ export const fetchOrder = userId => async dispatch => {
   }
 }
 
-export const fetchPassOrders = userId => async dispatch => {
+export const fetchPastOrders = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/orders/${userId}/past`)
     dispatch(getPastOrders(data))
