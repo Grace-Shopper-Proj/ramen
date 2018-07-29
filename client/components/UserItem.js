@@ -11,15 +11,15 @@ export default function UserItem(props) {
           Upgrade to admin
         </button>
       ) : (
-        ''
+        '[ADMIN]'
       )}
-      {user.isBan === true ? (
+      {user.isBan ? (
         <button type="submit" onClick={() => modifyUser(user.id, 'unban')}>
           Un-ban user
         </button>
       ) : (
-        <button type="submit" onClick={() => modifyUser(user.id, 'unban')}>
-          Un-ban user
+        <button type="submit" onClick={() => modifyUser(user.id, 'ban')}>
+          Ban user
         </button>
       )}
     </li>

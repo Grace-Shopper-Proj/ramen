@@ -24,7 +24,7 @@ export default class ManageUser extends Component {
     if (actionType === 'unban') {
       newStatus = {isBan: false}
     }
-    await axios.put(`/api/user/${userId}`, newStatus)
+    await axios.put(`/api/users/${userId}`, newStatus)
     const {data} = await axios.get('/api/users')
     this.setState({
       allUsers: data
