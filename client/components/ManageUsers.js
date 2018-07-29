@@ -3,18 +3,6 @@ import axios from 'axios'
 
 import UserItem from './UserItem'
 
-// using dummy data
-const dummyUsers = [
-  {
-    id: 1,
-    email: 'cody@email.com'
-  },
-  {
-    id: 2,
-    email: 'exploding.kitten@email.com'
-  }
-]
-
 export default class ManageUser extends Component {
   state = {
     allUsers: []
@@ -33,12 +21,33 @@ export default class ManageUser extends Component {
     if (actionType === 'ban') {
       newStatus = {isBan: true}
     }
-    const {data} = await axios.put(`/api/user/${userId}`, newStatus)
+    if (actionType === 'unban') {
+      newStatus = {isBan: false}
+    }
+    await axios.put(`/api/user/${userId}`, newStatus)
+    const {data} = await axios.get('/api/users')
+    this.setState({
+      allUsers: data
+    })
   }
   render() {
+    const {allUsers} = this.state
     return (
       <div>
-        <h1>Upgrade or band users</h1>
+        <h1>Upgrade or ban users</h1>
+        {allUsers.lenght === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {allUsers.map(user => (
+              <UserItem
+                key={user.id}
+                user={user}
+                modifyUser={this.modifyUser}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     )
   }

@@ -5,13 +5,23 @@ export default function UserItem(props) {
   const {user, modifyUser} = props
   return (
     <li key={user.id}>
-      user email: {user.email}
-      <button type="submit" onClick={() => modifyUser(user.id, 'upgrade')}>
-        Upgrade to admin
-      </button>
-      <button type="submit" onClick={() => modifyUser(user.id, 'ban')}>
-        Ban user
-      </button>
+      User email: {user.email}
+      {user.userType === 'customer' ? (
+        <button type="submit" onClick={() => modifyUser(user.id, 'upgrade')}>
+          Upgrade to admin
+        </button>
+      ) : (
+        ''
+      )}
+      {user.isBan === true ? (
+        <button type="submit" onClick={() => modifyUser(user.id, 'unban')}>
+          Un-ban user
+        </button>
+      ) : (
+        <button type="submit" onClick={() => modifyUser(user.id, 'unban')}>
+          Un-ban user
+        </button>
+      )}
     </li>
   )
 }
