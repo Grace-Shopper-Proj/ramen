@@ -29,4 +29,14 @@ router.get('/category', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    let ingredient = await Ingredient.findById(req.params.id)
+    ingredient = await ingredient.update(req.body)
+    res.json(ingredient)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

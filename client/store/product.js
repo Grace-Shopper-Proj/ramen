@@ -28,6 +28,7 @@ export default function(state = allProducts, action) {
     case GOT_PRODUCTS: {
       return action.products
     }
+
     default:
       return state
   }

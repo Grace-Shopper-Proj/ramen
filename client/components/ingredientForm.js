@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import axios from 'axios'
+import putProduct from '../store/product'
 class IngredientForm extends Component {
   constructor(props) {
     super(props)
@@ -7,7 +11,10 @@ class IngredientForm extends Component {
       description: '',
       price: 0,
       inventory: 0,
-      imageUrl: ''
+      imageUrl: '',
+      type: '',
+      id: '',
+      edited: false
     }
   }
 
@@ -17,17 +24,24 @@ class IngredientForm extends Component {
       description: this.props.ingredient.description,
       price: this.props.ingredient.price,
       inventory: this.props.ingredient.inventory,
-      imageUrl: this.props.ingredient.imageUrl
+      imageUrl: this.props.ingredient.imageUrl,
+      type: this.props.ingredient.type,
+      id: this.props.ingredient.id
     })
   }
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value})
   }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+    await axios.put(`api/ingredients/${this.state.id}`, this.state)
+    this.setState({edited: 'true'})
+  }
+
   render() {
     return (
-      <form
-      // onSubmit={props.handleSubmit}
-      >
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Ingredient</label>
           <input
@@ -41,7 +55,7 @@ class IngredientForm extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Campus Description</label>
+          <label htmlFor="description">Description</label>
           <textarea
             name="description"
             className="form-control"
@@ -74,7 +88,7 @@ class IngredientForm extends Component {
           />
           <div className="form-group">
             <label htmlFor="type">Type</label>
-            <select>
+            <select name="type" value={this.state.type}>
               <option value="broth">broth</option>
               <option value="noodles">noodles</option>
               <option value="toppings">toppings</option>
@@ -96,8 +110,9 @@ class IngredientForm extends Component {
           </div>
         </div>
         <button type="submit" className="btn btn-primary">
-          {this.state.ingredient ? <span>Edit</span> : <span>Add</span>}
+          {this.state.title ? <span>Update</span> : <span>Add</span>}
         </button>
+        {this.state.edited ? <span>Updated!</span> : null}
       </form>
     )
   }
