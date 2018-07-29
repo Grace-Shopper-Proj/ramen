@@ -137,7 +137,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  // import action creator for add to cart
+  // import thunk creator for add to cart
   getAllIngredients: () => dispatch(getProducts()),
   getRestrictions: () => dispatch(getRestrictions())
 })

@@ -8,6 +8,7 @@ import ReviewList from './components/reviews/ReviewList'
 
 import {Navbar} from './components'
 import Routes from './routes'
+import adminPage from './components/adminPage'
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
         <Route exact path="/account" component={AccountManagement} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/reviews" component={ReviewList} />
+        {/* Need to add logic to only allow logged in admins to view this page */}
+        <Route exact path="/admin" component={adminPage} />
         <Redirect to="/home" />
       </Switch>
     </div>
