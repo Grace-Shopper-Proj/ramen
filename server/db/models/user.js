@@ -11,10 +11,15 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   userType: {
-    type: Sequelize.ENUM('customer', 'admin')
+    type: Sequelize.ENUM('customer', 'admin'),
+    defaultValue: 'customer'
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  isBan: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
