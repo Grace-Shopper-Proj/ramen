@@ -4,7 +4,6 @@ const Category = require('./category')
 const Bowl = require('./bowl')
 const Order = require('./order')
 const Review = require('./review')
-const Session = require('./session')
 Ingredient.belongsToMany(Category, {
   through: 'ingredient_category',
   as: 'category',
@@ -43,6 +42,5 @@ module.exports = {
   Category,
   Bowl,
   Order,
-  Session,
   Review
 }

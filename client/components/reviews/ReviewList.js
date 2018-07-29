@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 //import components
-import reviewForm from './reviewForm'
+import ReviewForm from './reviewForm'
 
 //import thunks
-import {getReviewList} from '../../store/review'
+import {getReviewList, addReview} from '../../store/review'
 import {me} from '../../store/user'
 //import the thunk called
 //import {getReviewList}
@@ -27,6 +27,12 @@ import {me} from '../../store/user'
 class ReviewList extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      title: '',
+      rating: 0,
+      content: 'Tell us what you think of our ramen...'
+    }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -34,14 +40,25 @@ class ReviewList extends Component {
     this.props.fetchUser()
   }
 
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
+
   render() {
-    const {allReviews, user} = this.props
-    console.log('This is the user', user)
-    console.log(reviewForm)
+    const {allReviews, submitReview, user} = this.props
+    console.log('2. This is the allReviews', allReviews)
     return (
       <div>
-        <reviewForm />
-        {user.id ? <reviewForm /> : <p>we have reviews. please add some</p>}
+        {user.id ? (
+          <ReviewForm
+            handleChange={this.handleChange}
+            submitReview={submitReview}
+            reviewInfo={this.state}
+            userId={user.id}
+          />
+        ) : (
+          ''
+        )}
         <h1>Here is Our Reviews: </h1>
         {!allReviews.length ? (
           <p>we don't have reviews. please add some</p>
@@ -63,14 +80,18 @@ class ReviewList extends Component {
 
 const mapStateToProps = state => {
   return {
-    allReviews: state.review.reviewList,
+    allReviews: state.review,
     user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   fetchAllReviews: () => dispatch(getReviewList()),
-  fetchUser: () => dispatch(me())
+  fetchUser: () => dispatch(me()),
+  submitReview: async (event, review, userId) => {
+    event.preventDefault()
+    await dispatch(addReview({review, userId}))
+  }
 })
 
 export default withRouter(
