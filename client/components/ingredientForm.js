@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
-import putProduct from '../store/product'
+import {getProducts} from '../store/product'
 class IngredientForm extends Component {
   constructor(props) {
     super(props)
@@ -55,6 +55,8 @@ class IngredientForm extends Component {
       id: '',
       edited: false
     })
+    //is this best practice? Seems like maybe I should dispatch a seperate thunk that only adds the single new product to state. Or does it matter?
+    this.props.getAllIngredients()
   }
 
   render() {
@@ -139,4 +141,8 @@ class IngredientForm extends Component {
   }
 }
 
-export default IngredientForm
+const mapDispatch = dispatch => ({
+  getAllIngredients: () => dispatch(getProducts())
+})
+
+export default withRouter(connect(null, mapDispatch)(IngredientForm))
