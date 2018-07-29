@@ -34,14 +34,15 @@ router.put('/:userId', async (req, res, next) => {
     }
     const user = await User.findOne({
       where: {
-        id: +req.params.userId
+        id: +req.params.userId,
+        attributes: ['id', 'email', 'userType', 'isBan']
       }
     })
     if (user) {
       const updatedUser = user.update(req.body)
       res.json(updatedUser)
     } else {
-      throw new Error('Fail to update existing user')
+      res.status(404).send('User not found')
     }
   } catch (err) {
     next(err)
