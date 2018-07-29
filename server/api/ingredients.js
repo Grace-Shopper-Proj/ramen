@@ -20,10 +20,29 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    let ingredient = await Ingredient.create(req.body)
+    res.json(ingredient)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/category', async (req, res, next) => {
   try {
     const category = await Category.findAll()
     res.json(category)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    let ingredient = await Ingredient.findById(req.params.id)
+    ingredient = await ingredient.update(req.body)
+    res.json(ingredient)
   } catch (err) {
     next(err)
   }
