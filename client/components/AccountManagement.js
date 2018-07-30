@@ -27,6 +27,11 @@ class AccountManagement extends React.Component {
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
       <div>
+        {user.userType === 'admin' ? (
+          <Link to="/admin">Go to admin page</Link>
+        ) : (
+          ''
+        )}
         <h1>Your Account Information</h1>
         <p>Logged in with: {user.email}</p>
         <p>User Type: {user.userType}</p>
