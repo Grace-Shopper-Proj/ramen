@@ -15,7 +15,7 @@ class ReviewList extends Component {
     this.state = {
       title: '',
       rating: 0,
-      content: 'Tell us what you think of our ramen...'
+      content: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.ratingChanged = this.ratingChanged.bind(this)
@@ -53,21 +53,26 @@ class ReviewList extends Component {
         {!allReviews.length ? (
           <p>we don't have reviews. please add some</p>
         ) : (
-          allReviews.map(review => (
-            <div key={review.id}>
-              <h4>User: {review.user.email}</h4>
-              <h5>{review.title}</h5>
-              <h6>ordered at: {review.createdAt}</h6>
-              <Reactstars
-                count={5}
-                edit={false}
-                size={24}
-                color2="#ffd700"
-                value={review.rating}
-              />
-              <p>{review.content}</p>
-            </div>
-          ))
+          allReviews.map(review => {
+            //
+            const indexOfAt = review.user.email.indexOf('@')
+            const userName = review.user.email.slice(0, indexOfAt)
+            return (
+              <div key={review.id}>
+                <h4>User: {userName}</h4>
+                <h5>{review.title}</h5>
+                <h6>Reviewed at: {review.createdAt}</h6>
+                <Reactstars
+                  count={5}
+                  edit={false}
+                  size={24}
+                  color2="#ffd700"
+                  value={review.rating}
+                />
+                <p>{review.content}</p>
+              </div>
+            )
+          })
         )}
       </div>
     )
