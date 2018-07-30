@@ -6,6 +6,36 @@ import axios from 'axios'
 import {fetchOrder, deleteOrder} from '../store/order'
 import {me} from '../store/user'
 
+// parseItem is a helper function that parses a bowl object into a string that describes the bowl
+export const parseItem = bowl => {
+  const {ingredients} = bowl
+  const brothStr = ingredients.find(ingredient => ingredient.type === 'broth')
+    .title
+  const noodlesStr = ingredients.find(
+    ingredient => ingredient.type === 'noodles'
+  ).title
+  const proteinStr = ingredients.find(
+    ingredient => ingredient.type === 'protein'
+  ).title
+  const toppings = ingredients.filter(
+    ingredient => ingredient.type === 'toppings'
+  )
+  const parseToppings = toppings => {
+    if (toppings.length === 0) return 'and no toppings'
+    if (toppings.length === 1) return `and ${toppings[0].title}`
+    else {
+      let result = ''
+      for (let i = 0; i < toppings.length - 1; i++) {
+        result += `${toppings[i].title}, `
+      }
+      result += `and ${toppings[toppings.length - 1].title}`
+      return result
+    }
+  }
+  const toppingStr = parseToppings(toppings)
+  return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
+}
+
 class Cart extends Component {
   componentDidMount() {
     this.props.getUser()
@@ -16,35 +46,6 @@ class Cart extends Component {
     }
   }
 
-  // parseItem is a helper function that parses a bowl object into a string that describes the bowl
-  parseItem = bowl => {
-    const {ingredients} = bowl
-    const brothStr = ingredients.find(ingredient => ingredient.type === 'broth')
-      .title
-    const noodlesStr = ingredients.find(
-      ingredient => ingredient.type === 'noodles'
-    ).title
-    const proteinStr = ingredients.find(
-      ingredient => ingredient.type === 'protein'
-    ).title
-    const toppings = ingredients.filter(
-      ingredient => ingredient.type === 'toppings'
-    )
-    const parseToppings = toppings => {
-      if (toppings.length === 0) return 'and no toppings'
-      if (toppings.length === 1) return `and ${toppings[0].title}`
-      else {
-        let result = ''
-        for (let i = 0; i < toppings.length - 1; i++) {
-          result += `${toppings[i].title}, `
-        }
-        result += `and ${toppings[toppings.length - 1].title}`
-        return result
-      }
-    }
-    const toppingStr = parseToppings(toppings)
-    return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
-  }
   deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
     await axios.delete(`/api/bowls/${bowlId}`)
@@ -70,7 +71,7 @@ class Cart extends Component {
             </tr>
             {bowls.map(bowl => (
               <tr key={bowl.id}>
-                <td>{this.parseItem(bowl)}</td>
+                <td>{parseItem(bowl)}</td>
                 <td>${bowl.price}</td>
                 <td onClick={this.deleteBowl} name={bowl.id}>
                   remove
