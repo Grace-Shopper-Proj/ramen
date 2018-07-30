@@ -28,6 +28,8 @@ router.post('/', async (req, res, next) => {
       //if the user does not exist find the session
       let currentSessionId = req.sessionID
       //find or create an order for the session
+      req.session.banana = 'true'
+      console.log('req session', req.session)
       console.log('current session id', currentSessionId)
       cartArray = await Order.findOrCreate({
         where: {
