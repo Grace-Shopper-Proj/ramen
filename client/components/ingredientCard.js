@@ -29,6 +29,8 @@ class IngredientCard extends Component {
         <div className="card">
           <img
             className="card-img-top"
+            data-toggle="modal"
+            data-target={`#modal${ingredient.id}`}
             src={ingredient.imageUrl}
             onClick={this.togglePopup}
           />
