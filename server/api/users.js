@@ -1,7 +1,7 @@
 // There routes are for managing users.
 
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {

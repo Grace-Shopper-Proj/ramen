@@ -61,12 +61,14 @@ class AccountManagement extends React.Component {
 
 const mapState = state => ({
   user: state.user,
-  orders: state.pastOrders
+  orders: state.pastOrders,
+  reviews: state.pastReviews
 })
 
 const mapDispatch = dispatch => ({
   getUser: () => dispatch(me()),
-  getPastOrders: () => dispatch(fetchPastOrders())
+  getPastOrders: () => dispatch(fetchPastOrders()),
+  getPastReviews: userId => dispatch()
 })
 
 export default connect(mapState, mapDispatch)(AccountManagement)
