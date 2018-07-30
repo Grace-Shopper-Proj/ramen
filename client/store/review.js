@@ -3,6 +3,7 @@ import axios from 'axios'
 //ACTION
 const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS'
 const ADD_A_REVIEW = 'ADD_A_REVIEW'
+const DELETED_A_REVIEW = 'DELETED_A_REVIEW'
 
 //ACTION CREATOR
 const getAllReviews = reviews => ({
@@ -13,6 +14,11 @@ const getAllReviews = reviews => ({
 const submitReview = singleReview => ({
   type: ADD_A_REVIEW,
   singleReview
+})
+
+const deletedReview = id => ({
+  type: DELETED_A_REVIEW,
+  id
 })
 
 //THUNK
@@ -33,6 +39,17 @@ export const addReview = reviewInfo => {
       dispatch(submitReview(data))
     } catch (err) {
       console.log("sorry, you can't submit this review...".err)
+    }
+  }
+}
+
+export const deleteReview = id => {
+  return async dispatch => {
+    try {
+      await axios.delete(`api/reviews/${id}`)
+      dispatch(deletedReview(id))
+    } catch (err) {
+      console.log("sorry, we can't delete this review.".err)
     }
   }
 }

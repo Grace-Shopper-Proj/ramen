@@ -11,9 +11,9 @@ class ManageReviews extends Component {
   componentDidMount() {
     this.props.fetchAllReviews()
   }
-  removeReview = async event => {
+  removeReview = async (event, id) => {
     event.preventDefault()
-    await axios.delete(`api/reviews/${this.state.id}`)
+    await axios.delete(`api/reviews/${id}`)
     this.props.fetchAllReviews()
   }
   render() {
@@ -40,7 +40,7 @@ class ManageReviews extends Component {
               <p>{review.content}</p>
               <button
                 className="btn btn-primary btn-danger"
-                onClick={this.removeReview}
+                onClick={event => this.removeReview(event, review.id)}
               >
                 Delete Review
               </button>
