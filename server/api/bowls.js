@@ -25,15 +25,16 @@ router.post('/', async (req, res, next) => {
         }
       })
     } else {
-      //if the user does not exist find the session
-      let currentSessionId = req.sessionID
+      //if session does not yet have a guestUserId
+      if (!req.session.guestUserId) {
+        //add a guestUserId to the session
+        req.session.guestUserId = req.sessionID
+      }
+
       //find or create an order for the session
-      req.session.banana = 'true'
-      console.log('req session', req.session)
-      console.log('current session id', currentSessionId)
       cartArray = await Order.findOrCreate({
         where: {
-          sessionId: currentSessionId
+          sessionId: req.session.guestUserId
         }
       })
     }
@@ -73,7 +74,7 @@ router.use('/:id', async (req, res, next) => {
 })
 
 //get a bowl
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   res.json(req.bowl)
 })
 
