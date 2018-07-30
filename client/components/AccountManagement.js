@@ -29,7 +29,6 @@ class AccountManagement extends React.Component {
     // A thunk creator for deleting user is needed to implement this method
   }
   render() {
-    console.log('what is this', this)
     const {user, orders, reviews} = this.props
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
@@ -50,14 +49,18 @@ class AccountManagement extends React.Component {
               <th>Date</th>
               <th>Time</th>
               <th>Status</th>
+              <th>Quantity</th>
+              <th>Total</th>
             </tr>
             {orders &&
               orders.map(order => (
                 <tr key={order.id}>
                   <td>{order.id}</td>
-                  <td>{order.createdAt}</td>
-                  <td>{order.createdAt}</td>
-                  <td>{order.isCart}</td>
+                  <td>{order.createdAt.slice(0, 10)}</td>
+                  <td>{order.createdAt.slice(11, 16)}</td>
+                  <td>{order.status}</td>
+                  <td>{order.quantity}</td>
+                  <td>{order.total}</td>
                 </tr>
               ))}
           </tbody>

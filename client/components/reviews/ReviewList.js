@@ -59,7 +59,12 @@ class ReviewList extends Component {
             //
             const indexOfAt = review.user.email.indexOf('@')
             const userName = review.user.email.slice(0, indexOfAt)
-            return <SingleReview userName={userName} review={review} />
+            return (
+              <div key={review.id}>
+                <h4>user: {userName}</h4>
+                <SingleReview userName={userName} review={review} />
+              </div>
+            )
           })
         )}
       </div>
