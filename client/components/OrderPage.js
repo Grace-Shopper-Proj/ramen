@@ -78,7 +78,6 @@ class OrderPage extends Component {
     const {allIngredients, restrictions} = this.props
     const {selectedBroth, selectedNoodles, selectedProtein} = this.state
 
-    console.log('this is the props', this.props)
     return (
       <form className="container">
         <h1>Order Ramen</h1>
