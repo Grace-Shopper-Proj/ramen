@@ -48,4 +48,14 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    let ingredient = await Ingredient.findById(req.params.id)
+    ingredient = await ingredient.destroy()
+    res.json(ingredient)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
