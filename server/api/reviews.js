@@ -39,3 +39,17 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await Review.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(204)
+  } catch (err) {
+    console.log('Sorry, cannot delete this review...', err)
+    next(err)
+  }
+})

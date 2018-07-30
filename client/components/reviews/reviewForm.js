@@ -32,6 +32,7 @@ export default props => {
         row="7"
         cols="50"
         value={reviewInfo.content}
+        placeholder="Tell us what you think of our ramen..."
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
