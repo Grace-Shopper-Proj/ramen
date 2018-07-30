@@ -21,7 +21,7 @@ export const parseItem = bowl => {
   const proteinStr = ingredients.find(
     ingredient => ingredient.type === 'protein'
   ).title
-  const toppings = ingredients.filter(
+  const topping = ingredients.filter(
     ingredient => ingredient.type === 'toppings'
   )
   const parseToppings = toppings => {
@@ -36,7 +36,7 @@ export const parseItem = bowl => {
       return result
     }
   }
-  const toppingStr = parseToppings(toppings)
+  const toppingStr = parseToppings(topping)
   return `${brothStr} ramen with ${noodlesStr}, ${proteinStr}, ${toppingStr}`
 }
 

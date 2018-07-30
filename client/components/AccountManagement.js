@@ -1,13 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import ReactStars from 'react-stars'
 
 //component
 import SingleReview from './reviews/SingleReview'
 
 //thunks
-import {getPastOrders, fetchPastOrders} from '../store/pastOrders'
+import {fetchPastOrders} from '../store/pastOrders'
 import {getPastReviews} from '../store/pastReviews'
 import {me} from '../store/user'
 

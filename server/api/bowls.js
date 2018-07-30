@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Bowl, Ingredient, Order, Session} = require('../db/models')
+const {Bowl, Order} = require('../db/models')
 
 module.exports = router
 
@@ -31,7 +31,6 @@ router.post('/', async (req, res, next) => {
         req.session.guestUserId = req.sessionID
       }
 
-      //find or create an order for the session
       cartArray = await Order.findOrCreate({
         where: {
           sessionId: req.session.guestUserId
