@@ -11,6 +11,13 @@ const Order = db.define('order', {
   },
   sessionId: {
     type: Sequelize.STRING
+  },
+  status: {
+    type: Sequelize.ENUM('creating', 'ready'),
+    defaultValue: 'creating'
+  },
+  total: {
+    type: Sequelize.INTEGER
   }
   // promoCode: {
   //   type: Sequelize.STRING,
