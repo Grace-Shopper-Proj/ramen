@@ -8,6 +8,7 @@ import restrictions from './restrictions'
 import cart from './order'
 import pastOrders from './pastOrders'
 import review from './review'
+import pastReviews from './pastReviews'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   restrictions,
   cart,
   pastOrders,
-  review
+  review,
+  pastReviews
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

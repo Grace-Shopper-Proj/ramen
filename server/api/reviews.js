@@ -24,6 +24,28 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const reviewList = await Review.findAll({
+      where: {userId: req.params.userId},
+      include: [
+        {
+          model: User
+        }
+      ]
+    })
+    if (!reviewList) {
+      const error = new Error('There is no reviews')
+      //send an error
+      error.status = 404
+      return next(error)
+    }
+    res.status(200).json(reviewList)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   //request body receives an object includes review and UserId
   const {review, userId} = req.body
