@@ -36,16 +36,6 @@ class OrderPage extends Component {
       selectedToppings
     } = this.state
 
-    let ingredientsPrice =
-      Number(selectedBroth.price) +
-      Number(selectedNoodles.price) +
-      Number(selectedProtein.price) +
-      Number(selectedToppings.price)
-    let bowlPrice = selectedToppings.reduce(
-      (totalPrice, eachTopping) => totalPrice + Number(eachTopping.price),
-      ingredientsPrice
-    )
-
     const bowlIngredients = [
       selectedBroth,
       selectedNoodles,
