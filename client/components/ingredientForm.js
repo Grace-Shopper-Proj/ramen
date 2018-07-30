@@ -40,7 +40,11 @@ class IngredientForm extends Component {
     await axios.put(`api/ingredients/${this.state.id}`, this.state)
     this.setState({edited: 'true'})
   }
-
+  removeIngredient = async event => {
+    event.preventDefault()
+    await axios.delete(`api/ingredients/${this.state.id}`)
+    this.props.getAllIngredients()
+  }
   handleAdd = async event => {
     event.preventDefault()
     console.log('new ingredient is', this.state)
@@ -136,6 +140,14 @@ class IngredientForm extends Component {
           {this.props.edit ? <span>Update</span> : <span>Add</span>}
         </button>
         {this.state.edited ? <span>Updated!</span> : null}
+        {this.props.edit ? (
+          <button
+            className="btn btn-primary btn-danger"
+            onClick={this.removeIngredient}
+          >
+            Delete
+          </button>
+        ) : null}
       </form>
     )
   }

@@ -96,6 +96,27 @@ router.get('/:userId/past', async (req, res, next) => {
   }
 })
 
+// GET orders by status (creating vs ready)
+router.get('/status/:status', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        status: req.params.status,
+        isCart: false
+      },
+      include: [
+        {
+          model: Bowl,
+          include: [Ingredient]
+        }
+      ]
+    })
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //some middleware to find the order and send it on to the next route or handle the error if there is one
 router.use('/:id', async (req, res, next) => {
   try {
@@ -117,6 +138,16 @@ router.use('/:id', async (req, res, next) => {
     //catch any other errors
   } catch (error) {
     next(error)
+  }
+})
+
+// change an order's status to 'ready'
+router.put('/:id', async (req, res, next) => {
+  try {
+    const order = await req.order.update({status: 'ready'})
+    res.status(202).json(order)
+  } catch (err) {
+    console.log(err)
   }
 })
 
