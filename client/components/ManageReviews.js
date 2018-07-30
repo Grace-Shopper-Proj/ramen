@@ -2,26 +2,23 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Reactstars from 'react-stars'
-import axios from 'axios'
 
 //import thunks
-import {getReviewList} from '../store/review'
+import {getReviewList, deleteReview} from '../store/review'
 
 class ManageReviews extends Component {
   componentDidMount() {
     this.props.fetchAllReviews()
   }
-  removeReview = async (event, id) => {
+  removeReview = (event, id) => {
     event.preventDefault()
-    await axios.delete(`api/reviews/${id}`)
-    this.props.fetchAllReviews()
+    this.props.deleteReview(id)
   }
   render() {
     const {allReviews} = this.props
     return (
       <div>
         <h1>Reviews </h1>
-        {console.log(allReviews)}
         {!allReviews ? (
           <p>There are no reviews</p>
         ) : (
@@ -57,7 +54,8 @@ const mapState = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllReviews: () => dispatch(getReviewList())
+  fetchAllReviews: () => dispatch(getReviewList()),
+  deleteReview: id => dispatch(deleteReview(id))
 })
 
 export default withRouter(connect(mapState, mapDispatchToProps)(ManageReviews))

@@ -45,6 +45,7 @@ export const addReview = reviewInfo => {
 
 export const deleteReview = id => {
   return async dispatch => {
+    console.log('the thunk ran for review with id', id)
     try {
       await axios.delete(`api/reviews/${id}`)
       dispatch(deletedReview(id))
@@ -62,6 +63,12 @@ const reducer = (state = initialState, action) => {
       return action.reviews
     case ADD_A_REVIEW:
       return [...state, action.singleReview]
+    case DELETED_A_REVIEW:
+      console.log(
+        'this is what the state should be,',
+        state.filter(review => review.id !== action.id)
+      )
+      return state.filter(review => review.id !== action.id)
     default:
       return state
   }
