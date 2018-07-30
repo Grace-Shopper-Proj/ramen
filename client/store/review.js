@@ -3,6 +3,7 @@ import axios from 'axios'
 //ACTION
 const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS'
 const ADD_A_REVIEW = 'ADD_A_REVIEW'
+const DELETED_A_REVIEW = 'DELETED_A_REVIEW'
 
 //ACTION CREATOR
 const getAllReviews = reviews => ({
@@ -13,6 +14,11 @@ const getAllReviews = reviews => ({
 const submitReview = singleReview => ({
   type: ADD_A_REVIEW,
   singleReview
+})
+
+const deletedReview = id => ({
+  type: DELETED_A_REVIEW,
+  id
 })
 
 //THUNK
@@ -37,6 +43,18 @@ export const addReview = reviewInfo => {
   }
 }
 
+export const deleteReview = id => {
+  return async dispatch => {
+    console.log('the thunk ran for review with id', id)
+    try {
+      await axios.delete(`api/reviews/${id}`)
+      dispatch(deletedReview(id))
+    } catch (err) {
+      console.log("sorry, we can't delete this review.".err)
+    }
+  }
+}
+
 const initialState = []
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +63,12 @@ const reducer = (state = initialState, action) => {
       return action.reviews
     case ADD_A_REVIEW:
       return [...state, action.singleReview]
+    case DELETED_A_REVIEW:
+      console.log(
+        'this is what the state should be,',
+        state.filter(review => review.id !== action.id)
+      )
+      return state.filter(review => review.id !== action.id)
     default:
       return state
   }
