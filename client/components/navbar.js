@@ -10,6 +10,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <div>
         <Link to="/account">ACCOUNT</Link>
+        <Link to="/reviews">REVIEWS</Link>
       </div>
       {isLoggedIn ? (
         <div>

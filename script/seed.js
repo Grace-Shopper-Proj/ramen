@@ -174,6 +174,9 @@ async function seed() {
   await fakeUser.addOrders(fakeOrder)
   //add review to user
   await fakeUser.addReviews(fakeReview)
+  await fakeBowl.setPrice()
+  await fakeOrder.getPrice()
+
   console.log(`assigned successfully`)
 }
 
