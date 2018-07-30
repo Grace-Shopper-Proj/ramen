@@ -14,7 +14,13 @@ class IngredientForm extends Component {
       imageUrl: '',
       type: 'broth',
       id: '',
-      edited: false
+      edited: false,
+      //this isn't right i should loop through everything in the category table and then check it off based on what is in the ingredient. but I am not sure how to do this. kind of stuck here.
+      category: {
+        'non-dairy': false,
+        'no-fish': false,
+        'non-spicy': false
+      }
     }
   }
 
@@ -133,16 +139,48 @@ class IngredientForm extends Component {
           />
         </div>
         <br />
-        {/* Generate the checkboxes for toppings */}
+        {/* Generate the checkboxes for toppings. This is not correct but need to talk through with team what is correct */}
         <div>
-          <label htmlFor="non-dairy" />
+          <label htmlFor="non-dairy">Non-dairy</label>
           <input
             type="checkbox"
             name="non-dairy"
             onChange={this.handleChange}
           />
         </div>
-        {this.props.ingredient
+        <div>
+          <label htmlFor="no-fish">No fish</label>
+          <input type="checkbox" name="no-fish" onChange={this.handleChange} />
+        </div>
+        <div>
+          <label htmlFor="non-spicy">non-spicy</label>
+          <input
+            type="checkbox"
+            name="non-spicy"
+            onChange={this.handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="soy-free">soy-free</label>
+          <input type="checkbox" name="soy-free" onChange={this.handleChange} />
+        </div>
+        <div>
+          <label htmlFor="gluten-free">gluten-free</label>
+          <input
+            type="checkbox"
+            name="gluten-free"
+            onChange={this.handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="vegetarian">vegetarian</label>
+          <input
+            type="checkbox"
+            name="vegetarian"
+            onChange={this.handleChange}
+          />
+        </div>
+        {/* {this.props.ingredient
           ? this.props.ingredient.category.map(cat => (
               <div key={cat.id}>
                 <label htmlFor={cat.name}>{cat.name}</label>
@@ -153,7 +191,7 @@ class IngredientForm extends Component {
                 />
               </div>
             ))
-          : null}
+          : null} */}
         <button type="submit" className="btn btn-primary">
           {this.props.edit ? <span>Update</span> : <span>Add</span>}
         </button>
