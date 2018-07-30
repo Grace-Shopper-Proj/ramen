@@ -6,6 +6,7 @@ import user from './user'
 import allIngredients from './product'
 import restrictions from './restrictions'
 import cart from './order'
+import pastOrders from './pastOrders'
 import review from './review'
 
 const reducer = combineReducers({
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   allIngredients,
   restrictions,
   cart,
+  pastOrders,
   review
 })
 const middleware = composeWithDevTools(
