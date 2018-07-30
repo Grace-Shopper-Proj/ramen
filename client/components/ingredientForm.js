@@ -43,7 +43,6 @@ class IngredientForm extends Component {
 
   handleAdd = async event => {
     event.preventDefault()
-    console.log('new ingredient is', this.state)
     await axios.post('api/ingredients', this.state)
     this.setState({
       title: '',

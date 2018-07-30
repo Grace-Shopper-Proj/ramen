@@ -18,7 +18,6 @@ class IngredientCard extends Component {
   selectIngredient(event) {
     event.preventDefault()
     const {ingredient, updateSelection} = this.props
-    console.log('We have this ingredient:', ingredient)
     updateSelection(ingredient)
   }
 

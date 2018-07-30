@@ -25,7 +25,7 @@ export const fetchOrder = userId => async dispatch => {
 
 export const deleteOrder = orderId => async dispatch => {
   try {
-    const {data} = await axios.delete(`/api/orders/${orderId}`)
+    await axios.delete(`/api/orders/${orderId}`)
     dispatch(removeOrder())
   } catch (err) {
     console.log(err)

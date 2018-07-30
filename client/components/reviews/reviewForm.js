@@ -2,10 +2,6 @@ import React from 'react'
 //a library for star rating components
 import ReactStars from 'react-stars'
 
-// const ratingChanged = (newRating) => {
-//   console.log(newRating)
-// }
-
 export default props => {
   const {submitReview, reviewInfo, userId, handleChange, ratingChanged} = props
   return (

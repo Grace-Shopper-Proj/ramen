@@ -48,7 +48,6 @@ class OrderPage extends Component {
     try {
       const responseOfBowl = await axios.post('/api/bowls', bowlIngredientIds)
       if (responseOfBowl) {
-        console.log('So we are adding this to the cart', responseOfBowl.data)
         this.props.history.push('/cart')
       }
     } catch (err) {
