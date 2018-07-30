@@ -25,13 +25,18 @@ router.post('/', async (req, res, next) => {
         }
       })
     } else {
-      //if the user does not exist find the session
-      let currentSessionId = req.sessionID
+      //if session does not yet have a guestUserId
+      if (!req.session.guestUserId) {
+        //add a guestUserId to the session
+        req.session.guestUserId = req.sessionID
+      }
+
       //find or create an order for the session
       req.session.banana = 'true'
+
       cartArray = await Order.findOrCreate({
         where: {
-          sessionId: currentSessionId
+          sessionId: req.session.guestUserId
         }
       })
     }

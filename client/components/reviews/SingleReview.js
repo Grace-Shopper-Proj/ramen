@@ -5,7 +5,10 @@ export default function SingleReview(props) {
   return (
     <div className="review">
       <h5>{review.title}</h5>
-      <h6>Reviewed at: {review.createdAt}</h6>
+      <h6>
+        Reviewed at: {review.createdAt.slice(0, 10)},{' '}
+        {review.createdAt.slice(11, 16)}{' '}
+      </h6>
       <Reactstars
         count={5}
         edit={false}
