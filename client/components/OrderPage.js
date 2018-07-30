@@ -90,52 +90,69 @@ class OrderPage extends Component {
 
     console.log('this is the props', this.props)
     return (
-      <form>
+      <form className="container">
         <h1>Order Ramen</h1>
-        <CurrentBowl currentBowl={this.state} />
-        <h2>Dietary Restriction</h2>
-        <DietaryRestrictionForm
-          restrictions={restrictions}
-          selectedRestrictions={this.state.selectedRestrictions}
-          updateRestrictions={this.updateRestrictions}
-        />
-        <h2>Select broth</h2>
-        <SingleSelectionForm
-          type="broth"
-          allIngredients={allIngredients}
-          selectedRestrictions={this.state.selectedRestrictions}
-          updateSelection={this.updateSelection}
-        />
-        <h2>Select noodles</h2>
-        <SingleSelectionForm
-          type="noodles"
-          allIngredients={allIngredients}
-          selectedRestrictions={this.state.selectedRestrictions}
-          updateSelection={this.updateSelection}
-        />
-        <h2>Select protein</h2>
-        <SingleSelectionForm
-          type="protein"
-          allIngredients={allIngredients}
-          selectedRestrictions={this.state.selectedRestrictions}
-          updateSelection={this.updateSelection}
-        />
-        <h2>Select toppings</h2>
-        <MultiSelectionForm
-          allIngredients={allIngredients}
-          selectedRestrictions={this.state.selectedRestrictions}
-          selectedToppings={this.state.selectedToppings}
-          updateSelection={this.updateSelection}
-        />
-        <button
-          type="submit"
-          disabled={
-            !selectedBroth.id && !selectedNoodles.id && !selectedProtein.id
-          }
-          onClick={this.submitBowl}
-        >
-          Add To Cart
-        </button>
+        <div className="row">
+          <div className="col">
+            <h2>Dietary Restrictions</h2>
+            <DietaryRestrictionForm
+              restrictions={restrictions}
+              selectedRestrictions={this.state.selectedRestrictions}
+              updateRestrictions={this.updateRestrictions}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <h2>Select broth</h2>
+
+            <SingleSelectionForm
+              type="broth"
+              allIngredients={allIngredients}
+              selectedRestrictions={this.state.selectedRestrictions}
+              updateSelection={this.updateSelection}
+            />
+
+            <h2>Select noodles</h2>
+            <SingleSelectionForm
+              type="noodles"
+              allIngredients={allIngredients}
+              selectedRestrictions={this.state.selectedRestrictions}
+              updateSelection={this.updateSelection}
+            />
+            <h2>Select protein</h2>
+            <SingleSelectionForm
+              type="protein"
+              allIngredients={allIngredients}
+              selectedRestrictions={this.state.selectedRestrictions}
+              updateSelection={this.updateSelection}
+            />
+            <h2>Select toppings</h2>
+            <MultiSelectionForm
+              allIngredients={allIngredients}
+              selectedRestrictions={this.state.selectedRestrictions}
+              selectedToppings={this.state.selectedToppings}
+              updateSelection={this.updateSelection}
+            />
+            <div className="row">
+              <button
+                className="btn btn-danger col-5"
+                type="submit"
+                disabled={
+                  !selectedBroth.id ||
+                  !selectedNoodles.id ||
+                  !selectedProtein.id
+                }
+                onClick={this.submitBowl}
+              >
+                Add To Cart
+              </button>{' '}
+            </div>
+          </div>
+          <div className="col-4">
+            <CurrentBowl currentBowl={this.state} />
+          </div>
+        </div>
       </form>
     )
   }

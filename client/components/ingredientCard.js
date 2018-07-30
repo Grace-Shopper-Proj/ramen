@@ -25,22 +25,33 @@ class IngredientCard extends Component {
   render() {
     const {ingredient} = this.props
     return (
-      <div>
-        <img src={ingredient.imageUrl} onClick={this.togglePopup} />
-        {ingredient.inventory < 1 ? (
-          <p>Out of Stock</p>
-        ) : (
-          <p>${ingredient.price}</p>
-        )}
-        <h4>{ingredient.title}</h4>
-        {this.state.showPopup ? (
-          <SingleIngredient
-            ingredient={ingredient}
-            closePopup={this.togglePopup}
-            selectIngredient={this.selectIngredient}
+      <div className="col-5 ingredient-card">
+        <div className="card">
+          <img
+            className="card-img-top"
+            src={ingredient.imageUrl}
+            onClick={this.togglePopup}
           />
-        ) : null}
-        <button onClick={this.selectIngredient}>choose this</button>
+
+          <div className="row card-body">
+            <h5 className="col">{ingredient.title}</h5>
+            {ingredient.inventory < 1 ? (
+              <h5 className="col">Out of Stock</h5>
+            ) : (
+              <h5 className="col">${ingredient.price}</h5>
+            )}
+          </div>
+          {this.state.showPopup ? (
+            <SingleIngredient
+              ingredient={ingredient}
+              closePopup={this.togglePopup}
+              selectIngredient={this.selectIngredient}
+            />
+          ) : null}
+          <button className="btn btn-danger" onClick={this.selectIngredient}>
+            CHOOSE
+          </button>
+        </div>
       </div>
     )
   }

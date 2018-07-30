@@ -1,6 +1,13 @@
 body {
   font-family: sans-serif;
 }
+h2 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+ul {
+  list-style-type: none;
+}
 
 a {
   text-decoration: none;
@@ -18,10 +25,6 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
-}
-
-img {
-  width: 300px;
 }
 
 .popup {
@@ -43,4 +46,16 @@ img {
   bottom: 10%;
   margin: auto;
   background: white;
+}
+
+/* current ramen bowl styles */
+#currentBowl {
+}
+#currentBowl h5 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.ingredient-card h5 {
+  font-size: 14px;
+  text-transform: uppercase;
 }
