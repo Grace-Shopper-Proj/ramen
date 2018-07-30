@@ -1,13 +1,13 @@
 import React from 'react'
+//a library for star rating components
+import ReactStars from 'react-stars'
+
+// const ratingChanged = (newRating) => {
+//   console.log(newRating)
+// }
 
 export default props => {
-  const {submitReview, handleChange, reviewInfo, userId} = props
-  console.log(
-    'ReviewInfo in the FORM ',
-    reviewInfo,
-    'UserID in the form',
-    userId
-  )
+  const {submitReview, reviewInfo, userId, handleChange, ratingChanged} = props
   return (
     <form onSubmit={event => submitReview(event, reviewInfo, userId)}>
       <h3>Please leave a review:</h3>
@@ -19,11 +19,12 @@ export default props => {
         onChange={handleChange}
       />
       <label>Rating:</label>
-      <input
-        name="rating"
-        type="number"
+      <ReactStars
+        count={5}
+        onChange={ratingChanged}
+        size={24}
+        color2="#ffd700"
         value={reviewInfo.rating}
-        onChange={handleChange}
       />
       <label>Review:</label>
       <textarea

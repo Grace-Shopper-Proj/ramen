@@ -7,8 +7,12 @@ const Review = db.define('review', {
     allowNull: false
   },
   rating: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
+    type: Sequelize.DECIMAL(10, 1),
+    defaultValue: 0,
+    validate: {
+      min: 0,
+      max: 5
+    }
   },
   content: {
     type: Sequelize.TEXT

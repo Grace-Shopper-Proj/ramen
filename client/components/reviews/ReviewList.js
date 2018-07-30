@@ -1,28 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
+import Reactstars from 'react-stars'
 //import components
-import ReviewForm from './reviewForm'
+import ReviewForm from './ReviewForm'
 
 //import thunks
 import {getReviewList, addReview} from '../../store/review'
 import {me} from '../../store/user'
-//import the thunk called
-//import {getReviewList}
-
-// const allReviews = [{
-//     "id": 1,
-//     "title": "THIS RAMEN SUCK!",
-//     "rating": 2,
-//     "content": "noodles were soggy, broth was cold and blend. Don't want to comeback",
-//     "updatedAt": "2018-07-28T20:17:03.869Z",
-//     "createdAt": "2018-07-28T20:17:03.869Z",
-//     user: {
-//       id:1,
-//       email: 'sdf@gmail.com'
-//     }}
-//     ]
 
 class ReviewList extends Component {
   constructor(props) {
@@ -33,6 +18,7 @@ class ReviewList extends Component {
       content: 'Tell us what you think of our ramen...'
     }
     this.handleChange = this.handleChange.bind(this)
+    this.ratingChanged = this.ratingChanged.bind(this)
   }
 
   componentDidMount() {
@@ -44,14 +30,18 @@ class ReviewList extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  ratingChanged(newRating) {
+    this.setState({rating: newRating})
+  }
+
   render() {
     const {allReviews, submitReview, user} = this.props
-    console.log('2. This is the allReviews', allReviews)
     return (
       <div>
         {user.id ? (
           <ReviewForm
             handleChange={this.handleChange}
+            ratingChanged={this.ratingChanged}
             submitReview={submitReview}
             reviewInfo={this.state}
             userId={user.id}
@@ -68,7 +58,13 @@ class ReviewList extends Component {
               <h4>User: {review.user.email}</h4>
               <h5>{review.title}</h5>
               <h6>ordered at: {review.createdAt}</h6>
-              <div>rating: {review.rating} / 5</div>
+              <Reactstars
+                count={5}
+                edit={false}
+                size={24}
+                color2="#ffd700"
+                value={review.rating}
+              />
               <p>{review.content}</p>
             </div>
           ))

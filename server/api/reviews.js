@@ -6,14 +6,12 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const reviewList = await Review.findAll({
-      includes: [
+      include: [
         {
-          model: User,
-          as: 'userId'
+          model: User
         }
       ]
     })
-    console.log('1. Here is the reviewList in routes', reviewList)
     if (!reviewList) {
       const error = new Error('There is no reviews')
       //send an error
@@ -29,17 +27,13 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   //request body receives an object includes review and UserId
   const {review, userId} = req.body
-  console.log(
-    '5. we are posting this Backend review and userID',
-    review,
-    ' and userId',
-    userId
-  )
   try {
     const newReview = await Review.create(review)
     await newReview.setUser(userId)
-    console.log('backEnd after setUser', newReview)
-    res.status(201).json(newReview)
+    const newReviewIncludesUser = await Review.findById(newReview.id, {
+      include: [{model: User}]
+    })
+    res.status(201).json(newReviewIncludesUser)
   } catch (err) {
     console.log('Sorry, cannot add a review...', err)
     next(err)

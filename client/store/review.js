@@ -20,10 +20,6 @@ export const getReviewList = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/reviews')
-      console.log(
-        '3. This is the all reviews in the thunk after axios get',
-        data
-      )
       dispatch(getAllReviews(data))
     } catch (err) {
       console.log('Sorry, we cannot get the reviews...', err)
@@ -31,11 +27,9 @@ export const getReviewList = () => {
   }
 }
 export const addReview = reviewInfo => {
-  console.log('THis is the thunk reviewInfo', reviewInfo)
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/reviews', reviewInfo)
-      console.log('6.This is the posted review after axios', data)
       dispatch(submitReview(data))
     } catch (err) {
       console.log("sorry, you can't submit this review...".err)
