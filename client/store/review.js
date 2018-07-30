@@ -61,7 +61,7 @@ const reducer = (state = initialState, action) => {
     case GET_ALL_REVIEWS:
       return action.reviews
     case ADD_A_REVIEW:
-      return [...state, action.singleReview]
+      return [action.singleReview, ...state]
     case DELETED_A_REVIEW:
       return state.filter(review => review.id !== action.id)
     default:

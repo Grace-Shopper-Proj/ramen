@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
       error.status = 404
       return next(error)
     }
-    res.status(200).json(reviewList)
+    res.status(200).json(reviewList.reverse())
   } catch (err) {
     next(err)
   }
