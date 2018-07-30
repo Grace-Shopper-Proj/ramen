@@ -3,7 +3,7 @@ const Ingredient = require('./ingredient')
 const Category = require('./category')
 const Bowl = require('./bowl')
 const Order = require('./order')
-
+const Review = require('./review')
 Ingredient.belongsToMany(Category, {
   through: 'ingredient_category',
   as: 'category',
@@ -31,10 +31,16 @@ User.hasMany(Order)
 Bowl.belongsTo(Order)
 Order.hasMany(Bowl)
 
+//user has many reviews
+//review belongs to one user
+User.hasMany(Review)
+Review.belongsTo(User)
+
 module.exports = {
   User,
   Ingredient,
   Category,
   Bowl,
-  Order
+  Order,
+  Review
 }
