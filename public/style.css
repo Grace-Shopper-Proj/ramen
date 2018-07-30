@@ -48,6 +48,10 @@ form div {
   background: white;
 }
 
+.popup_inner img {
+  width: 300px;
+}
+
 /* current ramen bowl styles */
 #currentBowl {
 }
