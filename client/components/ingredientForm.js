@@ -106,32 +106,54 @@ class IngredientForm extends Component {
             value={this.state.inventory || ''}
             required
           />
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <select
-              name="type"
-              value={this.state.type}
-              onChange={this.handleChange}
-            >
-              <option value="broth">broth</option>
-              <option value="noodles">noodles</option>
-              <option value="toppings">toppings</option>
-              <option value="protein">protein</option>
-            </select>
-          </div>
-          {/* need to add functionality for categories/tags - a multi select or something. or checkboxes */}
-          <div className="form-group">
-            <label htmlFor="imageUrl">Image</label>
-            <input
-              type="text"
-              name="imageUrl"
-              className="form-control"
-              placeholder="enter image Url"
-              onChange={this.handleChange}
-              value={this.state.imageUrl || ''}
-            />
-          </div>
         </div>
+        <div className="form-group">
+          <label htmlFor="type">Type</label>
+          <select
+            name="type"
+            value={this.state.type}
+            onChange={this.handleChange}
+          >
+            <option value="broth">broth</option>
+            <option value="noodles">noodles</option>
+            <option value="toppings">toppings</option>
+            <option value="protein">protein</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="imageUrl">Image</label>
+          <input
+            type="text"
+            name="imageUrl"
+            className="form-control"
+            placeholder="enter image Url"
+            onChange={this.handleChange}
+            value={this.state.imageUrl || ''}
+          />
+        </div>
+        <br />
+        {/* Generate the checkboxes for toppings */}
+        <div>
+          <label htmlFor="non-dairy" />
+          <input
+            type="checkbox"
+            name="non-dairy"
+            onChange={this.handleChange}
+          />
+        </div>
+        {this.props.ingredient
+          ? this.props.ingredient.category.map(cat => (
+              <div key={cat.id}>
+                <label htmlFor={cat.name}>{cat.name}</label>
+                <input
+                  type="checkbox"
+                  name={cat.name}
+                  onChange={this.handleChange}
+                />
+              </div>
+            ))
+          : null}
         <button type="submit" className="btn btn-primary">
           {this.props.edit ? <span>Update</span> : <span>Add</span>}
         </button>
