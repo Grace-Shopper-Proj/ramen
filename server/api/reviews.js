@@ -47,7 +47,7 @@ router.delete('/:id', async (req, res, next) => {
         id: req.params.id
       }
     })
-    res.status(204)
+    res.status(204).send()
   } catch (err) {
     console.log('Sorry, cannot delete this review...', err)
     next(err)
