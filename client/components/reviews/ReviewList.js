@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Reactstars from 'react-stars'
+
 //import components
 import ReviewForm from './ReviewForm'
+import SingleReview from './SingleReview'
 
 //import thunks
 import {getReviewList, addReview} from '../../store/review'
@@ -59,17 +61,8 @@ class ReviewList extends Component {
             const userName = review.user.email.slice(0, indexOfAt)
             return (
               <div key={review.id}>
-                <h4>User: {userName}</h4>
-                <h5>{review.title}</h5>
-                <h6>Reviewed at: {review.createdAt}</h6>
-                <Reactstars
-                  count={5}
-                  edit={false}
-                  size={24}
-                  color2="#ffd700"
-                  value={review.rating}
-                />
-                <p>{review.content}</p>
+                <h4>user: {userName}</h4>
+                <SingleReview userName={userName} review={review} />
               </div>
             )
           })

@@ -107,7 +107,7 @@ async function seed() {
   })
 
   //fakeOrder
-  const fakeOrder = await Order.create()
+  const fakeOrder = await Order.create({isCart: false})
 
   //fakeReview
 

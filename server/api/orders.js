@@ -22,7 +22,6 @@ router.get('/', async (req, res, next) => {
 // GET cart by userId
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    console.log('I am here!')
     const cart = await Order.findOne({
       where: {
         isCart: true,
@@ -36,7 +35,6 @@ router.get('/:userId/cart', async (req, res, next) => {
       ]
     })
     if (cart) {
-      console.log(cart)
       res.json(cart)
     } else {
       const newCart = await Order.create({isCart: true})
@@ -46,7 +44,6 @@ router.get('/:userId/cart', async (req, res, next) => {
         }
       })
       await user.setOrder(newCart)
-      console.log(newCart)
       res.status(201).json(newCart)
     }
   } catch (error) {
@@ -89,7 +86,6 @@ router.get('/:userId/past', async (req, res, next) => {
         }
       ]
     })
-    console.log('ORDERSSSSSS', orders)
     res.json(orders)
   } catch (error) {
     next(error)
