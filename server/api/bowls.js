@@ -31,9 +31,6 @@ router.post('/', async (req, res, next) => {
         req.session.guestUserId = req.sessionID
       }
 
-      //find or create an order for the session
-      req.session.banana = 'true'
-
       cartArray = await Order.findOrCreate({
         where: {
           sessionId: req.session.guestUserId
