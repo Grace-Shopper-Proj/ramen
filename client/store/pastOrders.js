@@ -13,7 +13,6 @@ export const fetchPastOrders = () => async (dispatch, getState) => {
     const userId = user.id
     const {data} = await axios.get(`/api/orders/${userId}/past`)
     dispatch(getPastOrders(data))
-    console.log('what is this data', data)
   } catch (err) {
     console.log(err)
   }

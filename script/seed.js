@@ -1,7 +1,14 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Ingredient, Category, Bowl} = require('../server/db/models')
+const {
+  User,
+  Ingredient,
+  Category,
+  Bowl,
+  Order,
+  Review
+} = require('../server/db/models')
 //const {broth, noodles, toppings, proteins} = require('../ingredients_data')
 const category = require('../category_data')
 
@@ -9,7 +16,7 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  //creating ingreadients
+  //creating ingredients
   const ShioBroth = await Ingredient.create({
     title: 'Shio',
     description:
@@ -90,6 +97,26 @@ async function seed() {
   const vegetarian = await Category.create({name: 'vegetarian'})
   console.log(`seeded successfully`)
 
+  //fakeBowl
+  const fakeBowl = await Bowl.create()
+
+  //fakeUser
+  const fakeUser = await User.create({
+    email: 'Ivytsoi@utexas.edu',
+    userType: 'admin'
+  })
+
+  //fakeOrder
+  const fakeOrder = await Order.create()
+
+  //fakeReview
+
+  const fakeReview = await Review.create({
+    title: 'It was AMAZING!!!',
+    rating: 5,
+    content: 'It was the best meal I have ever had in my entire life.'
+  })
+
   //assign association
   await Promise.all([
     await ShioBroth.addCategory([
@@ -139,6 +166,14 @@ async function seed() {
     ])
   ])
 
+  //add ingredients to fakebowl
+  await fakeBowl.addIngredients([1, 3, 5, 7])
+  //add bowl to order
+  await fakeOrder.addBowls(fakeBowl)
+  //add order to user
+  await fakeUser.addOrders(fakeOrder)
+  //add review to user
+  await fakeUser.addReviews(fakeReview)
   console.log(`assigned successfully`)
 }
 

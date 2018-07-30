@@ -12,6 +12,10 @@ const Order = db.define('order', {
   sessionId: {
     type: Sequelize.STRING
   },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   status: {
     type: Sequelize.ENUM('creating', 'ready'),
     defaultValue: 'creating'
