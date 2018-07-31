@@ -35,12 +35,42 @@ const Ingredient = db.define('ingredient', {
       'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
   }
 })
-//if imageUrl is an empty string add default image
-Ingredient.beforeValidate(ingredientInstance => {
-  if (!ingredientInstance.imageUrl) {
-    ingredientInstance.imageUrl =
-      'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
+
+//increase one from inventory
+Ingredient.prototype.increaseOne = async function() {
+  try {
+    const newInventory = this.inventory + 1
+    const updatedIngredient = await this.update({inventory: newInventory})
+    console.log('What is this', updatedIngredient)
+    return updatedIngredient
+  } catch (error) {
+    console.log(error)
   }
-})
+}
+
+//decrease one from inventory
+Ingredient.prototype.decreaseOne = async function() {
+  try {
+    const newInventory = this.inventory - 1
+    const updatedIngredient = await this.update({inventory: newInventory})
+    console.log('What is this', updatedIngredient)
+    return updatedIngredient
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//check if there's any more of this ingredient
+Ingredient.prototype.hasAny = function() {
+  return this.inventory > 0
+}
+
+// //if imageUrl is an empty string add default image
+// Ingredient.beforeValidate(ingredientInstance => {
+//   if (!ingredientInstance.imageUrl) {
+//     ingredientInstance.imageUrl =
+//       'https://images-na.ssl-images-amazon.com/images/I/71D4cSXNBEL._UX466_.jpg'
+//   }
+// })
 
 module.exports = Ingredient
