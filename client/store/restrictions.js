@@ -14,7 +14,7 @@ export const gotRestrictions = restrictions => ({
 export const getRestrictions = () => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/ingredients/category')
+      const response = await axios.get('/api/categories')
       const restrictions = response.data
       dispatch(gotRestrictions(restrictions))
     } catch (err) {
