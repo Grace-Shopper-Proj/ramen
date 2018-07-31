@@ -9,6 +9,7 @@ import SingleReview from './SingleReview'
 //import thunks
 import {getReviewList, addReview} from '../../store/review'
 import {me} from '../../store/user'
+import {sendMessage} from '../../store/toast'
 
 class ReviewList extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class ReviewList extends Component {
       rating: 0,
       content: ''
     })
+    this.props.submitNotification('Thank you for your review!')
     await this.props.submitReview(review, userId)
   }
 
@@ -94,7 +96,8 @@ const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch(me()),
   submitReview: (review, userId) => {
     dispatch(addReview({review, userId}))
-  }
+  },
+  submitNotification: msg => dispatch(sendMessage(msg))
 })
 
 export default withRouter(
