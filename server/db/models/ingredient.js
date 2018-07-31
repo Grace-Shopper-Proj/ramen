@@ -36,18 +36,6 @@ const Ingredient = db.define('ingredient', {
   }
 })
 
-//increase one from inventory
-Ingredient.prototype.increaseOne = async function() {
-  try {
-    const newInventory = this.inventory + 1
-    const updatedIngredient = await this.update({inventory: newInventory})
-    console.log('What is this', updatedIngredient)
-    return updatedIngredient
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 //decrease one from inventory
 Ingredient.prototype.decreaseOne = async function() {
   try {
