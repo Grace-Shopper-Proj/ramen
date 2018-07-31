@@ -34,14 +34,11 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/account" component={AccountManagement} />
-            {/* Need to add logic to only allow logged in admins to view this page */}
-            {/* Need to add logic to only allow logged in admins to view this page */}
             <Route exact path="/admin" component={adminPage} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Redirect to="/home" />
-        {/* <Route component={Login} /> */}
+        <Route component={Login} />
       </Switch>
     )
   }
@@ -54,7 +51,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userType: state.user.userType || 'none'
   }
 }
 
