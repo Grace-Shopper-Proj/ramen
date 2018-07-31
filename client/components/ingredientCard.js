@@ -47,7 +47,7 @@ class IngredientCard extends Component {
               selectIngredient={this.selectIngredient}
             />
           ) : null}
-          <button className="btn btn-danger" onClick={this.selectIngredient}>
+          <button className="btn" onClick={this.selectIngredient}>
             CHOOSE
           </button>
         </div>
