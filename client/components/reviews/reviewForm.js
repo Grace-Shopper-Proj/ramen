@@ -3,9 +3,9 @@ import React from 'react'
 import ReactStars from 'react-stars'
 
 export default props => {
-  const {submitReview, reviewInfo, userId, handleChange, ratingChanged} = props
+  const {handleSubmit, reviewInfo, userId, handleChange, ratingChanged} = props
   return (
-    <form onSubmit={event => submitReview(event, reviewInfo, userId)}>
+    <form onSubmit={event => handleSubmit(event, reviewInfo, userId)}>
       <h3>Please leave a review:</h3>
       <label>Title:</label>
       <input
