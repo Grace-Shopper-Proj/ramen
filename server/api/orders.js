@@ -109,6 +109,16 @@ router.get('/past', async (req, res, next) => {
         }
       ]
     })
+
+    // This does not work:
+    //
+    // let promises = orders.map(order => order.getPrice())
+    // let prices = await Promise.all(promises)
+
+    // orders.forEach((order, i) => {
+    //   order.price = prices[i]
+    // })
+
     res.json(orders)
   } catch (error) {
     next(error)

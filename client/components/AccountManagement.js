@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
+import {parseItem} from './Cart'
+
 //component
 import SingleReview from './reviews/SingleReview'
 
@@ -28,6 +30,9 @@ class AccountManagement extends React.Component {
   }
   render() {
     const {user, orders, reviews} = this.props
+    const prices = orders.map(order =>
+      order.bowls.reduce((acc, val) => acc + Number(val.price), 0).toFixed(2)
+    )
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
       <div>
@@ -43,22 +48,26 @@ class AccountManagement extends React.Component {
         <table>
           <tbody>
             <tr>
-              <th>Order Number</th>
               <th>Date</th>
               <th>Time</th>
+              <th>Item</th>
               <th>Status</th>
-              <th>Quantity</th>
               <th>Total</th>
             </tr>
             {orders &&
-              orders.map(order => (
+              orders.map((order, i) => (
                 <tr key={order.id}>
-                  <td>{order.id}</td>
                   <td>{order.createdAt.slice(0, 10)}</td>
                   <td>{order.createdAt.slice(11, 16)}</td>
+                  <td>
+                    <ol>
+                      {order.bowls.map(bowl => (
+                        <li key={bowl.id}>{parseItem(bowl)}</li>
+                      ))}
+                    </ol>
+                  </td>
                   <td>{order.status}</td>
-                  <td>{order.quantity}</td>
-                  <td>{order.total}</td>
+                  <td>${prices[i]}</td>
                 </tr>
               ))}
           </tbody>
