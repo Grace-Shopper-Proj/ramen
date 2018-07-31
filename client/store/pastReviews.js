@@ -12,7 +12,7 @@ const pastReviews = reviews => ({
 export const getPastReviews = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/reviews/${userId}`)
+      const {data} = await axios.get(`/api/reviews/user_reviews`)
       dispatch(pastReviews(data))
     } catch (err) {
       console.log('Cannot get past reviews', err)

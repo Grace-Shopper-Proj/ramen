@@ -8,7 +8,10 @@ import axios from 'axios'
 class CheckoutForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {complete: false}
+    this.state = {
+      complete: false,
+      isLoggedIn: this.props.user.id && true
+    }
     this.submit = this.submit.bind(this)
   }
 
@@ -30,7 +33,13 @@ class CheckoutForm extends Component {
       <div className="checkout">
         <h2>Check Out</h2>
         <CardElement />
-        <button onClick={this.submit}>Pay for order</button>
+        <button
+          type="submit"
+          onClick={this.submit}
+          disabled={!this.state.isLoggedIn}
+        >
+          {this.state.isLoggedIn ? 'Pay for order now' : 'Please log in first'}
+        </button>
       </div>
     )
   }
