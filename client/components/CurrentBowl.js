@@ -50,6 +50,18 @@ export default function CurrentBowl(props) {
         </p>
         <h5>Total Price: </h5>
         <p>${currentPrice}</p>
+        <button
+          className="btn btn-danger col-5"
+          type="submit"
+          disabled={
+            !currentBowl.selectedBroth ||
+            !currentBowl.selectedNoodles ||
+            !currentBowl.selectedProtein
+          }
+          onClick={props.submitBowl}
+        >
+          Add To Cart
+        </button>
       </div>
     </div>
   )

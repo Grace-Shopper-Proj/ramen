@@ -102,7 +102,7 @@ class OrderPage extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-12 col-md-7">
+          <div className="col-sm-12 col-md-12">
             <h2>Select broth</h2>
 
             <SingleSelectionForm
@@ -133,23 +133,12 @@ class OrderPage extends Component {
               selectedToppings={this.state.selectedToppings}
               updateSelection={this.updateSelection}
             />
-            <div className="row">
-              <button
-                className="btn btn-danger col-5"
-                type="submit"
-                disabled={
-                  !selectedBroth.id ||
-                  !selectedNoodles.id ||
-                  !selectedProtein.id
-                }
-                onClick={this.submitBowl}
-              >
-                Add To Cart
-              </button>{' '}
-            </div>
           </div>
           <div className="col-md-4 col-sm-12">
-            <CurrentBowl currentBowl={this.state} />
+            <CurrentBowl
+              currentBowl={this.state}
+              submitBowl={this.submitBowl}
+            />
           </div>
         </div>
       </form>
