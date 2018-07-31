@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const {Review, User} = require('../db/models')
+const authorize = require('./authorize')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', authorize, async (req, res, next) => {
   try {
     const reviewList = await Review.findAll({
       include: [
@@ -24,7 +25,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', authorize, async (req, res, next) => {
   try {
     const reviewList = await Review.findAll({
       where: {userId: req.params.userId},
@@ -46,7 +47,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', authorize, async (req, res, next) => {
   //request body receives an object includes review and UserId
   const {review, userId} = req.body
   try {
@@ -62,7 +63,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authorize, async (req, res, next) => {
   try {
     await Review.destroy({
       where: {
