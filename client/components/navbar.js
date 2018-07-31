@@ -5,10 +5,12 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>WELCOME TO RAMEN SHOP</h1>
+  <div className="row">
+    <div className="col">
+      <img src="../img/logo-small.png" />
+    </div>
     <nav>
-      <div>
+      <div className="col">
         <Link to="/account">ACCOUNT</Link>
         <Link to="/reviews">REVIEWS</Link>
         <Link to="/cart">CART</Link>
