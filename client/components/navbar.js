@@ -3,36 +3,42 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import Path from 'path'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div className="row">
-    <div className="col">
-      <img src="../img/logo-small.png" />
-    </div>
-    <nav>
-      <div className="col">
-        <Link to="/account">ACCOUNT</Link>
-        <Link to="/reviews">REVIEWS</Link>
-        <Link to="/cart">CART</Link>
-      </div>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
+  <nav className="navbar">
+    <Link className="nav-link" to="/home">
+      <img src={Path.join(__dirname, '/img/small-logo.png')} />
+    </Link>
+
+    <Link className="nav-link" to="/reviews">
+      <img src={Path.join(__dirname, '/img/reviews.png')} />
+    </Link>
+
+    <Link className="nav-link" to="/cart">
+      <img src={Path.join(__dirname, '/img/cart.png')} />
+    </Link>
+
+    <Link className="nav-link" to="/account">
+      <img src={Path.join(__dirname, 'img/user.png')} />
+    </Link>
+
+    {isLoggedIn ? (
+      <span>
+        {/* The navbar will show these links after you log in */}
+        <a className="nav-link" href="#" onClick={handleClick}>
+          Logout
+        </a>
+      </span>
+    ) : (
+      <span>
+        {/* The navbar will show these links before you log in */}
+        <Link to="/login">Login </Link>
+        {'  '} | {'  '}
+        <Link to="/signup">Sign Up</Link>
+      </span>
+    )}
+  </nav>
 )
 
 /**
