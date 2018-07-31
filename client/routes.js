@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup} from './components'
 import {me} from './store'
 import Cart from './components/Cart'
 import OrderPage from './components/OrderPage'
+import AccountManagement from './components/AccountManagement'
+import ReviewList from './components/reviews/ReviewList'
+import adminPage from './components/adminPage'
 
 /**
  * COMPONENT
@@ -21,17 +24,24 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/reviews" component={ReviewList} />
+        <Route exact path="/home" component={OrderPage} />
         <Route exact path="/" component={OrderPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/account" component={AccountManagement} />
+            {/* Need to add logic to only allow logged in admins to view this page */}
+            {/* Need to add logic to only allow logged in admins to view this page */}
+            <Route exact path="/admin" component={adminPage} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Redirect to="/home" />
+        {/* <Route component={Login} /> */}
       </Switch>
     )
   }
