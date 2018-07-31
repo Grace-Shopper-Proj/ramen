@@ -102,8 +102,9 @@ async function seed() {
 
   //fakeUser
   const fakeUser = await User.create({
-    email: 'Ivytsoi@utexas.edu',
-    userType: 'admin'
+    email: 'cody@email.com',
+    userType: 'admin',
+    password: 'iamapug'
   })
 
   //fakeOrder
