@@ -4,7 +4,7 @@ body {
 header {
   background-image: url('./img/banner.jpg');
   width: 100%;
-  padding-bottom: 30%;
+  padding-bottom: 40%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -72,14 +72,27 @@ th td {
   background-color: #f0f8ff;
 }
 /* current ramen bowl styles */
-
 #currentBowl {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
+#currentBowl h2 {
+  background-image: url('./img/bar-header.jpg');
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
+#currentBowl button {
+  width: 100%;
+}
+
 #currentBowl h5 {
   font-size: 14px;
   font-weight: bold;
 }
-.ingredient-card h5 {
+.ingredient-card h2 {
   font-size: 14px;
   text-transform: uppercase;
 }
