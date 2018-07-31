@@ -34,36 +34,12 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const name = profile.displayName
       const email = profile.emails[0].value
 
-      User.findOne({
+      User.findOrCreate({
         where: {googleId},
-        include: [
-          {
-            model: Order,
-            where: {
-              isCart: true
-            },
-            include: [
-              {
-                model: Bowl,
-                include: [Ingredient]
-              }
-            ]
-          }
-        ]
+        defaults: {name, email}
       })
-        .then(user => {
-          if (user) return user
-          else return User.create({defaults: {name, email}})
-        })
-        .then(user => done(null, user))
+        .then(([user]) => done(null, user))
         .catch(done)
-
-      // User.findOrCreate({
-      //   where: {googleId},
-      //   defaults: {name, email}
-      // })
-      //   .then(([user]) => done(null, user))
-      //   .catch(done)
     }
   )
 

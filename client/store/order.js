@@ -9,15 +9,10 @@ const getOrder = order => ({type: GET_ORDER, order})
 const removeOrder = () => ({type: REMOVE_ORDER})
 
 // THUNK CREATORS
-export const fetchOrder = userId => async dispatch => {
+export const fetchOrder = () => async dispatch => {
   try {
-    let res
-    if (userId) {
-      res = await axios.get(`/api/orders/${userId}/cart`)
-    } else {
-      res = await axios.get('/api/orders/guest/cart')
-    }
-    dispatch(getOrder(res.data))
+    const {data} = await axios.get('/api/orders/cart')
+    dispatch(getOrder(data))
   } catch (err) {
     console.log(err)
   }
