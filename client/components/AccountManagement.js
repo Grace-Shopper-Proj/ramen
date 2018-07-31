@@ -54,29 +54,17 @@ class AccountManagement extends React.Component {
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Order Number ID</th>
               <th scope="col">Date</th>
               <th scope="col">Time</th>
+              <th scope="col">Items</th>
               <th scope="col">Status</th>
-              <th scope="col">Quantity</th>
               <th scope="col">Total</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Item</th>
-              <th>Status</th>
-              <th>Total</th>
             </tr>
           </thead>
           <tbody>
             {orders &&
               orders.map((order, i) => (
                 <tr key={order.id}>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{order.id}</td>
-                  </tr>
-
                   <td>{order.createdAt.slice(0, 10)}</td>
                   <td>{order.createdAt.slice(11, 16)}</td>
                   <td>
