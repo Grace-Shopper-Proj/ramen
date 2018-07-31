@@ -1,6 +1,7 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #242b33;
+  font-size: 1em;
 }
 header {
   background-image: url('./img/banner.jpg');
@@ -9,8 +10,24 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.btn {
+  background-color: #e13a2d;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
+}
+
+h1 {
+  font-size: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+
 h2 {
-  font-size: 16px;
+  font-size: 2em;
   text-transform: uppercase;
 }
 ul {
