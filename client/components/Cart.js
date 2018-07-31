@@ -42,12 +42,8 @@ export const parseItem = bowl => {
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.getUser()
-  }
-  componentDidUpdate() {
-    if (!this.props.cart.id) {
-      this.props.fetchOrder(this.props.user.id)
-    }
+    if (!this.props.user.id) this.props.fetchMe()
+    this.props.fetchOrder(this.props.user.id)
   }
   deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
@@ -97,7 +93,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   fetchOrder: userId => dispatch(fetchOrder(userId)),
   deleteOrder: orderId => dispatch(deleteOrder(orderId)),
-  getUser: () => dispatch(me())
+  fetchMe: () => dispatch(me())
 })
 
 export default withRouter(connect(mapState, mapDispatch)(Cart))
