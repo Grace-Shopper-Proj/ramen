@@ -78,7 +78,7 @@ class OrderPage extends Component {
     const {selectedBroth, selectedNoodles, selectedProtein} = this.state
 
     return (
-      <form className="container">
+      <form className="container-fluid">
         <h1>Order Ramen</h1>
         <div className="row">
           <div className="col">
@@ -91,7 +91,7 @@ class OrderPage extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-sm-12 col-md-7">
             <h2>Select broth</h2>
 
             <SingleSelectionForm
@@ -137,7 +137,7 @@ class OrderPage extends Component {
               </button>{' '}
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-md-4 col-sm-12">
             <CurrentBowl currentBowl={this.state} />
           </div>
         </div>
