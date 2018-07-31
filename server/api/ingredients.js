@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Ingredient, Category} = require('../db/models')
+const authorize = require('./authorize')
 
 //Get all
 router.get('/', async (req, res, next) => {
@@ -20,7 +21,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', authorize, async (req, res, next) => {
   try {
     let ingredient = await Ingredient.create(req.body)
     res.json(ingredient)
@@ -29,16 +30,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.get('/category', async (req, res, next) => {
-  try {
-    const category = await Category.findAll()
-    res.json(category)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', authorize, async (req, res, next) => {
   try {
     let ingredient = await Ingredient.findById(req.params.id)
     ingredient = await ingredient.update(req.body)
@@ -48,7 +40,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authorize, async (req, res, next) => {
   try {
     let ingredient = await Ingredient.findById(req.params.id)
     ingredient = await ingredient.destroy()
