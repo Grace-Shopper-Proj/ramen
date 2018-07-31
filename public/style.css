@@ -98,3 +98,17 @@ th td {
   font-size: 14px;
   text-transform: uppercase;
 }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  z-index: 1;
+  opacity: 1;
+  transform: opacity ease-in 1s;
+  border: 1px solid fuchsia;
+}
+
+.hidden {
+  opacity: 0;
+}

@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import {fetchOrder, deleteOrder} from '../store/order'
 import {me} from '../store/user'
+import {sendMessage} from '../store/toast'
 
 import {Elements, StripeProvider} from 'react-stripe-elements'
 import CheckoutForm from './CheckoutForm'
@@ -48,6 +49,7 @@ class Cart extends Component {
     const bowlId = event.target.getAttribute('name')
     await axios.delete(`/api/bowls/${bowlId}`)
     this.props.fetchOrder(this.props.user.id)
+    this.props.deleteNotification('You cancelled a bowl!')
   }
   render() {
     if (!this.props.cart) return <p>LOADING...</p>
@@ -99,7 +101,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   fetchOrder: () => dispatch(fetchOrder()),
   deleteOrder: orderId => dispatch(deleteOrder(orderId)),
-  fetchMe: () => dispatch(me())
+  fetchMe: () => dispatch(me()),
+  deleteNotification: msg => dispatch(sendMessage(msg))
 })
 
 export default withRouter(connect(mapState, mapDispatch)(Cart))

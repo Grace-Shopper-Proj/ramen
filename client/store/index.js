@@ -9,6 +9,7 @@ import cart from './order'
 import pastOrders from './pastOrders'
 import review from './review'
 import pastReviews from './pastReviews'
+import toast from './toast'
 
 const reducer = combineReducers({
   user,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   cart,
   pastOrders,
   review,
-  pastReviews
+  pastReviews,
+  message: toast
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

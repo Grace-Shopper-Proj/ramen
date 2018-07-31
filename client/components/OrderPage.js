@@ -8,9 +8,11 @@ import DietaryRestrictionForm from './DietaryRestrictionForm'
 import SingleSelectionForm from './SingleSelectionForm'
 import MultiSelectionForm from './MultiSelectionForm'
 import CurrentBowl from './CurrentBowl'
+import Toast from './Toast'
 //Thunks
 import {getProducts} from '../store/product'
 import {getRestrictions} from '../store/restrictions'
+import {sendMessage} from '../store/toast'
 
 class OrderPage extends Component {
   state = {
@@ -59,14 +61,23 @@ class OrderPage extends Component {
 
   //update broth, noodles, protein,toppings when add
   updateSelection = ingredient => {
+    const {updateNotification} = this.props
     if (ingredient.type === 'broth') {
       this.setState({selectedBroth: ingredient})
+      updateNotification(`You chose ${ingredient.title} !`)
     } else if (ingredient.type === 'noodles') {
       this.setState({selectedNoodles: ingredient})
+      updateNotification(`You chose ${ingredient.title} !`)
     } else if (ingredient.type === 'protein') {
       this.setState({selectedProtein: ingredient})
+      updateNotification(`You chose ${ingredient.title} !`)
     } else {
       this.setState({selectedToppings: ingredient})
+      const msg = ingredient.reduce(
+        (totalStr, topping) => totalStr + ' ' + topping.title,
+        ''
+      )
+      updateNotification(`You chose ${msg} as toppings!`)
     }
   }
 
@@ -143,7 +154,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   // import thunk creator for add to cart
   getAllIngredients: () => dispatch(getProducts()),
-  getRestrictions: () => dispatch(getRestrictions())
+  getRestrictions: () => dispatch(getRestrictions()),
+  updateNotification: msg => dispatch(sendMessage(msg))
 })
 
 export default withRouter(connect(mapState, mapDispatch)(OrderPage))
