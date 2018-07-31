@@ -12,17 +12,9 @@ const Order = db.define('order', {
   sessionId: {
     type: Sequelize.STRING
   },
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
   status: {
     type: Sequelize.ENUM('creating', 'ready'),
     defaultValue: 'creating'
-  },
-  total: {
-    type: Sequelize.DECIMAL(10, 2),
-    defaultValue: 0
   }
   // promoCode: {
   //   type: Sequelize.STRING,
@@ -50,8 +42,7 @@ Order.prototype.getPrice = async function() {
     // if(promoCode === ""){
     //   totalValue = price - (price * (Number(Bowl.getElemebById(promoCode).value)/100))
     // }
-    const updatedOrder = await this.update({total: price})
-    return updatedOrder
+    return price
   } catch (error) {
     console.log(error)
   }
