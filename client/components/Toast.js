@@ -1,10 +1,20 @@
-const Toast = prop => {
-  const {msg} = props
-  return (
-    <div>
-      <h1>{msg}</h1>
-    </div>
-  )
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+
+class Toast extends Component {
+  render() {
+    return (
+      <div className="toast">
+        <h1>{this.props.msg}</h1>
+      </div>
+    )
+  }
 }
 
-export default Toast
+const mapState = state => {
+  return {
+    msg: state.message
+  }
+}
+
+export default connect(mapState, null)(Toast)
