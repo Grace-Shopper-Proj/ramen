@@ -20,6 +20,7 @@ class ReviewList extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.ratingChanged = this.ratingChanged.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -35,15 +36,25 @@ class ReviewList extends Component {
     this.setState({rating: newRating})
   }
 
+  async handleSubmit(event, review, userId) {
+    event.preventDefault()
+    this.setState({
+      title: '',
+      rating: 0,
+      content: ''
+    })
+    await this.props.submitReview(review, userId)
+  }
+
   render() {
-    const {allReviews, submitReview, user} = this.props
+    const {allReviews, user} = this.props
     return (
       <div>
         {user.id ? (
           <ReviewForm
             handleChange={this.handleChange}
             ratingChanged={this.ratingChanged}
-            submitReview={submitReview}
+            handleSubmit={this.handleSubmit}
             reviewInfo={this.state}
             userId={user.id}
           />
@@ -81,9 +92,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchAllReviews: () => dispatch(getReviewList()),
   fetchUser: () => dispatch(me()),
-  submitReview: async (event, review, userId) => {
-    event.preventDefault()
-    await dispatch(addReview({review, userId}))
+  submitReview: (review, userId) => {
+    dispatch(addReview({review, userId}))
   }
 })
 
