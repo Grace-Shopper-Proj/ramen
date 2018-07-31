@@ -3,6 +3,8 @@ module.exports = router
 
 router.use('/ingredients', require('./ingredients'))
 
+router.use('/categories', require('./categories'))
+
 router.use('/users', require('./users'))
 
 router.use('/bowls', require('./bowls'))

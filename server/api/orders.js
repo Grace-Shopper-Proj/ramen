@@ -20,13 +20,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// GET cart by userId
-router.get('/:userId/cart', async (req, res, next) => {
+// GET cart
+router.get('/cart', async (req, res, next) => {
   try {
+    // Always grab the cart associated with the session first
     const cart = await Order.findOne({
       where: {
-        isCart: true,
-        userId: req.params.userId
+        sessionId: req.session.guestUserId,
+        isCart: true
       },
       include: [
         {
@@ -35,50 +36,71 @@ router.get('/:userId/cart', async (req, res, next) => {
         }
       ]
     })
-    if (cart) {
-      res.json(cart)
-    } else {
-      const newCart = await Order.create({isCart: true})
+    if (req.user) {
+      // If the client is logged in
+      // Grab the user
       const user = await User.findOne({
         where: {
-          id: req.params.userId
+          id: req.user.id
         }
       })
-      await user.setOrder(newCart)
-      res.status(201).json(newCart)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
-
-// Get cart by Session ID
-router.get('/guest/cart', async (req, res, next) => {
-  try {
-    const cart = await Order.findOne({
-      where: {
-        sessionId: req.session.id
-      },
-      include: [
-        {
-          model: Bowl
+      // Check to see if the user already has a cart
+      const usrCart = await Order.findOne({
+        where: {
+          isCart: true,
+          userId: req.user.id
+        },
+        include: [
+          {
+            model: Bowl,
+            include: [Ingredient]
+          }
+        ]
+      })
+      if (usrCart) {
+        // if there is an old cart...
+        // Check if there is a session cart.
+        // If so, keep the newer cart
+        if (cart && cart.updatedAt > usrCart.updatedAt) {
+          await user.addOrder(cart)
+          await usrCart.destroy()
+          res.json(cart)
+        } else {
+          // otherwise keep and use the old cart
+          res.json(usrCart)
         }
-      ]
-    })
-
-    res.json(cart)
-  } catch (error) {
-    next(error)
+      } else {
+        // if there is no old cart...
+        if (cart) {
+          // and if there IS a session cart...
+          await user.addOrder(cart)
+          console.log(cart)
+          res.json(cart)
+        } else {
+          const newCart = await Order.create({isCart: true})
+          await user.addOrder(newCart)
+          res.status(201).json(newCart)
+        }
+      }
+    } else {
+      // if user is not logged in
+      // just return the session cart
+      if (cart) res.json(cart)
+      else res.json({})
+    }
+  } catch (err) {
+    next(err)
   }
 })
 
 // GET past orders by userId
-router.get('/:userId/past', async (req, res, next) => {
+router.get('/past', async (req, res, next) => {
+  if (!req.user) res.sendStatus(404)
   try {
     const orders = await Order.findAll({
       where: {
         isCart: false,
-        userId: +req.params.userId
+        userId: req.user.id
       },
       include: [
         {

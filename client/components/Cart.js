@@ -42,8 +42,7 @@ export const parseItem = bowl => {
 
 class Cart extends Component {
   componentDidMount() {
-    if (!this.props.user.id) this.props.fetchMe()
-    this.props.fetchOrder(this.props.user.id)
+    this.props.fetchOrder()
   }
   deleteBowl = async event => {
     const bowlId = event.target.getAttribute('name')
@@ -51,8 +50,15 @@ class Cart extends Component {
     this.props.fetchOrder(this.props.user.id)
   }
   render() {
+    if (!this.props.cart) return <p>LOADING...</p>
     const {bowls} = this.props.cart
-    if (!bowls) return <p>loading...</p>
+    if (!bowls || bowls.length === 0)
+      return (
+        <div>
+          <h1>There's nothing in your cart.</h1>
+          <Link to="/home">Go order some ramen!</Link>
+        </div>
+      )
     return (
       <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
         <div>
@@ -77,7 +83,7 @@ class Cart extends Component {
           </table>
           <Link to="/home">Add another bowl</Link>
           <Elements>
-            <CheckoutForm cart={this.props.cart} />
+            <CheckoutForm cart={this.props.cart} user={this.props.user} />
           </Elements>
         </div>
       </StripeProvider>
@@ -91,7 +97,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchOrder: userId => dispatch(fetchOrder(userId)),
+  fetchOrder: () => dispatch(fetchOrder()),
   deleteOrder: orderId => dispatch(deleteOrder(orderId)),
   fetchMe: () => dispatch(me())
 })
