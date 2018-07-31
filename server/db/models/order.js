@@ -42,7 +42,7 @@ Order.prototype.getPrice = async function() {
     const bowls = await Bowl.findAll({
       where: {orderId: this.id}
     })
-    const price = bowls.reduce(
+    return bowls.reduce(
       (totalPrice, currentBowl) => totalPrice + Number(currentBowl.price),
       0
     )
@@ -50,8 +50,8 @@ Order.prototype.getPrice = async function() {
     // if(promoCode === ""){
     //   totalValue = price - (price * (Number(Bowl.getElemebById(promoCode).value)/100))
     // }
-    const updatedOrder = await this.update({total: price})
-    return updatedOrder
+    // const updatedOrder = await this.update({total: price})
+    // return updatedOrder
   } catch (error) {
     console.log(error)
   }
