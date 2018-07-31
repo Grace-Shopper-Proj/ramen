@@ -36,24 +36,37 @@ class AccountManagement extends React.Component {
         ) : (
           ''
         )}
-        <h1>Your Account Information</h1>
-        <p>Logged in with: {user.email}</p>
-        <p>User Type: {user.userType}</p>
-        <h2>Order History:</h2>
-        <table>
-          <tbody>
+        <h1 className="text-center font-weight-bold">
+          Your Account Information
+        </h1>
+        <p className="text-justify font-weight-bold">
+          Logged in with: {user.email}
+        </p>
+        <p className="text-justify font-weight-bold">
+          User Type: {user.userType}
+        </p>
+        <h2 className="text-justify font-weight-bold">Order History:</h2>
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
-              <th>Order Number</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Quantity</th>
-              <th>Total</th>
+              <th scope="col">#</th>
+              <th scope="col">Order Number ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Status</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
             </tr>
+          </thead>
+          <tbody>
             {orders &&
               orders.map(order => (
                 <tr key={order.id}>
-                  <td>{order.id}</td>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{order.id}</td>
+                  </tr>
+
                   <td>{order.createdAt.slice(0, 10)}</td>
                   <td>{order.createdAt.slice(11, 16)}</td>
                   <td>{order.status}</td>
@@ -83,9 +96,9 @@ class AccountManagement extends React.Component {
             })
           )}
         </div>
-        <button type="submit" onClick={this.handleClick}>
+        {/* <button type="submit" onClick={this.handleClick}>
           Logout
-        </button>
+        </button> */}
       </div>
     )
   }
