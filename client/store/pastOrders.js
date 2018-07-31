@@ -7,11 +7,9 @@ const GET_PAST_ORDERS = 'GET_PAST_ORDERS'
 const getPastOrders = orders => ({type: GET_PAST_ORDERS, orders})
 
 //THUNK CREATORS
-export const fetchPastOrders = () => async (dispatch, getState) => {
+export const fetchPastOrders = () => async dispatch => {
   try {
-    const {user} = getState()
-    const userId = user.id
-    const {data} = await axios.get(`/api/orders/${userId}/past`)
+    const {data} = await axios.get(`/api/orders/past`)
     dispatch(getPastOrders(data))
   } catch (err) {
     console.log(err)

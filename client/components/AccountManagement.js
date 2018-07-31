@@ -18,9 +18,8 @@ class AccountManagement extends React.Component {
   }
   componentDidMount() {
     this.props.getUser()
-    const {user} = this.props
     this.props.getPastOrders()
-    this.props.fetchPastReviews(user.id)
+    this.props.fetchPastReviews()
   }
 
   handleClick = event => {
@@ -101,7 +100,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getUser: () => dispatch(me()),
   getPastOrders: () => dispatch(fetchPastOrders()),
-  fetchPastReviews: userId => dispatch(getPastReviews(userId))
+  fetchPastReviews: () => dispatch(getPastReviews())
 })
 
 export default connect(mapState, mapDispatch)(AccountManagement)
