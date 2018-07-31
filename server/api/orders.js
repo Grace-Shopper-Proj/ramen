@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Order, Bowl, User, Ingredient} = require('../db/models')
+const authorize = require('./authorize')
 
 module.exports = router
 
