@@ -8,15 +8,17 @@ module.exports = router
 router.post('/', async (req, res, next) => {
   try {
     const order = await Order.findById(req.body.orderId)
+    const amount = await order.getPrice()
     let {status} = await stripe.charges.create({
-      amount: order.getPrice(),
+      amount: amount * 100,
       currency: 'usd',
       description: 'An example charge',
-      source: req.body
+      source: req.body.tokenId
     })
-    await order.update({inCart: false})
+    if (status === 'succeeded') await order.update({isCart: false})
     res.json({status})
   } catch (err) {
+    console.log(err)
     res.status(500).end()
   }
 })
