@@ -6,23 +6,38 @@ export default function singleIngredient(props) {
   return (
     <div className="popup">
       <div className="popup_inner">
-        <button onClick={closePopup}>close me</button>
-        <h2>
-          {ingredient.title} ({ingredient.type})
-        </h2>
-        <img src={ingredient.imageUrl} />
+        <button
+          onClick={closePopup}
+          type="button"
+          className="close"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div className="row">
+          <div className="col">
+            <img src={ingredient.imageUrl} />
+          </div>
+          <div className="col">
+            <h3>
+              {ingredient.title} ({ingredient.type})
+            </h3>
 
-        <p>{ingredient.description}</p>
-        {ingredient.inventory < 1 ? (
-          <p>Out of Stock</p>
-        ) : (
-          <p>${ingredient.price}</p>
-        )}
-        <h4>Category</h4>
-        <ul>
-          {ingredient.category.map(cat => <li key={cat.id}>{cat.name}</li>)}
-        </ul>
-        <button onClick={selectIngredient}>choose me</button>
+            <p>{ingredient.description}</p>
+            {ingredient.inventory < 1 ? (
+              <p>Out of Stock</p>
+            ) : (
+              <p>${ingredient.price}</p>
+            )}
+            <h4>Categories</h4>
+            <ul>
+              {ingredient.category.map(cat => <li key={cat.id}>{cat.name}</li>)}
+            </ul>
+          </div>
+        </div>
+        <button className="btn" onClick={selectIngredient}>
+          choose me
+        </button>
       </div>
     </div>
   )

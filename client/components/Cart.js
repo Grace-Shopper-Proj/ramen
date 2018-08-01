@@ -52,38 +52,49 @@ class Cart extends Component {
     this.props.deleteNotification('You cancelled a bowl!')
   }
   render() {
-    if (!this.props.cart) return <p>LOADING...</p>
+    if (!this.props.cart) return <h1>LOADING...</h1>
     const {bowls} = this.props.cart
     if (!bowls || bowls.length === 0)
       return (
-        <div>
-          <h1>There's nothing in your cart.</h1>
-          <Link to="/home">Go order some ramen!</Link>
+        <div className="container">
+          <Link to="/home">
+            <h1>Your cart is empty. Let's order some ramen!</h1>
+          </Link>
         </div>
       )
     return (
       <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
-        <div>
-          <h1>Your order</h1>
-          <table>
-            <tbody>
+        <div className="container">
+          <h1 className="text-center font-weight-bold">Your order</h1>
+          <table className="table">
+            <thead className="thead-dark">
               <tr>
-                <td>Item</td>
-                <td>Price</td>
-                <td>Click to remove item from order</td>
+                <th scope="col">Item(s)</th>
+                <th scope="col">Price</th>
               </tr>
+            </thead>
+            <tbody>
               {bowls.map(bowl => (
                 <tr key={bowl.id}>
                   <td>{parseItem(bowl)}</td>
-                  <td>${bowl.price}</td>
-                  <td onClick={this.deleteBowl} name={bowl.id}>
-                    remove
+                  <td>
+                    {`${bowl.price} `}
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={this.deleteBowl}
+                      name={bowl.id}
+                    >
+                      remove
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <Link to="/home">Add another bowl</Link>
+          <Link to="/home">
+            <h3>Add another bowl</h3>
+          </Link>
           <Elements>
             <CheckoutForm cart={this.props.cart} user={this.props.user} />
           </Elements>
