@@ -19,6 +19,14 @@ header {
   text-transform: uppercase;
 }
 
+.btn-other {
+  background-color: #02205e;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
 #infoButton {
   background-color: #5ca93e;
   font-family: 'Lato', sans-serif;
@@ -56,6 +64,8 @@ ul {
 a {
   text-decoration: none;
   color: #242b33;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 label {
@@ -180,4 +190,8 @@ th td {
 
 .element {
   height: 120px;
+}
+
+.admin-form {
+  padding: 20px;
 }
