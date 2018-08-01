@@ -44,10 +44,10 @@ class AccountManagement extends React.Component {
         <h1 className="text-center font-weight-bold">
           Your Account Information
         </h1>
-        <span className="text-justify font-weight-bold">
+        <span id="email" className="text-justify font-weight-bold">
           Logged in with: {user.email} &nbsp; &nbsp; &nbsp;
         </span>
-        <span className="text-justify font-weight-bold">
+        <span id="user-type" className="text-justify font-weight-bold">
           User Type: {user.userType}
         </span>
         <h2 className="text-justify font-weight-bold">Order History:</h2>
