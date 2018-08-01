@@ -28,18 +28,46 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    if (this.state.complete) return <h1>purchase completed!</h1>
+    if (this.state.complete)
+      return (
+        <h1 className="text-center font-weight-bold">Purchase completed!</h1>
+      )
+    const style = {
+      base: {
+        color: '#303238',
+        fontSize: '20px',
+        // fontFamily: '"Open Sans", sans-serif',
+        // fontSmoothing: 'antialiased',
+        margin: '5px',
+        '::placeholder': {
+          color: '#CFD7DF'
+        }
+      },
+      invalid: {
+        color: '#e5424d',
+        ':focus': {
+          color: '#303238'
+        }
+      }
+    }
     return (
       <div className="checkout">
-        <h2>Check Out</h2>
-        <CardElement />
-        <button
-          type="submit"
-          onClick={this.submit}
-          disabled={!this.state.isLoggedIn}
-        >
-          {this.state.isLoggedIn ? 'Pay for order now' : 'Please log in first'}
-        </button>
+        <h1>Check Out</h1>
+        <div className="checkout-form">
+          <div className="element">
+            <CardElement style={style} />
+          </div>
+          <button
+            type="button"
+            className="btn-outline-dark"
+            onClick={this.submit}
+            disabled={!this.state.isLoggedIn}
+          >
+            {this.state.isLoggedIn
+              ? 'Pay for your order now'
+              : 'Please log in first'}
+          </button>
+        </div>
       </div>
     )
   }
