@@ -136,3 +136,19 @@ th td {
 .container .padding {
   padding: 20px;
 }
+
+.checkout {
+  padding: 70px;
+}
+
+.checkout-form {
+  padding: 20px;
+}
+
+.checkout-btn {
+  margin: 20px;
+}
+
+.element {
+  height: 120px;
+}
