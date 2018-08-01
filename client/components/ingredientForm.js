@@ -60,7 +60,10 @@ class IngredientForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.edit ? this.handleEdit : this.handleAdd}>
+      <div
+        className="admin-form"
+        onSubmit={this.props.edit ? this.handleEdit : this.handleAdd}
+      >
         <div className="form-group">
           <label htmlFor="title">Ingredient</label>
           <input
@@ -135,7 +138,7 @@ class IngredientForm extends Component {
           {this.props.edit ? <span>Update</span> : <span>Add</span>}
         </button>
         {this.state.edited ? <span>Updated!</span> : null}
-      </form>
+      </div>
     )
   }
 }

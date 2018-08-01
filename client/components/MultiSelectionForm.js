@@ -43,13 +43,21 @@ export default function MultiSelectionForm(props) {
       {/* Generate the checkboxes for toppings */}
       {toppings.map(topping => {
         return (
-          <div key={topping.id}>
-            <label htmlFor={topping.title}>{topping.title}</label>
+          <div key={topping.id} className="form-check form-check-inline">
             <input
+              className="form-check-input"
               type="checkbox"
+              id="inlineCheckbox1"
               name={topping.title}
               onChange={evt => handleToppingsChange(evt)}
             />
+            <label
+              className="form-check-label"
+              form="inlineCheckbox1"
+              htmlFor={topping.title}
+            >
+              {topping.title}
+            </label>
           </div>
         )
       })}

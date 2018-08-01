@@ -31,10 +31,20 @@ export default class ManageOrders extends Component {
     return (
       <div>
         <h1>Manage order status</h1>
-        <button type="submit" name="creating" onClick={this.changeSelection}>
+        <button
+          className="btn-other"
+          type="submit"
+          name="creating"
+          onClick={this.changeSelection}
+        >
           Show active orders (default)
         </button>
-        <button type="submit" name="ready" onClick={this.changeSelection}>
+        <button
+          className="btn-other"
+          type="submit"
+          name="ready"
+          onClick={this.changeSelection}
+        >
           Show inactive orders
         </button>
         {orders.length === 0 ? (

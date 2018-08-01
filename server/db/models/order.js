@@ -14,7 +14,7 @@ const Order = db.define('order', {
   },
   status: {
     type: Sequelize.ENUM('creating', 'ready'),
-    defaultValue: 'creating'
+    defaultValue: 'ready'
   }
   // promoCode: {
   //   type: Sequelize.STRING,

@@ -14,11 +14,19 @@ export default function UserItem(props) {
         '[ADMIN]'
       )}
       {user.isBan ? (
-        <button type="submit" onClick={() => modifyUser(user.id, 'unban')}>
+        <button
+          className="btn-other"
+          type="submit"
+          onClick={() => modifyUser(user.id, 'unban')}
+        >
           Un-ban user
         </button>
       ) : (
-        <button type="submit" onClick={() => modifyUser(user.id, 'ban')}>
+        <button
+          className="btn-other"
+          type="submit"
+          onClick={() => modifyUser(user.id, 'ban')}
+        >
           Ban user
         </button>
       )}
