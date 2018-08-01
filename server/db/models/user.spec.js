@@ -17,9 +17,6 @@ describe('User model', () => {
     it('contains email', () => {
       expect(user1.email).to.equal('cody@email.com')
     })
-    it('contains password', () => {
-      expect(user1.password).to.equal('jlkjlkjlkj')
-    })
     it('contains user type', () => {
       expect(user1.userType).to.equal('admin')
     })

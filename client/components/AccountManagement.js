@@ -35,25 +35,33 @@ class AccountManagement extends React.Component {
     )
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
-      <div>
+      <div className="container">
         {user.userType === 'admin' ? (
           <Link to="/admin">Go to admin page</Link>
         ) : (
           ''
         )}
-        <h1>Your Account Information</h1>
-        <p>Logged in with: {user.email}</p>
-        <p>User Type: {user.userType}</p>
-        <h2>Order History:</h2>
-        <table>
-          <tbody>
+        <h1 className="text-center font-weight-bold">
+          Your Account Information
+        </h1>
+        <span id="email" className="text-justify font-weight-bold">
+          Logged in with: {user.email} &nbsp; &nbsp; &nbsp;
+        </span>
+        <span id="user-type" className="text-justify font-weight-bold">
+          User Type: {user.userType}
+        </span>
+        <h2 className="text-justify font-weight-bold">Order History:</h2>
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Item</th>
-              <th>Status</th>
-              <th>Total</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Items</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total</th>
             </tr>
+          </thead>
+          <tbody>
             {orders &&
               orders.map((order, i) => (
                 <tr key={order.id}>
@@ -74,27 +82,29 @@ class AccountManagement extends React.Component {
         </table>
 
         <div>
-          <h2>Past Reviews:</h2>
-          {!reviews.length ? (
-            <p>You didn't not submit any review</p>
-          ) : (
-            reviews.map(review => {
-              //
-              const indexOfAt = review.user.email.indexOf('@')
-              const userName = review.user.email.slice(0, indexOfAt)
-              return (
-                <SingleReview
-                  key={review.id}
-                  userName={userName}
-                  review={review}
-                />
-              )
-            })
-          )}
+          <h2 className="text-justify font-weight-bold">Past Reviews:</h2>
+          <div>
+            {!reviews.length ? (
+              <p>You didn't not submit any review</p>
+            ) : (
+              reviews.map(review => {
+                //
+                const indexOfAt = review.user.email.indexOf('@')
+                const userName = review.user.email.slice(0, indexOfAt)
+                return (
+                  <SingleReview
+                    key={review.id}
+                    userName={userName}
+                    review={review}
+                  />
+                )
+              })
+            )}
+          </div>
         </div>
-        <button type="submit" onClick={this.handleClick}>
+        {/* <button type="submit" onClick={this.handleClick}>
           Logout
-        </button>
+        </button> */}
       </div>
     )
   }

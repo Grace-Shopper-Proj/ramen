@@ -132,3 +132,7 @@ th td {
 .toast p {
   font-size: 2em;
 }
+
+.container .padding {
+  padding: 20px;
+}
