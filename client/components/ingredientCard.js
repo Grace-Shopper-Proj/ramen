@@ -29,7 +29,7 @@ class IngredientCard extends Component {
           <img
             className="card-img-top"
             src={ingredient.imageUrl}
-            onClick={this.togglePopup}
+            onClick={this.selectIngredient}
           />
 
           <div className="row card-body">
