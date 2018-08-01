@@ -38,7 +38,15 @@ class IngredientCard extends Component {
               <h5 className="col">Out of Stock</h5>
             ) : (
               <h5 className="col">${ingredient.price}</h5>
-            )}
+            )}{' '}
+            <button
+              type="button"
+              className="btn"
+              id="infoButton"
+              onClick={this.togglePopup}
+            >
+              info
+            </button>
           </div>
           {this.state.showPopup ? (
             <SingleIngredient
