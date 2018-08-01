@@ -42,8 +42,8 @@ class AccountManagement extends React.Component {
           ''
         )}
         <h1>Your Account Information</h1>
-        <p>Logged in with: {user.email}</p>
-        <p>User Type: {user.userType}</p>
+        <p id="email">Logged in with: {user.email}</p>
+        <p id="user-type">User Type: {user.userType}</p>
         <h2>Order History:</h2>
         <table>
           <tbody>
