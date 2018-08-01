@@ -39,7 +39,12 @@ class IngredientCard extends Component {
             ) : (
               <h5 className="col">${ingredient.price}</h5>
             )}{' '}
-            <button type="button" className="btn" id="infoButton">
+            <button
+              type="button"
+              className="btn"
+              id="infoButton"
+              onClick={this.togglePopup}
+            >
               info
             </button>
           </div>
