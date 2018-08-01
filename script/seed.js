@@ -433,7 +433,7 @@ async function seed() {
   ])
 
   //add ingredients to fakebowl
-  await fakeBowl.addIngredients([1, 3, 5, 7])
+  await fakeBowl.addIngredients([1, 6, 11, 14, 20])
   //add bowl to order
   await fakeOrder.addBowls(fakeBowl)
   //add order to user
