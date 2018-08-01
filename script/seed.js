@@ -385,13 +385,7 @@ async function seed() {
       glutenFree,
       vegetarian
     ]),
-    await fishProtein.addCategory([
-      nonSpicy,
-      nonDairy,
-      glutenFree,
-      vegetarian,
-      soyFree
-    ]),
+    await fishProtein.addCategory([nonSpicy, nonDairy, glutenFree, soyFree]),
     await kamabokoTopping.addCategory([
       nonSpicy,
       nonDairy,
