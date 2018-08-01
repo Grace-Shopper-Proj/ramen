@@ -21,13 +21,21 @@ export default function DietaryRestrictionForm(props) {
       {/* Generate the checkboxes for dietary restrictions */}
       {restrictions.map(restriction => {
         return (
-          <div key={restriction.id} className="checkbox">
-            <label htmlFor={restriction.name}>{restriction.name}</label>
+          <div key={restriction.id} className="form-check form-check-inline">
             <input
+              className="form-check-input"
               type="checkbox"
+              id="inlineCheckbox1"
               name={restriction.name}
               onChange={evt => handleRestrictionChange(evt)}
             />
+            <label
+              className="form-check-label"
+              form="inlineCheckbox1"
+              htmlFor={restriction.name}
+            >
+              {restriction.name}
+            </label>
           </div>
         )
       })}
