@@ -51,7 +51,7 @@ class ReviewList extends Component {
   render() {
     const {allReviews, user} = this.props
     return (
-      <div>
+      <div className="container">
         {user.id ? (
           <ReviewForm
             handleChange={this.handleChange}
@@ -63,7 +63,7 @@ class ReviewList extends Component {
         ) : (
           ''
         )}
-        <h1>Here is Our Reviews: </h1>
+        <h1>Here Are Our Reviews: </h1>
         {!allReviews.length ? (
           <p>we don't have reviews. please add some</p>
         ) : (
