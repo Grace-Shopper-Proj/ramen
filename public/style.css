@@ -18,6 +18,13 @@ header {
   font-size: 1em;
 }
 
+#infoButton {
+  background-color: #5ca93e;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.5em;
+  text-transform: uppercase;
+}
+
 h1 {
   font-size: 3em;
   text-transform: uppercase;
@@ -64,6 +71,7 @@ th td {
 
 .popup {
   position: fixed;
+  z-index: 100;
   width: 100%;
   height: 100%;
   top: 0;
@@ -75,6 +83,7 @@ th td {
 }
 .popup_inner {
   position: absolute;
+  padding: 30px;
   left: 25%;
   right: 25%;
   top: 10%;
@@ -85,6 +94,12 @@ th td {
 
 .popup_inner img {
   width: 300px;
+}
+
+.popup_inner h3 {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
 }
 
 .review {
@@ -135,4 +150,20 @@ th td {
 
 .container .padding {
   padding: 20px;
+}
+
+.checkout {
+  padding: 70px;
+}
+
+.checkout-form {
+  padding: 20px;
+}
+
+.checkout-btn {
+  margin: 20px;
+}
+
+.element {
+  height: 120px;
 }
