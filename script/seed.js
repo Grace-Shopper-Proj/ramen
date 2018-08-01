@@ -69,7 +69,7 @@ async function seed() {
   })
 
   const UdonNoodles = await Ingredient.create({
-    title: 'Udon',
+    title: 'udon',
     description: 'thick, chewy',
     price: '3.50',
     inventory: 100,
@@ -79,7 +79,7 @@ async function seed() {
   })
 
   const CurlyNoodles = await Ingredient.create({
-    title: 'Curly noodle',
+    title: 'curly noodle',
     description: 'yellow, made with wheat and eggs.',
     price: '3.50',
     inventory: 100,
@@ -89,7 +89,7 @@ async function seed() {
   })
 
   const SobaNoodles = await Ingredient.create({
-    title: 'Soba',
+    title: 'soba',
     description:
       'A brown, densed-texture, flavorful noodle, made with buckwheat. The healthiest choice of noodle, gluten-free.',
     price: '3.50',
@@ -100,17 +100,17 @@ async function seed() {
   })
 
   const RamenNoodles = await Ingredient.create({
-    title: 'Ramen',
+    title: 'straight noodle',
     description: 'A thin wheat noodle, goes with variety of flavor.',
     price: '3.50',
-    inventory: 0,
+    inventory: 100,
     type: 'noodles',
     imageUrl:
       'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-1.png'
   })
 
   const GlutenFreeNoodles = await Ingredient.create({
-    title: 'Gluten-free noodle',
+    title: 'gluten-free noodle',
     description: 'chewy, gluten-free.',
     price: '3.50',
     inventory: 100,
