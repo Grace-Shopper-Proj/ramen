@@ -112,3 +112,7 @@ th td {
 .hidden {
   opacity: 0;
 }
+
+.container .padding {
+  padding: 20px;
+}

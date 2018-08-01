@@ -35,7 +35,7 @@ class AccountManagement extends React.Component {
     )
     if (!user.id) return <h1>No logged in user to manage</h1>
     return (
-      <div>
+      <div className="container">
         {user.userType === 'admin' ? (
           <Link to="/admin">Go to admin page</Link>
         ) : (
@@ -44,12 +44,12 @@ class AccountManagement extends React.Component {
         <h1 className="text-center font-weight-bold">
           Your Account Information
         </h1>
-        <p className="text-justify font-weight-bold">
-          Logged in with: {user.email}
-        </p>
-        <p className="text-justify font-weight-bold">
+        <span className="text-justify font-weight-bold">
+          Logged in with: {user.email} &nbsp; &nbsp; &nbsp;
+        </span>
+        <span className="text-justify font-weight-bold">
           User Type: {user.userType}
-        </p>
+        </span>
         <h2 className="text-justify font-weight-bold">Order History:</h2>
         <table className="table">
           <thead className="thead-dark">
@@ -82,23 +82,25 @@ class AccountManagement extends React.Component {
         </table>
 
         <div>
-          <h2>Past Reviews:</h2>
-          {!reviews.length ? (
-            <p>You didn't not submit any review</p>
-          ) : (
-            reviews.map(review => {
-              //
-              const indexOfAt = review.user.email.indexOf('@')
-              const userName = review.user.email.slice(0, indexOfAt)
-              return (
-                <SingleReview
-                  key={review.id}
-                  userName={userName}
-                  review={review}
-                />
-              )
-            })
-          )}
+          <h2 className="text-justify font-weight-bold">Past Reviews:</h2>
+          <div>
+            {!reviews.length ? (
+              <p>You didn't not submit any review</p>
+            ) : (
+              reviews.map(review => {
+                //
+                const indexOfAt = review.user.email.indexOf('@')
+                const userName = review.user.email.slice(0, indexOfAt)
+                return (
+                  <SingleReview
+                    key={review.id}
+                    userName={userName}
+                    review={review}
+                  />
+                )
+              })
+            )}
+          </div>
         </div>
         {/* <button type="submit" onClick={this.handleClick}>
           Logout
