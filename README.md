@@ -18,4 +18,4 @@ npm run start
 
 ## Deployed version
 
-[Not available]
+https://ramentestdeploy.herokuapp.com/
