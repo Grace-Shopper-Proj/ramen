@@ -9,8 +9,6 @@ const {
   Order,
   Review
 } = require('../server/db/models')
-//const {broth, noodles, toppings, proteins} = require('../ingredients_data')
-const category = require('../category_data')
 
 async function seed() {
   await db.sync({force: true})

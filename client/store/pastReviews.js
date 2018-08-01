@@ -9,7 +9,7 @@ const pastReviews = reviews => ({
 })
 
 //THUNK
-export const getPastReviews = userId => {
+export const getPastReviews = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/reviews/user_reviews`)
