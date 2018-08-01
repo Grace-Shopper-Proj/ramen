@@ -180,13 +180,13 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-//delete an order
+// delete an order--currently not in use
 
-router.delete('/:id', async (req, res, next) => {
-  try {
-    await req.order.destroy()
-    res.sendStatus(204)
-  } catch (error) {
-    next(error)
-  }
-})
+// router.delete('/:id', async (req, res, next) => {
+//   try {
+//     await req.order.destroy()
+//     res.sendStatus(204)
+//   } catch (error) {
+//     next(error)
+//   }
+// })

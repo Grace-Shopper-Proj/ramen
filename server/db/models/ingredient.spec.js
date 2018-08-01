@@ -40,19 +40,5 @@ describe('Ingredient model', () => {
     it('contains imageUrl', () => {
       expect(ramen1.imageUrl).to.equal('sdfdfs.jpg')
     })
-
-    it('inventory adds 1 when calling increaseOne', () => {
-      ramen1.increaseOne()
-      expect(ramen1.inventory).to.equal(11)
-    })
-
-    it('inventory delete 1 when calling decreaseOne', () => {
-      ramen1.decreaseOne()
-      expect(ramen1.inventory).to.equal(10)
-    })
-
-    it('checks if there is any ingredient in the inventory', () => {
-      expect(ramen1.hasAny()).to.equal(true)
-    })
   })
 })
