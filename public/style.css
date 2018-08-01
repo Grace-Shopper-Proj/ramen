@@ -16,6 +16,8 @@ header {
   color: white;
   font-family: 'Lato', sans-serif;
   font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #infoButton {
@@ -104,6 +106,7 @@ th td {
 
 .review {
   background-color: #f0f8ff;
+  padding: 10px;
 }
 /* current ramen bowl styles */
 #currentBowl {
@@ -133,7 +136,7 @@ th td {
 
 .toast {
   position: fixed;
-  top: 0%;
+  top: 30%;
   right: 10px;
   z-index: 1;
   opacity: 1;
@@ -141,11 +144,11 @@ th td {
   background-color: #242b33;
   color: white;
   border-radius: 5px;
-  padding: 5px;
+  padding: 2px;
 }
 
 .toast p {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .container .padding {

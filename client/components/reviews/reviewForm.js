@@ -6,7 +6,7 @@ export default props => {
   const {handleSubmit, reviewInfo, userId, handleChange, ratingChanged} = props
   return (
     <form onSubmit={event => handleSubmit(event, reviewInfo, userId)}>
-      <h3>Please leave a review:</h3>
+      <h1>Please leave a review:</h1>
       <label>Title:</label>
       <input
         type="text"
@@ -31,7 +31,10 @@ export default props => {
         placeholder="Tell us what you think of our ramen..."
         onChange={handleChange}
       />
-      <button type="submit">Submit</button>
+      <br />
+      <button className="btn" type="submit">
+        Submit
+      </button>
     </form>
   )
 }

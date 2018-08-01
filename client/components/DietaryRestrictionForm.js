@@ -21,7 +21,7 @@ export default function DietaryRestrictionForm(props) {
       {/* Generate the checkboxes for dietary restrictions */}
       {restrictions.map(restriction => {
         return (
-          <div key={restriction.id}>
+          <div key={restriction.id} className="checkbox">
             <label htmlFor={restriction.name}>{restriction.name}</label>
             <input
               type="checkbox"
