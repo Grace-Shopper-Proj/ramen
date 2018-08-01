@@ -7,19 +7,19 @@ import {connect} from 'react-redux'
 
 class AdminPage extends Component {
   render() {
-    if (this.props.userType === 'admin') {
-      return (
-        <div>
-          <h1>Welcome Admin</h1>
-          <AdminAllProducts />
-          <ManageUsers />
-          <ManageReviews />
-          <ManageOrders />
-        </div>
-      )
-    } else {
-      return <p>You do not have admin privileges</p>
-    }
+    // if (this.props.userType === 'admin') {
+    return (
+      <div className="container">
+        <h1>Welcome Admin</h1>
+        <AdminAllProducts />
+        <ManageUsers />
+        <ManageReviews />
+        <ManageOrders />
+      </div>
+    )
+    //   } else {
+    //     return <p>You do not have admin privileges</p>
+    //   }
   }
 }
 const mapState = state => {
