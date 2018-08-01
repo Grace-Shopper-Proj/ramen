@@ -26,6 +26,38 @@ async function seed() {
       'https://i.pinimg.com/originals/d2/b2/09/d2b20921e8cf9b504e7d897ae6595aae.jpg'
   })
 
+  const TonkotsuBroth = await Ingredient.create({
+    title: 'Tonkotsu',
+    description:
+      'A thick, cloudy white, and hearty broth made with pork boiled for 12-15 hours.',
+    price: '3.50',
+    inventory: 100,
+    type: 'broth',
+    imageUrl: 'https://truffle-assets.imgix.net/888fce8e-ramentime3.png'
+  })
+
+  const MisoBroth = await Ingredient.create({
+    title: 'Miso',
+    description:
+      'A sweet, nutty, and creamy soup base made with fermented soy beans',
+    price: '3.50',
+    inventory: 100,
+    type: 'broth',
+    imageUrl:
+      'https://thevikingchef.files.wordpress.com/2011/03/miso_ramen_broth.jpg'
+  })
+
+  const SpicyBroth = await Ingredient.create({
+    title: 'Spicy',
+    description:
+      'A spicy and flaverful broth made with vegetables and our secret sauce. Very popular!',
+    price: '3.50',
+    inventory: 100,
+    type: 'broth',
+    imageUrl:
+      'https://media-cdn.tripadvisor.com/media/photo-s/0d/3c/6d/e3/spicy-pork-ramen.jpg'
+  })
+
   const ShoyuBroth = await Ingredient.create({
     title: 'Shoyu',
     description:
@@ -56,6 +88,37 @@ async function seed() {
       'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-2.png'
   })
 
+  const SobaNoodles = await Ingredient.create({
+    title: 'Soba',
+    description:
+      'A brown, densed-texture, flavorful noodle, made with buckwheat. The healthiest choice of noodle, gluten-free.',
+    price: '3.50',
+    inventory: 100,
+    type: 'noodles',
+    imageUrl:
+      'https://www.citysuper.com.hk/getmedia/ab49c8cb-3e11-4abc-8559-aa1cf1f0554d/cold-warm-sake-09.png.aspx?width=475&height=300&ext=.png'
+  })
+
+  const RamenNoodles = await Ingredient.create({
+    title: 'Ramen',
+    description: 'A thin wheat noodle, goes with variety of flavor.',
+    price: '3.50',
+    inventory: 0,
+    type: 'noodles',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-1.png'
+  })
+
+  const GlutenFreeNoodles = await Ingredient.create({
+    title: 'Gluten-free noodle',
+    description: 'chewy, gluten-free.',
+    price: '3.50',
+    inventory: 100,
+    type: 'noodles',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-3.png'
+  })
+
   const noriTopping = await Ingredient.create({
     title: 'nori',
     description: 'crunchy seaweed',
@@ -84,6 +147,100 @@ async function seed() {
     type: 'protein',
     imageUrl:
       'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-PORK.png'
+  })
+
+  const chickenProtein = await Ingredient.create({
+    title: 'chicken',
+    description: 'Slices of tender marinated chicken breast.',
+    price: '2.00',
+    inventory: 100,
+    type: 'protein',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-CHICKEN.png'
+  })
+
+  const tofuProtein = await Ingredient.create({
+    title: 'organic tofu',
+    description: 'tofu slices',
+    price: '2.00',
+    inventory: 100,
+    type: 'protein',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-TOFU.png'
+  })
+
+  const fishProtein = await Ingredient.create({
+    title: 'salmon sashimi',
+    description: 'fresh salmon slices',
+    price: '2.00',
+    inventory: 100,
+    type: 'protein',
+    imageUrl:
+      'https://media.istockphoto.com/photos/thinly-sliced-fresh-salmon-arranged-on-white-background-picture-id179232060?k=6&m=179232060&s=612x612&w=0&h=DOXSC9YjSvPJFSIPIWfKvrzafOepAvYVJegdXELwXlM='
+  })
+
+  const beefProtein = await Ingredient.create({
+    title: 'ground beef',
+    description: 'red ground beef made with our secret sauce',
+    price: '2.00',
+    inventory: 100,
+    type: 'protein',
+    imageUrl:
+      'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-RED-BEEF.png'
+  })
+
+  const kamabokoTopping = await Ingredient.create({
+    title: 'kamaboko',
+    description:
+      'a type of cured surimi, a processed seafood product common in Japanese cuisine.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
+  })
+
+  const scallionsTopping = await Ingredient.create({
+    title: 'scallions',
+    description:
+      'When freshly sprinkled on top of ramen, scallions give off an invigorating natural aroma that compliments the deep richness of the soup base.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
+  })
+
+  const menmaTopping = await Ingredient.create({
+    title: 'menma',
+    description:
+      'a Japanese condiment made from lactate-fermented bamboo shoots. The bamboo shoots are dried in the sun or through other means before the process of fermentation.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
+  })
+
+  const beansSproutsTopping = await Ingredient.create({
+    title: 'beans sprouts',
+    description:
+      'When dipped into the soup they absorb the flavor of the ramen.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
+  })
+
+  const cornTopping = await Ingredient.create({
+    title: 'corn',
+    description:
+      'Corn adds a full, robust flavor when soaked into any ramen broth.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
+  })
+
+  const butterTopping = await Ingredient.create({
+    title: 'butter',
+    description:
+      'Adding butter to the ramen might be one of the most delicious sins ever committed, because it makes ramen soup even creamier. With just a touch of butter, ramen becomes a delectable stew.',
+    price: '1.00',
+    inventory: 100,
+    type: 'toppings'
   })
 
   //creating categories
@@ -162,7 +319,117 @@ async function seed() {
       nonDairy,
       noFish,
       glutenFree
-    ])
+    ]),
+    await TonkotsuBroth.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree
+    ]),
+    await MisoBroth.addCategory([
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await SpicyBroth.addCategory([
+      soyFree,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await SobaNoodles.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await RamenNoodles.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      vegetarian
+    ]),
+    await GlutenFreeNoodles.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await chickenProtein.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree
+    ]),
+    await beefProtein.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree
+    ]),
+    await tofuProtein.addCategory([
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await fishProtein.addCategory([
+      nonSpicy,
+      nonDairy,
+      glutenFree,
+      vegetarian,
+      soyFree
+    ]),
+    await kamabokoTopping.addCategory([
+      nonSpicy,
+      nonDairy,
+      glutenFree,
+      soyFree
+    ]),
+    await scallionsTopping.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await menmaTopping.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await beansSproutsTopping.addCategory([
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await cornTopping.addCategory([
+      soyFree,
+      nonSpicy,
+      nonDairy,
+      noFish,
+      glutenFree,
+      vegetarian
+    ]),
+    await butterTopping.addCategory([soyFree, nonSpicy, noFish, glutenFree])
   ])
 
   //add ingredients to fakebowl

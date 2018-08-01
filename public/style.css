@@ -118,16 +118,19 @@ th td {
 
 .toast {
   position: fixed;
-  bottom: 20px;
+  top: 0%;
   right: 10px;
   z-index: 1;
   opacity: 1;
   transform: opacity ease-in 1s;
-  border: 1px solid fuchsia;
+  background-color: #242b33;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
 }
 
-.hidden {
-  opacity: 0;
+.toast p {
+  font-size: 2em;
 }
 
 .container .padding {
