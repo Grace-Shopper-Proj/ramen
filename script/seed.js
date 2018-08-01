@@ -105,7 +105,7 @@ async function seed() {
     title: 'Ramen',
     description: 'A thin wheat noodle, goes with variety of flavor.',
     price: '3.50',
-    inventory: 100,
+    inventory: 0,
     type: 'noodles',
     imageUrl:
       'https://s3-us-west-2.amazonaws.com/tatsuramen/production/menu/TATSU-ITE-EXTRA-NOODLE-1.png'
