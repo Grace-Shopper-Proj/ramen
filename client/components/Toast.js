@@ -5,7 +5,7 @@ class Toast extends Component {
   render() {
     return (
       <div className="toast">
-        <h1>{this.props.msg}</h1>
+        <p>{this.props.msg}</p>
       </div>
     )
   }

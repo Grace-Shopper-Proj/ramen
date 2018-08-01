@@ -5,11 +5,12 @@ export default function CurrentBowl(props) {
     (totalPrice, currentTopping) => totalPrice + Number(currentTopping.price),
     0
   )
-  let currentPrice =
+  let currentPrice = (
     (Number(currentBowl.selectedBroth.price) || 0) +
     (Number(currentBowl.selectedNoodles.price) || 0) +
     (Number(currentBowl.selectedProtein.price) || 0) +
     (toppingsPrice || 0)
+  ).toFixed(2)
   return (
     <div className="card" id="currentBowl">
       <h2>Your Current Ramen Bowl</h2>
