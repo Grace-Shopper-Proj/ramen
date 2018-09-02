@@ -24,7 +24,7 @@ class IngredientCard extends Component {
   render() {
     const {ingredient} = this.props
     return (
-      <div className="col-sm-6 col-md-3 ingredient-card ml-0">
+      <div className="col-sm-6 col-md-4 ingredient-card ml-0 mr-0">
         <div className="card">
           <img
             className="card-img-top"
