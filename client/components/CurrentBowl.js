@@ -51,18 +51,26 @@ export default function CurrentBowl(props) {
         </p>
         <h5>Total Price: </h5>
         <p>${currentPrice}</p>
-        <button
-          className="btn btn-danger btn-block"
-          type="submit"
-          disabled={
-            !currentBowl.selectedBroth ||
-            !currentBowl.selectedNoodles ||
-            !currentBowl.selectedProtein
-          }
-          onClick={props.submitBowl}
-        >
-          Add To Cart
-        </button>
+        {currentBowl.selectedBroth.title &&
+        currentBowl.selectedNoodles.title &&
+        currentBowl.selectedProtein.title ? (
+          <button
+            className="btn btn-danger btn-block"
+            type="submit"
+            onClick={props.submitBowl}
+          >
+            Add To Cart
+          </button>
+        ) : (
+          <button
+            className="btn btn-danger btn-block"
+            type="submit"
+            disabled
+            onClick={props.submitBowl}
+          >
+            Add To Cart
+          </button>
+        )}
       </div>
     </div>
   )
