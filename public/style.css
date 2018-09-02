@@ -96,16 +96,15 @@ th td {
 .popup_inner {
   position: absolute;
   padding: 30px;
-  left: 25%;
-  right: 25%;
+  left: 15%;
+  right: 15%;
   top: 10%;
-  bottom: 10%;
   margin: auto;
   background: white;
 }
 
 .popup_inner img {
-  width: 300px;
+  width: 100%;
 }
 
 .popup_inner h3 {
@@ -130,9 +129,6 @@ th td {
   font-size: 16px;
   text-align: center;
   padding: 20px;
-}
-#currentBowl button {
-  width: 100%;
 }
 
 #currentBowl h5 {

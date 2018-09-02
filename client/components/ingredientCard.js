@@ -19,6 +19,9 @@ class IngredientCard extends Component {
     event.preventDefault()
     const {ingredient, updateSelection} = this.props
     updateSelection(ingredient)
+    if (this.state.showPopup) {
+      this.togglePopup()
+    }
   }
 
   render() {

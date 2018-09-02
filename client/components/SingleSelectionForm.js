@@ -23,7 +23,7 @@ export default function SingleSelectionForm(props) {
   }
 
   return (
-    <div className="row">
+    <div className="row ">
       {filteredIngredients.map(ingredient => (
         <IngredientCard
           key={ingredient.id}

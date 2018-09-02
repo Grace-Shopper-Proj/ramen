@@ -52,7 +52,7 @@ export default function CurrentBowl(props) {
         <h5>Total Price: </h5>
         <p>${currentPrice}</p>
         <button
-          className="btn btn-danger"
+          className="btn btn-danger btn-block"
           type="submit"
           disabled={
             !currentBowl.selectedBroth ||

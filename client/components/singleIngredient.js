@@ -15,10 +15,10 @@ export default function singleIngredient(props) {
           <span aria-hidden="true">&times;</span>
         </button>
         <div className="row">
-          <div className="col">
+          <div className="col-md">
             <img src={ingredient.imageUrl} />
           </div>
-          <div className="col">
+          <div className="col-md">
             <h3>
               {ingredient.title} ({ingredient.type})
             </h3>
@@ -29,15 +29,20 @@ export default function singleIngredient(props) {
             ) : (
               <p>${ingredient.price}</p>
             )}
-            <h4>Categories</h4>
-            <ul>
-              {ingredient.category.map(cat => <li key={cat.id}>{cat.name}</li>)}
-            </ul>
+            <p>
+              <strong>Categories: </strong>
+              {ingredient.category.map(cat => (
+                <span key={cat.id}>{cat.name}, </span>
+              ))}
+            </p>
+            <button
+              className="btn btn-danger btn-block"
+              onClick={selectIngredient}
+            >
+              ADD TO BOWL{' '}
+            </button>
           </div>
         </div>
-        <button className="btn" onClick={selectIngredient}>
-          choose me
-        </button>
       </div>
     </div>
   )
