@@ -55,9 +55,6 @@ class IngredientCard extends Component {
               selectIngredient={this.selectIngredient}
             />
           ) : null}
-          <button className="btn" onClick={this.selectIngredient}>
-            CHOOSE
-          </button>
         </div>
       </div>
     )
