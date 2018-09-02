@@ -102,7 +102,7 @@ class OrderPage extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-12 col-md-12">
+          <div className="col-sm-12 col-md-8">
             <h2>Select broth</h2>
 
             <SingleSelectionForm
@@ -134,7 +134,7 @@ class OrderPage extends Component {
               updateSelection={this.updateSelection}
             />
           </div>
-          <div className="col-md-4 col-sm-12">
+          <div className="col-md-3 col-sm-12">
             <CurrentBowl
               currentBowl={this.state}
               submitBowl={this.submitBowl}
