@@ -11,14 +11,6 @@ header {
   background-size: cover;
 }
 
-/* .btn {
-  background-color: #e13a2d;
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-size: 1em;
-  text-transform: uppercase;
-} */
-
 .btn-other {
   background-color: #02205e;
   color: white;
@@ -27,11 +19,8 @@ header {
   text-transform: uppercase;
 }
 
-#infoButton {
-  background-color: #5ca93e;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.5em;
-  text-transform: uppercase;
+.info-button {
+  z-index: 3;
 }
 
 h1 {
@@ -150,6 +139,10 @@ th td {
   font-size: 14px;
   font-weight: bold;
 }
+.ingredient-card {
+  cursor: pointer;
+}
+
 .ingredient-card > h2 {
   font-size: 14px;
   text-transform: uppercase;
@@ -175,8 +168,12 @@ th td {
   width: 100%;
   top: 25%;
   text-align: center;
-  z-index: 100;
+  z-index: 2;
   display: none;
+}
+.add i {
+  color: white;
+  cursor: pointer;
 }
 
 .ingredient-card:hover .add {

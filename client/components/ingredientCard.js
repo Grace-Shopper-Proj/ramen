@@ -27,7 +27,8 @@ class IngredientCard extends Component {
       <div className="col-sm-6 col-md-4 ingredient-card ml-0 mr-0">
         <div className="card">
           <h2 className="add" onClick={this.selectIngredient}>
-            Add
+            <i className="fas fa-plus-circle" />
+            <br /> Add
           </h2>
           <div
             className="overlay ml-0 mr-0 mb-0 mt-0"
@@ -42,14 +43,10 @@ class IngredientCard extends Component {
             ) : (
               <h5 className="col">${ingredient.price}</h5>
             )}{' '}
-            <button
-              type="button"
-              className="btn"
-              id="infoButton"
+            <i
+              className="fas fa-info-circle info-button"
               onClick={this.togglePopup}
-            >
-              info
-            </button>
+            />
           </div>
           {this.state.showPopup ? (
             <SingleIngredient
