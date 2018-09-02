@@ -26,11 +26,14 @@ class IngredientCard extends Component {
     return (
       <div className="col-sm-6 col-md-4 ingredient-card ml-0 mr-0">
         <div className="card">
-          <img
-            className="card-img-top"
-            src={ingredient.imageUrl}
+          <h2 className="add" onClick={this.selectIngredient}>
+            Add
+          </h2>
+          <div
+            className="overlay ml-0 mr-0 mb-0 mt-0"
             onClick={this.selectIngredient}
           />
+          <img className="card-img-top" src={ingredient.imageUrl} />
 
           <div className="row card-body">
             <h5 className="col">{ingredient.title}</h5>
