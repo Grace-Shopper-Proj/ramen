@@ -21,9 +21,8 @@ const reducer = combineReducers({
   pastReviews,
   message: toast
 })
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware))
+
 const store = createStore(reducer, middleware)
 
 export default store

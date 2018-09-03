@@ -51,13 +51,20 @@ export default function CurrentBowl(props) {
         </p>
         <h5>Total Price: </h5>
         <p>${currentPrice}</p>
+        {console.log(
+          'value of the boolean',
+          !currentBowl.selectedBroth.title ||
+            !currentBowl.selectedNoodles.title ||
+            !currentBowl.selectedProtein.title
+        )}
+
         <button
-          className="btn"
+          className="btn btn-danger btn-block"
           type="submit"
           disabled={
-            !currentBowl.selectedBroth ||
-            !currentBowl.selectedNoodles ||
-            !currentBowl.selectedProtein
+            !currentBowl.selectedBroth.title ||
+            !currentBowl.selectedNoodles.title ||
+            !currentBowl.selectedProtein.title
           }
           onClick={props.submitBowl}
         >

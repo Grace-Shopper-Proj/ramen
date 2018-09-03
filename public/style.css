@@ -11,14 +11,6 @@ header {
   background-size: cover;
 }
 
-.btn {
-  background-color: #e13a2d;
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-size: 1em;
-  text-transform: uppercase;
-}
-
 .btn-other {
   background-color: #02205e;
   color: white;
@@ -27,11 +19,8 @@ header {
   text-transform: uppercase;
 }
 
-#infoButton {
-  background-color: #5ca93e;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.5em;
-  text-transform: uppercase;
+.info-button {
+  z-index: 3;
 }
 
 h1 {
@@ -107,16 +96,15 @@ th td {
 .popup_inner {
   position: absolute;
   padding: 30px;
-  left: 25%;
-  right: 25%;
+  left: 15%;
+  right: 15%;
   top: 10%;
-  bottom: 10%;
   margin: auto;
   background: white;
 }
 
 .popup_inner img {
-  width: 300px;
+  width: 100%;
 }
 
 .popup_inner h3 {
@@ -131,10 +119,10 @@ th td {
 }
 /* current ramen bowl styles */
 #currentBowl {
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  position: sticky;
+  top: 10px;
 }
+
 #currentBowl h2 {
   background-image: url('./img/bar-header.jpg');
   color: white;
@@ -142,17 +130,50 @@ th td {
   text-align: center;
   padding: 20px;
 }
-#currentBowl button {
-  width: 100%;
-}
 
 #currentBowl h5 {
   font-size: 14px;
   font-weight: bold;
 }
-.ingredient-card h2 {
+.ingredient-card {
+  cursor: pointer;
+}
+
+.ingredient-card > h2 {
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.ingredient-card .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.5;
+  display: none;
+}
+
+.ingredient-card:hover .overlay {
+  display: inline;
+}
+
+.add {
+  position: absolute;
+  color: white;
+  text-align: center;
+  width: 100%;
+  top: 25%;
+  text-align: center;
+  z-index: 2;
+  display: none;
+}
+.add i {
+  color: white;
+  cursor: pointer;
+}
+
+.ingredient-card:hover .add {
+  display: inline;
 }
 
 .toast {
