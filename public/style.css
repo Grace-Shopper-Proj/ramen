@@ -216,3 +216,17 @@ th td {
 .admin-form {
   padding: 20px;
 }
+
+footer {
+  color: white;
+  margin-top: 20px;
+  background-color: #242b33;
+  padding: 20px;
+}
+
+footer a,
+footer a:hover {
+  text-decoration: none;
+  color: white;
+  font-size: 2em;
+}

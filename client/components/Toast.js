@@ -3,11 +3,13 @@ import {connect} from 'react-redux'
 
 class Toast extends Component {
   render() {
-    return (
-      <div className="toast">
-        <p>{this.props.msg}</p>
-      </div>
-    )
+    if (this.props.msg)
+      return (
+        <div className="toast">
+          <p>{this.props.msg}</p>
+        </div>
+      )
+    else return null
   }
 }
 
